@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * Home object for domain model class Contacts.
- * @see com.corporateforce.server.hibernate.Contacts
+ * @see org.corporateforce.server.model.Contacts
  * @author Hibernate Tools
  */
 @Stateless

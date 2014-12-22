@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * Home object for domain model class Chatter.
- * @see com.corporateforce.server.hibernate.Chatter
+ * @see org.corporateforce.server.model.Chatter
  * @author Hibernate Tools
  */
 @Stateless

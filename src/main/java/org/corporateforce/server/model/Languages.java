@@ -30,12 +30,6 @@ public class Languages implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public Languages(String name) {
-		this.name = name;
-		this.labelses = labelses;
-		this.settingses = settingses;
-	}
-
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "ID", unique = true, nullable = false)

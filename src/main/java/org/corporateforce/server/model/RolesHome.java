@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * Home object for domain model class Roles.
- * @see com.corporateforce.server.hibernate.Roles
+ * @see org.corporateforce.server.model.Roles
  * @author Hibernate Tools
  */
 @Stateless

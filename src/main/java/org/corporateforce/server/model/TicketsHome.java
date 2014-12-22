@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * Home object for domain model class Tickets.
- * @see com.corporateforce.server.hibernate.Tickets
+ * @see org.corporateforce.server.model.Tickets
  * @author Hibernate Tools
  */
 @Stateless

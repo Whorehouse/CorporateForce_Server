@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * Home object for domain model class Languages.
- * @see com.corporateforce.server.hibernate.Languages
+ * @see org.corporateforce.server.model.Languages
  * @author Hibernate Tools
  */
 @Stateless

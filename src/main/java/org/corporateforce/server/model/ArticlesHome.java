@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * Home object for domain model class Articles.
- * @see com.corporateforce.server.hibernate.Articles
+ * @see org.corporateforce.server.model.Articles
  * @author Hibernate Tools
  */
 @Stateless

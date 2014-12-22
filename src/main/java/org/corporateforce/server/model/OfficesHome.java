@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * Home object for domain model class Offices.
- * @see com.corporateforce.server.hibernate.Offices
+ * @see org.corporateforce.server.model.Offices
  * @author Hibernate Tools
  */
 @Stateless

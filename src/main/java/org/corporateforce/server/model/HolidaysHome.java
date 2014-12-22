@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * Home object for domain model class Holidays.
- * @see com.corporateforce.server.hibernate.Holidays
+ * @see org.corporateforce.server.model.Holidays
  * @author Hibernate Tools
  */
 @Stateless

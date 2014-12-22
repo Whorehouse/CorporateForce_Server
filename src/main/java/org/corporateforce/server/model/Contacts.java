@@ -39,7 +39,6 @@ public class Contacts implements java.io.Serializable {
 	private String email;
 	private String website;
 	private String about;
-	private Resources resources;
 
 	public Contacts() {
 	}
@@ -58,7 +57,7 @@ public class Contacts implements java.io.Serializable {
 	public Contacts(Resources resources, Users users, Date created,
 			Date updated, String firstname, String lastname, String nickname,
 			String gender, Date birthday, String address, String phone,
-			String email, String website, String about, Resources resources) {
+			String email, String website, String about) {
 		this.resources = resources;
 		this.users = users;
 		this.created = created;
@@ -73,7 +72,6 @@ public class Contacts implements java.io.Serializable {
 		this.email = email;
 		this.website = website;
 		this.about = about;
-		this.resources = resources;
 	}
 
 	@Id
@@ -217,14 +215,4 @@ public class Contacts implements java.io.Serializable {
 	public void setAbout(String about) {
 		this.about = about;
 	}
-
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "contacts")
-	public Resources getResources() {
-		return this.resources;
-	}
-
-	public void setResources(Resources resources) {
-		this.resources = resources;
-	}
-
 }

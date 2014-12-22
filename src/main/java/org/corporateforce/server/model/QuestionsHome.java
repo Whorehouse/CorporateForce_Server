@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * Home object for domain model class Questions.
- * @see com.corporateforce.server.hibernate.Questions
+ * @see org.corporateforce.server.model.Questions
  * @author Hibernate Tools
  */
 @Stateless

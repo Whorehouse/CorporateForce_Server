@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * Home object for domain model class Labels.
- * @see com.corporateforce.server.hibernate.Labels
+ * @see org.corporateforce.server.model.Labels
  * @author Hibernate Tools
  */
 @Stateless

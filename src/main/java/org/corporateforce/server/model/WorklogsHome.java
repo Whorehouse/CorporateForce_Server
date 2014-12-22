@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * Home object for domain model class Worklogs.
- * @see com.corporateforce.server.hibernate.Worklogs
+ * @see org.corporateforce.server.model.Worklogs
  * @author Hibernate Tools
  */
 @Stateless
