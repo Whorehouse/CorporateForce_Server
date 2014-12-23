@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>CorporateForce_Server</name>
-	<description>A starter Java EE 6 webapp project for use on JBoss AS 7 / EAP 6, generated from the jboss-javaee6-webapp archetype</description>
+	<description>CorporateForce - Server</description>
 
 	<url>http://jboss.org/jbossas</url>
 	<licenses>
@@ -208,10 +208,11 @@
 			</exclusions>
 		</dependency>
 
+		<!-- PrimeFaces framework -->
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-tools</artifactId>
-			<version>4.0.0-CR1</version>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>5.1</version>
 		</dependency>
 
 	</dependencies>
