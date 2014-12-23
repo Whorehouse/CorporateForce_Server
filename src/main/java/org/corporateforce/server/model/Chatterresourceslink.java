@@ -19,6 +19,10 @@ import javax.persistence.Table;
 @Table(name = "chatterresourceslink", catalog = "corporateforce")
 public class Chatterresourceslink implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Chatter chatter;
 	private Resources resources;

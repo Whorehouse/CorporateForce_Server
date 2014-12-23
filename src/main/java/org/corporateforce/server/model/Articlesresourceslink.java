@@ -19,6 +19,10 @@ import javax.persistence.Table;
 @Table(name = "articlesresourceslink", catalog = "corporateforce")
 public class Articlesresourceslink implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Articles articles;
 	private Resources resources;

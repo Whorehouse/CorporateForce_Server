@@ -19,6 +19,10 @@ import javax.persistence.Table;
 @Table(name = "questions", catalog = "corporateforce")
 public class Questions implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Trainings trainings;
 	private short index;

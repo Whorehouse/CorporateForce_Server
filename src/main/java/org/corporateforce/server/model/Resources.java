@@ -3,8 +3,6 @@ package org.corporateforce.server.model;
 // Generated 22.12.2014 22:41:08 by Hibernate Tools 4.3.1
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -28,6 +25,10 @@ import org.hibernate.annotations.Parameter;
 @Table(name = "resources", catalog = "corporateforce")
 public class Resources implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Contacts contacts;
 	private Users users;

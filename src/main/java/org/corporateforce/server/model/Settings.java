@@ -20,6 +20,10 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "settings", catalog = "corporateforce", uniqueConstraints = @UniqueConstraint(columnNames = "USER"))
 public class Settings implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Languages languages;
 	private Users users;

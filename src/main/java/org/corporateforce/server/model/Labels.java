@@ -19,6 +19,10 @@ import javax.persistence.Table;
 @Table(name = "labels", catalog = "corporateforce")
 public class Labels implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Languages languages;
 	private String code;

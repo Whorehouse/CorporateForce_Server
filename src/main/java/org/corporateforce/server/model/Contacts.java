@@ -11,7 +11,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,6 +23,10 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "contacts", catalog = "corporateforce", uniqueConstraints = @UniqueConstraint(columnNames = "USER"))
 public class Contacts implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Resources resources;
 	private Users users;

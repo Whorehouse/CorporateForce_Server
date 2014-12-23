@@ -23,6 +23,10 @@ import javax.persistence.TemporalType;
 @Table(name = "worklogs", catalog = "corporateforce")
 public class Worklogs implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Tickets tickets;
 	private Users users;
