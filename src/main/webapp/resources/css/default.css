@@ -30,12 +30,13 @@ body {
 }
 
 .footer {
+	position: relative;
 	height: 60px;
-	z-index: 0;
 	padding-left: 20px;
 	padding-right: 20px;
 	padding-top: 10px;
 	text-align: center;
+	z-index: 9999;
 }
 
 .footer-content {
@@ -61,6 +62,7 @@ body {
 }
 
 .splitter-horizontal {
+	position: relative;
 	height: 1px;
 	width: 100%;
 	background-color: rgb(223, 223, 223);
@@ -68,5 +70,61 @@ body {
 
 .welcome-content {
 	position: relative;
-	top: 60px;
+	top: 55px;
+	padding-bottom: 60px;
+	padding-left: 100px;
+	padding-right: 100px;
+}
+
+.welcome-block-first {
+	overflow: hidden;
+	padding: 20px;
+	position: relative;
+	background-color: #03A9F4;
+	color: white;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+	z-index: 99;
+}
+
+.welcome-block {
+	overflow: hidden;
+	padding: 20px;
+	position: relative;
+	background-color: white;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.welcome-text {
+	float: left;
+	line-height: 1.5em;
+}
+
+.welcome-text-big {
+	font-size: large;
+}
+
+.welcome-text-small {
+	font-size: small;
+}
+
+.welcome-link-help {
+	height: 18px;
+	float: right;
+	text-decoration: none;
+	color: #F9FDFF;
+	background: url(../resources/icons/icon_help.png) no-repeat 0 0px;
+    padding-left: 20px;
+    line-height: 1.5em;
+}
+
+.welcome-link-help:HOVER {
+	color: #FAFF2D;
+}
+
+.welcome-item-left {
+	float: left;
+}
+
+.welcome-item-right {
+	float: right;
 }
