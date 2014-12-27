@@ -103,6 +103,10 @@ body {
 	font-size: large;
 }
 
+.welcome-text-medium {
+	font-size: medium;
+}
+
 .welcome-text-small {
 	font-size: small;
 }
@@ -123,8 +127,39 @@ body {
 
 .welcome-item-left {
 	float: left;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 .welcome-item-right {
 	float: right;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.welcome-features-list {
+	list-style: disc outside;
+	line-height: 1.4em;
+	font-size: medium;
+	color: rgb(120, 120, 120);
+}
+
+.welcome-link-tutorial {
+	color: #03A9F4;
+	text-decoration: none;
+	padding: 5px;
+}
+
+.welcome-link-tutorial:HOVER {
+	color: white;
+	background-color: #03A9F4;
+}
+	
+.welcom-text-center {
+	text-align: center;
+}
+
+.welcom-block-devices {
+	padding: 30px;
+	line-height: 2.0em;
 }
