@@ -60,6 +60,7 @@ public abstract class AbstractFacade<T> {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public T get(int id) {
 		T res = null;
 		try {
@@ -74,6 +75,7 @@ public abstract class AbstractFacade<T> {
 		return res;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List<T> list() {
 		List entities = new ArrayList<T>();
 		try {

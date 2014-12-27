@@ -16,7 +16,6 @@ public class UsersBean extends AbstractFacade<org.corporateforce.server.model.Us
 
     public UsersBean(Class<Users> entityClass) {
         super(entityClass);
-        // TODO Auto-generated constructor stub
     }
 
 	@Override
@@ -108,6 +107,7 @@ public class UsersBean extends AbstractFacade<org.corporateforce.server.model.Us
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Users> listByUsernameUsers() {
 		this.session.beginTransaction();
