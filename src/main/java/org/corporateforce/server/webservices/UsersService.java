@@ -1,4 +1,4 @@
-package org.corporateforce.ws;
+package org.corporateforce.server.webservices;
 
 import org.corporateforce.server.dao.UsersBeanLocal;
 import org.corporateforce.server.model.Users;
