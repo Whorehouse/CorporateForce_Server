@@ -1,6 +1,6 @@
 package org.corporateforce.server.model;
 
-// Generated 22.12.2014 22:41:08 by Hibernate Tools 4.3.1
+// Generated 25.12.2014 2:00:33 by Hibernate Tools 4.3.1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,7 +36,6 @@ public class Profiles implements java.io.Serializable {
 		this.systemControl = systemControl;
 		this.manageUsers = manageUsers;
 	}
-
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -84,4 +83,5 @@ public class Profiles implements java.io.Serializable {
 	public void setManageUsers(boolean manageUsers) {
 		this.manageUsers = manageUsers;
 	}
+
 }

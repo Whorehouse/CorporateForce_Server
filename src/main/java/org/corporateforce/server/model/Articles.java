@@ -1,16 +1,13 @@
 package org.corporateforce.server.model;
 
-// Generated 22.12.2014 22:41:08 by Hibernate Tools 4.3.1
+// Generated 25.12.2014 2:00:33 by Hibernate Tools 4.3.1
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-
 import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;

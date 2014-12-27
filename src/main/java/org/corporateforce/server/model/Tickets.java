@@ -1,6 +1,6 @@
 package org.corporateforce.server.model;
 
-// Generated 22.12.2014 22:41:08 by Hibernate Tools 4.3.1
+// Generated 25.12.2014 2:00:33 by Hibernate Tools 4.3.1
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -198,4 +198,5 @@ public class Tickets implements java.io.Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 }

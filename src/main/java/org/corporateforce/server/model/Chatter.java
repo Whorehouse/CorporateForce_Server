@@ -1,6 +1,6 @@
 package org.corporateforce.server.model;
 
-// Generated 22.12.2014 22:41:08 by Hibernate Tools 4.3.1
+// Generated 25.12.2014 2:00:33 by Hibernate Tools 4.3.1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -48,7 +48,7 @@ public class Chatter implements java.io.Serializable {
 		this.usersByParent = usersByParent;
 		this.created = created;
 		this.updated = updated;
-		this.body = body;;
+		this.body = body;
 	}
 
 	@Id
@@ -110,5 +110,4 @@ public class Chatter implements java.io.Serializable {
 	public void setBody(String body) {
 		this.body = body;
 	}
-
 }

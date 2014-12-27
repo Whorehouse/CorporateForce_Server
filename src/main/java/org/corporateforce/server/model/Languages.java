@@ -1,6 +1,6 @@
 package org.corporateforce.server.model;
 
-// Generated 22.12.2014 22:41:08 by Hibernate Tools 4.3.1
+// Generated 25.12.2014 2:00:33 by Hibernate Tools 4.3.1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,4 +49,5 @@ public class Languages implements java.io.Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 }
