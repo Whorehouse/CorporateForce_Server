@@ -9,3 +9,5 @@ nb-configuration.xml
 /.project
 /.factorypath
 /.classpath
+/.idea
+/CorporateForce_Server.iml
