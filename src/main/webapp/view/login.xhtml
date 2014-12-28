@@ -15,8 +15,23 @@
 		<h:outputScript library="javax.faces" name="jsf.js" target="head" />
 	</h:head>
 	<h:body styleClass="login-page">
-		login page
-
+		<h:form>
+			<p:growl id="messages" showDetail="true" />
+			<p:fieldset styleClass="login-block">
+				<p:commandLink styleClass="login-logo" />
+				<h:panelGrid columns="1" cellpadding="3"
+					styleClass="login-block-input">
+					<h:outputLabel for="inputLogin" value="Login: " />
+					<p:inputText id="inputLogin" required="true" />
+					<h:outputLabel for="inputPassword" value="Password: " />
+					<p:password id="inputPassword" required="true" />
+				</h:panelGrid>
+				<h:panelGrid columns="1" cellpadding="3"
+					styleClass="login-block-buttons">
+					<p:commandButton value="Sign In" />
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
 	</h:body>
 </f:view>
 </html>

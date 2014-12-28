@@ -3,7 +3,8 @@
 
 /.tern-project
 
-/.apt_generated/
+/.apt_generated
+/
 nb-configuration.xml
 /.project
 /.factorypath

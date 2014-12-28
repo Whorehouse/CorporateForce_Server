@@ -8,109 +8,111 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	template="/view/templates/default.xhtml">
 	<ui:define name="body">
-		<p:outputPanel styleClass="welcome-content">
-			<p:outputPanel styleClass="welcome-block-first">
-				<div class="welcome-text">
-					<div class="welcome-text-big">Welcome to CorporateForce</div>
+		<h:form>
+			<p:outputPanel styleClass="welcome-content">
+				<p:outputPanel styleClass="welcome-block-first">
+					<div class="welcome-text">
+						<div class="welcome-text-big">Welcome to CorporateForce</div>
+						<div class="welcome-text-small">
+							To get started, you need to <b>Login</b> or <b>Sign Up</b>
+						</div>
+					</div>
 					<div class="welcome-text-small">
-						To get started, you need to <b>Login</b> or <b>Sign Up</b>
+						<p:link value="Need help?" class="welcome-link-help" />
 					</div>
-				</div>
-				<div class="welcome-text-small">
-					<p:link value="Need help?" class="welcome-link-help" />
-				</div>
-			</p:outputPanel>
-			<p:outputPanel styleClass="welcome-block" style="z-index: 9">
-				<p:link value="Quick overview"
-					class="welcome-item-right welcome-link-tutorial" />
-				<img class="welcome-item-left"
-					src="../resources/images/img_corporateforce.png"></img>
-				<div class="welcome-text-big welcome-item-left">
-					What is CorporateForce?
-					<ul class="welcome-features-list">
-						<li>More efficient organization of the work process</li>
-						<li>More effective business</li>
-						<li>Always on communication with employees</li>
-						<li>Integration of the latest technologies</li>
-						<li>Easy to install and easy to use</li>
-						<li>You can always rely on us</li>
-					</ul>
-				</div>
-			</p:outputPanel>
-			<p:outputPanel styleClass="welcome-block" style="z-index: 8">
-				<img class="welcome-item-left"
-					src="../resources/images/img_customize.png"></img>
-				<div class="welcome-text-big welcome-item-left">
-					Fully customizable to the needs of your organization
-					<ul class="welcome-features-list">
-						<li>Control levels of access</li>
-						<li>Manage profiles and users</li>
-						<li>Manage roles of users</li>
-						<li>Manage projects</li>
-						<li>Create trainings</li>
-						<li>Examine knowledge of the employees</li>
-					</ul>
-					<div class="welcome-text-small welcom-text-center">
-						<p:link value="Tutorial" class="welcome-link-tutorial" />
+				</p:outputPanel>
+				<p:outputPanel styleClass="welcome-block" style="z-index: 9">
+					<p:link value="Quick overview"
+						class="welcome-item-right welcome-link-tutorial" />
+					<img class="welcome-item-left"
+						src="../resources/images/img_corporateforce.png"></img>
+					<div class="welcome-text-big welcome-item-left">
+						What is CorporateForce?
+						<ul class="welcome-features-list">
+							<li>More efficient organization of the work process</li>
+							<li>More effective business</li>
+							<li>Always on communication with employees</li>
+							<li>Integration of the latest technologies</li>
+							<li>Easy to install and easy to use</li>
+							<li>You can always rely on us</li>
+						</ul>
 					</div>
-				</div>
-				<div class="welcome-item-right welcom-block-devices">
-					<img src="../resources/images/img_devices.png"></img>
-					<div class="welcome-text-medium">Easy access from any device
-						in your network</div>
-					<div class="welcome-text-small welcom-text-center">
-						<p:link value="Tutorial" class="welcome-link-tutorial" />
+				</p:outputPanel>
+				<p:outputPanel styleClass="welcome-block" style="z-index: 8">
+					<img class="welcome-item-left"
+						src="../resources/images/img_customize.png"></img>
+					<div class="welcome-text-big welcome-item-left">
+						Fully customizable to the needs of your organization
+						<ul class="welcome-features-list">
+							<li>Control levels of access</li>
+							<li>Manage profiles and users</li>
+							<li>Manage roles of users</li>
+							<li>Manage projects</li>
+							<li>Create trainings</li>
+							<li>Examine knowledge of the employees</li>
+						</ul>
+						<div class="welcome-text-small welcom-text-center">
+							<p:link value="Tutorial" class="welcome-link-tutorial" />
+						</div>
 					</div>
-				</div>
+					<div class="welcome-item-right welcom-block-devices">
+						<img src="../resources/images/img_devices.png"></img>
+						<div class="welcome-text-medium">Easy access from any device
+							in your network</div>
+						<div class="welcome-text-small welcom-text-center">
+							<p:link value="Tutorial" class="welcome-link-tutorial" />
+						</div>
+					</div>
+				</p:outputPanel>
+				<p:outputPanel styleClass="welcome-block" style="z-index: 7">
+					<p:link value="Tutorial"
+						class="welcome-item-right welcome-link-tutorial" />
+					<img class="welcome-item-left"
+						src="../resources/images/img_faces.png"></img>
+					<div class="welcome-text-big welcome-item-left">
+						All employees in one place
+						<ul class="welcome-features-list">
+							<li>Quick access to list of employees</li>
+							<li>Hierarchy of organization in simple form</li>
+							<li>Fast access to all contacts</li>
+							<li>Upload documents and photos</li>
+							<li>Make announcements to all of the employees</li>
+							<li>Convenient scheduling of vacations</li>
+						</ul>
+					</div>
+				</p:outputPanel>
+				<p:outputPanel styleClass="welcome-block" style="z-index: 6">
+					<p:link value="Tutorial"
+						class="welcome-item-right welcome-link-tutorial" />
+					<img class="welcome-item-left"
+						src="../resources/images/img_projects.png"></img>
+					<div class="welcome-text-big welcome-item-left">
+						Manage projects more efficiently
+						<ul class="welcome-features-list">
+							<li>Visual description of the projects</li>
+							<li>Prepare documentation and fast access to it</li>
+							<li>Create tickets for the employees</li>
+							<li>Control work on projects</li>
+							<li>User friendly timesheet</li>
+						</ul>
+					</div>
+				</p:outputPanel>
+				<p:outputPanel styleClass="welcome-block" style="z-index: 5">
+					<p:link value="Tutorial"
+						class="welcome-item-right welcome-link-tutorial" />
+					<img class="welcome-item-left"
+						src="../resources/images/img_trainings.png"></img>
+					<div class="welcome-text-big welcome-item-left">
+						Training of the employees
+						<ul class="welcome-features-list">
+							<li>Create tutorials for the employees</li>
+							<li>Create trainings and exams</li>
+							<li>Fast access to the exams results</li>
+							<li>Control the employees qualification</li>
+						</ul>
+					</div>
+				</p:outputPanel>
 			</p:outputPanel>
-			<p:outputPanel styleClass="welcome-block" style="z-index: 7">
-				<p:link value="Tutorial"
-					class="welcome-item-right welcome-link-tutorial" />
-				<img class="welcome-item-left"
-					src="../resources/images/img_faces.png"></img>
-				<div class="welcome-text-big welcome-item-left">
-					All employees in one place
-					<ul class="welcome-features-list">
-						<li>Quick access to list of employees</li>
-						<li>Hierarchy of organization in simple form</li>
-						<li>Fast access to all contacts</li>
-						<li>Upload documents and photos</li>
-						<li>Make announcements to all of the employees</li>
-						<li>Convenient scheduling of vacations</li>
-					</ul>
-				</div>
-			</p:outputPanel>
-			<p:outputPanel styleClass="welcome-block" style="z-index: 6">
-				<p:link value="Tutorial"
-					class="welcome-item-right welcome-link-tutorial" />
-				<img class="welcome-item-left"
-					src="../resources/images/img_projects.png"></img>
-				<div class="welcome-text-big welcome-item-left">
-					Manage projects more efficiently
-					<ul class="welcome-features-list">
-						<li>Visual description of the projects</li>
-						<li>Prepare documentation and fast access to it</li>
-						<li>Create tickets for the employees</li>
-						<li>Control work on projects</li>
-						<li>User friendly timesheet</li>
-					</ul>
-				</div>
-			</p:outputPanel>
-			<p:outputPanel styleClass="welcome-block" style="z-index: 5">
-				<p:link value="Tutorial"
-					class="welcome-item-right welcome-link-tutorial" />
-				<img class="welcome-item-left"
-					src="../resources/images/img_trainings.png"></img>
-				<div class="welcome-text-big welcome-item-left">
-					Training of the employees
-					<ul class="welcome-features-list">
-						<li>Create tutorials for the employees</li>
-						<li>Create trainings and exams</li>
-						<li>Fast access to the exams results</li>
-						<li>Control the employees qualification</li>
-					</ul>
-				</div>
-			</p:outputPanel>
-		</p:outputPanel>
+		</h:form>
 	</ui:define>
 </ui:composition>
