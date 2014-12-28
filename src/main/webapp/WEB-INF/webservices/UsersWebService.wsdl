@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="UsersWebService" targetNamespace="http://webservices.server.corporateforce.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://webservices.server.corporateforce.org/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+<schema xmlns="http://www.w3.org/2001/XMLSchema">
+  <import namespace="http://webservices.server.corporateforce.org/" schemaLocation="UsersWebService_schema1.xsd"></import>
+</schema>
+  </wsdl:types>
+  <wsdl:message name="createWithContactsUsersResponse">
+    <wsdl:part name="parameters" element="tns:createWithContactsUsersResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="loginUsers">
+    <wsdl:part name="parameters" element="tns:loginUsers">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createSimpleUsers">
+    <wsdl:part name="parameters" element="tns:createSimpleUsers">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listUsersResponse">
+    <wsdl:part name="parameters" element="tns:listUsersResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listByUsernameUsersResponse">
+    <wsdl:part name="parameters" element="tns:listByUsernameUsersResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changeProfileUsers">
+    <wsdl:part name="parameters" element="tns:changeProfileUsers">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changePasswordUsers">
+    <wsdl:part name="parameters" element="tns:changePasswordUsers">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changePasswordSecureUsers">
+    <wsdl:part name="parameters" element="tns:changePasswordSecureUsers">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createUsersResponse">
+    <wsdl:part name="parameters" element="tns:createUsersResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getUsersResponse">
+    <wsdl:part name="parameters" element="tns:getUsersResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getUsers">
+    <wsdl:part name="parameters" element="tns:getUsers">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changeOfficeUsers">
+    <wsdl:part name="parameters" element="tns:changeOfficeUsers">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changeRoleUsers">
+    <wsdl:part name="parameters" element="tns:changeRoleUsers">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="editUsers">
+    <wsdl:part name="parameters" element="tns:editUsers">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="countUsers">
+    <wsdl:part name="parameters" element="tns:countUsers">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listUsers">
+    <wsdl:part name="parameters" element="tns:listUsers">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createWithContactsUsers">
+    <wsdl:part name="parameters" element="tns:createWithContactsUsers">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createUsers">
+    <wsdl:part name="parameters" element="tns:createUsers">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="loginUsersResponse">
+    <wsdl:part name="parameters" element="tns:loginUsersResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createSimpleUsersResponse">
+    <wsdl:part name="parameters" element="tns:createSimpleUsersResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listByUsernameUsers">
+    <wsdl:part name="parameters" element="tns:listByUsernameUsers">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="countUsersResponse">
+    <wsdl:part name="parameters" element="tns:countUsersResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteUsers">
+    <wsdl:part name="parameters" element="tns:deleteUsers">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changeManagerUsers">
+    <wsdl:part name="parameters" element="tns:changeManagerUsers">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="UsersWebService">
+    <wsdl:operation name="createWithContactsUsers">
+      <wsdl:input name="createWithContactsUsers" message="tns:createWithContactsUsers">
+    </wsdl:input>
+      <wsdl:output name="createWithContactsUsersResponse" message="tns:createWithContactsUsersResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeProfileUsers">
+      <wsdl:input name="changeProfileUsers" message="tns:changeProfileUsers">
+    </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="getUsers">
+      <wsdl:input name="getUsers" message="tns:getUsers">
+    </wsdl:input>
+      <wsdl:output name="getUsersResponse" message="tns:getUsersResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createUsers">
+      <wsdl:input name="createUsers" message="tns:createUsers">
+    </wsdl:input>
+      <wsdl:output name="createUsersResponse" message="tns:createUsersResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="countUsers">
+      <wsdl:input name="countUsers" message="tns:countUsers">
+    </wsdl:input>
+      <wsdl:output name="countUsersResponse" message="tns:countUsersResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteUsers">
+      <wsdl:input name="deleteUsers" message="tns:deleteUsers">
+    </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="editUsers">
+      <wsdl:input name="editUsers" message="tns:editUsers">
+    </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="changeRoleUsers">
+      <wsdl:input name="changeRoleUsers" message="tns:changeRoleUsers">
+    </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="changeManagerUsers">
+      <wsdl:input name="changeManagerUsers" message="tns:changeManagerUsers">
+    </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="listByUsernameUsers">
+      <wsdl:input name="listByUsernameUsers" message="tns:listByUsernameUsers">
+    </wsdl:input>
+      <wsdl:output name="listByUsernameUsersResponse" message="tns:listByUsernameUsersResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listUsers">
+      <wsdl:input name="listUsers" message="tns:listUsers">
+    </wsdl:input>
+      <wsdl:output name="listUsersResponse" message="tns:listUsersResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changePasswordSecureUsers">
+      <wsdl:input name="changePasswordSecureUsers" message="tns:changePasswordSecureUsers">
+    </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="loginUsers">
+      <wsdl:input name="loginUsers" message="tns:loginUsers">
+    </wsdl:input>
+      <wsdl:output name="loginUsersResponse" message="tns:loginUsersResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createSimpleUsers">
+      <wsdl:input name="createSimpleUsers" message="tns:createSimpleUsers">
+    </wsdl:input>
+      <wsdl:output name="createSimpleUsersResponse" message="tns:createSimpleUsersResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeOfficeUsers">
+      <wsdl:input name="changeOfficeUsers" message="tns:changeOfficeUsers">
+    </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="changePasswordUsers">
+      <wsdl:input name="changePasswordUsers" message="tns:changePasswordUsers">
+    </wsdl:input>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UsersWebServiceSoapBinding" type="tns:UsersWebService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="createWithContactsUsers">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createWithContactsUsers">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createWithContactsUsersResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeProfileUsers">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="changeProfileUsers">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="getUsers">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getUsers">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUsersResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createUsers">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createUsers">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createUsersResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="countUsers">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="countUsers">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="countUsersResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteUsers">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteUsers">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="changeRoleUsers">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="changeRoleUsers">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="editUsers">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="editUsers">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="changeManagerUsers">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="changeManagerUsers">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="listByUsernameUsers">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listByUsernameUsers">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listByUsernameUsersResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listUsers">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listUsers">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listUsersResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changePasswordSecureUsers">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="changePasswordSecureUsers">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="changeOfficeUsers">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="changeOfficeUsers">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="createSimpleUsers">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createSimpleUsers">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createSimpleUsersResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="loginUsers">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="loginUsers">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="loginUsersResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changePasswordUsers">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="changePasswordUsers">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UsersWebService">
+    <wsdl:port name="UsersWebServicePort" binding="tns:UsersWebServiceSoapBinding">
+      <soap:address location="http://localhost:9090/UsersWebServicePort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
