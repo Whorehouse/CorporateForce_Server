@@ -9,25 +9,12 @@ import java.util.List;
 import javax.ejb.Local;
 import org.corporateforce.server.model.Projects;
 
-/**
- *
- * @author Chep
- */
 @Local
 public interface ProjectsFacadeLocal {
-
-    void create(Projects projects);
-
-    void edit(Projects projects);
-
-    void remove(Projects projects);
-
-    Projects find(Object id);
-
-    List<Projects> findAll();
-
-    List<Projects> findRange(int[] range);
-
-    int count();
-    
+    Projects createProjects(Projects entity);
+    void editProjects(Projects entity);
+    void deleteProjects(Projects entity);
+    Projects getProjects(int id);
+    List<Projects> listProjects();
+    int countProjects();    
 }

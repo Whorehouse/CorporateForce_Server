@@ -9,25 +9,12 @@ import java.util.List;
 import javax.ejb.Local;
 import org.corporateforce.server.model.Questions;
 
-/**
- *
- * @author Chep
- */
 @Local
 public interface QuestionsFacadeLocal {
-
-    void create(Questions questions);
-
-    void edit(Questions questions);
-
-    void remove(Questions questions);
-
-    Questions find(Object id);
-
-    List<Questions> findAll();
-
-    List<Questions> findRange(int[] range);
-
-    int count();
-    
+    Questions createQuestions(Questions entity);
+    void editQuestions(Questions entity);
+    void deleteQuestions(Questions entity);
+    Questions getQuestions(int id);
+    List<Questions> listQuestions();
+    int countQuestions();    
 }

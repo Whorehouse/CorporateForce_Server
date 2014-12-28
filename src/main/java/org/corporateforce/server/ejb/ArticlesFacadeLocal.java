@@ -9,25 +9,12 @@ import java.util.List;
 import javax.ejb.Local;
 import org.corporateforce.server.model.Articles;
 
-/**
- *
- * @author Chep
- */
 @Local
 public interface ArticlesFacadeLocal {
-
-    void create(Articles articles);
-
-    void edit(Articles articles);
-
-    void remove(Articles articles);
-
-    Articles find(Object id);
-
-    List<Articles> findAll();
-
-    List<Articles> findRange(int[] range);
-
-    int count();
-    
+    Articles createArticles(Articles entity);
+    void editArticles(Articles entity);
+    void deleteArticles(Articles entity);
+    Articles getArticles(int id);
+    List<Articles> listArticles();
+    int countArticles();    
 }

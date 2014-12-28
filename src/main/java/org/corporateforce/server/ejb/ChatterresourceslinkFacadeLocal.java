@@ -9,25 +9,12 @@ import java.util.List;
 import javax.ejb.Local;
 import org.corporateforce.server.model.Chatterresourceslink;
 
-/**
- *
- * @author Chep
- */
 @Local
 public interface ChatterresourceslinkFacadeLocal {
-
-    void create(Chatterresourceslink chatterresourceslink);
-
-    void edit(Chatterresourceslink chatterresourceslink);
-
-    void remove(Chatterresourceslink chatterresourceslink);
-
-    Chatterresourceslink find(Object id);
-
-    List<Chatterresourceslink> findAll();
-
-    List<Chatterresourceslink> findRange(int[] range);
-
-    int count();
-    
+    Chatterresourceslink createChatterresourceslink(Chatterresourceslink entity);
+    void editChatterresourceslink(Chatterresourceslink entity);
+    void deleteChatterresourceslink(Chatterresourceslink entity);
+    Chatterresourceslink getChatterresourceslink(int id);
+    List<Chatterresourceslink> listChatterresourceslink();
+    int countChatterresourceslink();    
 }

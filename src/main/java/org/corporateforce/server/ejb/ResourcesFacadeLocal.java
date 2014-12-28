@@ -9,25 +9,12 @@ import java.util.List;
 import javax.ejb.Local;
 import org.corporateforce.server.model.Resources;
 
-/**
- *
- * @author Chep
- */
 @Local
 public interface ResourcesFacadeLocal {
-
-    void create(Resources resources);
-
-    void edit(Resources resources);
-
-    void remove(Resources resources);
-
-    Resources find(Object id);
-
-    List<Resources> findAll();
-
-    List<Resources> findRange(int[] range);
-
-    int count();
-    
+    Resources createResources(Resources entity);
+    void editResources(Resources entity);
+    void deleteResources(Resources entity);
+    Resources getResources(int id);
+    List<Resources> listResources();
+    int countResources();    
 }

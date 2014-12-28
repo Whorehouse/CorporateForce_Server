@@ -9,25 +9,12 @@ import java.util.List;
 import javax.ejb.Local;
 import org.corporateforce.server.model.Tutorials;
 
-/**
- *
- * @author Chep
- */
 @Local
 public interface TutorialsFacadeLocal {
-
-    void create(Tutorials tutorials);
-
-    void edit(Tutorials tutorials);
-
-    void remove(Tutorials tutorials);
-
-    Tutorials find(Object id);
-
-    List<Tutorials> findAll();
-
-    List<Tutorials> findRange(int[] range);
-
-    int count();
-    
+    Tutorials createTutorials(Tutorials entity);
+    void editTutorials(Tutorials entity);
+    void deleteTutorials(Tutorials entity);
+    Tutorials getTutorials(int id);
+    List<Tutorials> listTutorials();
+    int countTutorials();    
 }

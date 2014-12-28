@@ -5,9 +5,8 @@
  */
 package org.corporateforce.server.ejb;
 
+import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.corporateforce.server.model.Roles;
 
 /**
@@ -16,16 +15,39 @@ import org.corporateforce.server.model.Roles;
  */
 @Stateless
 public class RolesFacade extends AbstractFacade<Roles> implements RolesFacadeLocal {
-    @PersistenceContext(unitName = "org.corporateforce_CorporateForce_Server_war_0.0.1-SNAPSHOTPU")
-    private EntityManager em;
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
 
     public RolesFacade() {
         super(Roles.class);
     }
+
+    @Override
+    public Roles createRoles(Roles entity) {
+        return this.create(entity);
+    }
+
+    @Override
+    public void editRoles(Roles entity) {
+        this.edit(entity);
+    }
+
+    @Override
+    public void deleteRoles(Roles entity) {
+        this.delete(entity);
+    }
+
+    @Override
+    public Roles getRoles(int id) {
+        return this.get(id);
+    }
+
+    @Override
+    public List<Roles> listRoles() {
+        return this.list();
+    }
+
+    @Override
+    public int countRoles() {
+        return this.count();
+    }  
     
 }

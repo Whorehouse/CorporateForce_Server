@@ -5,9 +5,8 @@
  */
 package org.corporateforce.server.ejb;
 
+import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.corporateforce.server.model.Labels;
 
 /**
@@ -16,16 +15,39 @@ import org.corporateforce.server.model.Labels;
  */
 @Stateless
 public class LabelsFacade extends AbstractFacade<Labels> implements LabelsFacadeLocal {
-    @PersistenceContext(unitName = "org.corporateforce_CorporateForce_Server_war_0.0.1-SNAPSHOTPU")
-    private EntityManager em;
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
 
     public LabelsFacade() {
         super(Labels.class);
     }
+
+    @Override
+    public Labels createLabels(Labels entity) {
+        return this.create(entity);
+    }
+
+    @Override
+    public void editLabels(Labels entity) {
+        this.edit(entity);
+    }
+
+    @Override
+    public void deleteLabels(Labels entity) {
+        this.delete(entity);
+    }
+
+    @Override
+    public Labels getLabels(int id) {
+        return this.get(id);
+    }
+
+    @Override
+    public List<Labels> listLabels() {
+        return this.list();
+    }
+
+    @Override
+    public int countLabels() {
+        return this.count();
+    }  
     
 }

@@ -9,25 +9,12 @@ import java.util.List;
 import javax.ejb.Local;
 import org.corporateforce.server.model.Contacts;
 
-/**
- *
- * @author Chep
- */
 @Local
 public interface ContactsFacadeLocal {
-
-    void create(Contacts contacts);
-
-    void edit(Contacts contacts);
-
-    void remove(Contacts contacts);
-
-    Contacts find(Object id);
-
-    List<Contacts> findAll();
-
-    List<Contacts> findRange(int[] range);
-
-    int count();
-    
+    Contacts createContacts(Contacts entity);
+    void editContacts(Contacts entity);
+    void deleteContacts(Contacts entity);
+    Contacts getContacts(int id);
+    List<Contacts> listContacts();
+    int countContacts();    
 }

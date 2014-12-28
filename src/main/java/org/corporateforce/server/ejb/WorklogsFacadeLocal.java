@@ -9,25 +9,12 @@ import java.util.List;
 import javax.ejb.Local;
 import org.corporateforce.server.model.Worklogs;
 
-/**
- *
- * @author Chep
- */
 @Local
 public interface WorklogsFacadeLocal {
-
-    void create(Worklogs worklogs);
-
-    void edit(Worklogs worklogs);
-
-    void remove(Worklogs worklogs);
-
-    Worklogs find(Object id);
-
-    List<Worklogs> findAll();
-
-    List<Worklogs> findRange(int[] range);
-
-    int count();
-    
+    Worklogs createWorklogs(Worklogs entity);
+    void editWorklogs(Worklogs entity);
+    void deleteWorklogs(Worklogs entity);
+    Worklogs getWorklogs(int id);
+    List<Worklogs> listWorklogs();
+    int countWorklogs();    
 }

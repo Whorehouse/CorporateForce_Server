@@ -9,25 +9,12 @@ import java.util.List;
 import javax.ejb.Local;
 import org.corporateforce.server.model.Chatter;
 
-/**
- *
- * @author Chep
- */
 @Local
 public interface ChatterFacadeLocal {
-
-    void create(Chatter chatter);
-
-    void edit(Chatter chatter);
-
-    void remove(Chatter chatter);
-
-    Chatter find(Object id);
-
-    List<Chatter> findAll();
-
-    List<Chatter> findRange(int[] range);
-
-    int count();
-    
+    Chatter createChatter(Chatter entity);
+    void editChatter(Chatter entity);
+    void deleteChatter(Chatter entity);
+    Chatter getChatter(int id);
+    List<Chatter> listChatter();
+    int countChatter();    
 }

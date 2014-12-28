@@ -9,25 +9,12 @@ import java.util.List;
 import javax.ejb.Local;
 import org.corporateforce.server.model.Trainings;
 
-/**
- *
- * @author Chep
- */
 @Local
 public interface TrainingsFacadeLocal {
-
-    void create(Trainings trainings);
-
-    void edit(Trainings trainings);
-
-    void remove(Trainings trainings);
-
-    Trainings find(Object id);
-
-    List<Trainings> findAll();
-
-    List<Trainings> findRange(int[] range);
-
-    int count();
-    
+    Trainings createTrainings(Trainings entity);
+    void editTrainings(Trainings entity);
+    void deleteTrainings(Trainings entity);
+    Trainings getTrainings(int id);
+    List<Trainings> listTrainings();
+    int countTrainings();    
 }

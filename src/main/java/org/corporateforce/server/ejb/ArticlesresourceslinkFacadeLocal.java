@@ -9,25 +9,12 @@ import java.util.List;
 import javax.ejb.Local;
 import org.corporateforce.server.model.Articlesresourceslink;
 
-/**
- *
- * @author Chep
- */
 @Local
 public interface ArticlesresourceslinkFacadeLocal {
-
-    void create(Articlesresourceslink articlesresourceslink);
-
-    void edit(Articlesresourceslink articlesresourceslink);
-
-    void remove(Articlesresourceslink articlesresourceslink);
-
-    Articlesresourceslink find(Object id);
-
-    List<Articlesresourceslink> findAll();
-
-    List<Articlesresourceslink> findRange(int[] range);
-
-    int count();
-    
+    Articlesresourceslink createArticlesresourceslink(Articlesresourceslink entity);
+    void editArticlesresourceslink(Articlesresourceslink entity);
+    void deleteArticlesresourceslink(Articlesresourceslink entity);
+    Articlesresourceslink getArticlesresourceslink(int id);
+    List<Articlesresourceslink> listArticlesresourceslink();
+    int countArticlesresourceslink();    
 }

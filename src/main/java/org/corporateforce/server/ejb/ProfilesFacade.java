@@ -5,9 +5,8 @@
  */
 package org.corporateforce.server.ejb;
 
+import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.corporateforce.server.model.Profiles;
 
 /**
@@ -16,16 +15,39 @@ import org.corporateforce.server.model.Profiles;
  */
 @Stateless
 public class ProfilesFacade extends AbstractFacade<Profiles> implements ProfilesFacadeLocal {
-    @PersistenceContext(unitName = "org.corporateforce_CorporateForce_Server_war_0.0.1-SNAPSHOTPU")
-    private EntityManager em;
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
 
     public ProfilesFacade() {
         super(Profiles.class);
     }
+
+    @Override
+    public Profiles createProfiles(Profiles entity) {
+        return this.create(entity);
+    }
+
+    @Override
+    public void editProfiles(Profiles entity) {
+        this.edit(entity);
+    }
+
+    @Override
+    public void deleteProfiles(Profiles entity) {
+        this.delete(entity);
+    }
+
+    @Override
+    public Profiles getProfiles(int id) {
+        return this.get(id);
+    }
+
+    @Override
+    public List<Profiles> listProfiles() {
+        return this.list();
+    }
+
+    @Override
+    public int countProfiles() {
+        return this.count();
+    }  
     
 }

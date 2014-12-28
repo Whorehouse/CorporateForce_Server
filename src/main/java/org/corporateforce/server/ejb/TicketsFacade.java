@@ -5,9 +5,8 @@
  */
 package org.corporateforce.server.ejb;
 
+import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.corporateforce.server.model.Tickets;
 
 /**
@@ -16,16 +15,39 @@ import org.corporateforce.server.model.Tickets;
  */
 @Stateless
 public class TicketsFacade extends AbstractFacade<Tickets> implements TicketsFacadeLocal {
-    @PersistenceContext(unitName = "org.corporateforce_CorporateForce_Server_war_0.0.1-SNAPSHOTPU")
-    private EntityManager em;
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
 
     public TicketsFacade() {
         super(Tickets.class);
     }
+
+    @Override
+    public Tickets createTickets(Tickets entity) {
+        return this.create(entity);
+    }
+
+    @Override
+    public void editTickets(Tickets entity) {
+        this.edit(entity);
+    }
+
+    @Override
+    public void deleteTickets(Tickets entity) {
+        this.delete(entity);
+    }
+
+    @Override
+    public Tickets getTickets(int id) {
+        return this.get(id);
+    }
+
+    @Override
+    public List<Tickets> listTickets() {
+        return this.list();
+    }
+
+    @Override
+    public int countTickets() {
+        return this.count();
+    }  
     
 }

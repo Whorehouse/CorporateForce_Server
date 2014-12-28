@@ -9,25 +9,12 @@ import java.util.List;
 import javax.ejb.Local;
 import org.corporateforce.server.model.Labels;
 
-/**
- *
- * @author Chep
- */
 @Local
 public interface LabelsFacadeLocal {
-
-    void create(Labels labels);
-
-    void edit(Labels labels);
-
-    void remove(Labels labels);
-
-    Labels find(Object id);
-
-    List<Labels> findAll();
-
-    List<Labels> findRange(int[] range);
-
-    int count();
-    
+    Labels createLabels(Labels entity);
+    void editLabels(Labels entity);
+    void deleteLabels(Labels entity);
+    Labels getLabels(int id);
+    List<Labels> listLabels();
+    int countLabels();    
 }
