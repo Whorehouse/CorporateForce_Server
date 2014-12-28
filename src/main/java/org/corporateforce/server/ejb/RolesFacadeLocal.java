@@ -9,25 +9,12 @@ import java.util.List;
 import javax.ejb.Local;
 import org.corporateforce.server.model.Roles;
 
-/**
- *
- * @author Chep
- */
 @Local
 public interface RolesFacadeLocal {
-
-    void create(Roles roles);
-
-    void edit(Roles roles);
-
-    void remove(Roles roles);
-
-    Roles find(Object id);
-
-    List<Roles> findAll();
-
-    List<Roles> findRange(int[] range);
-
-    int count();
-    
+    Roles createRoles(Roles entity);
+    void editRoles(Roles entity);
+    void deleteRoles(Roles entity);
+    Roles getRoles(int id);
+    List<Roles> listRoles();
+    int countRoles();    
 }

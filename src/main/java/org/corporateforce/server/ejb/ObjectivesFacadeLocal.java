@@ -9,25 +9,12 @@ import java.util.List;
 import javax.ejb.Local;
 import org.corporateforce.server.model.Objectives;
 
-/**
- *
- * @author Chep
- */
 @Local
 public interface ObjectivesFacadeLocal {
-
-    void create(Objectives objectives);
-
-    void edit(Objectives objectives);
-
-    void remove(Objectives objectives);
-
-    Objectives find(Object id);
-
-    List<Objectives> findAll();
-
-    List<Objectives> findRange(int[] range);
-
-    int count();
-    
+    Objectives createObjectives(Objectives entity);
+    void editObjectives(Objectives entity);
+    void deleteObjectives(Objectives entity);
+    Objectives getObjectives(int id);
+    List<Objectives> listObjectives();
+    int countObjectives();    
 }

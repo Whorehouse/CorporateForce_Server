@@ -5,9 +5,8 @@
  */
 package org.corporateforce.server.ejb;
 
+import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.corporateforce.server.model.Offices;
 
 /**
@@ -16,16 +15,39 @@ import org.corporateforce.server.model.Offices;
  */
 @Stateless
 public class OfficesFacade extends AbstractFacade<Offices> implements OfficesFacadeLocal {
-    @PersistenceContext(unitName = "org.corporateforce_CorporateForce_Server_war_0.0.1-SNAPSHOTPU")
-    private EntityManager em;
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
 
     public OfficesFacade() {
         super(Offices.class);
     }
+
+    @Override
+    public Offices createOffices(Offices entity) {
+        return this.create(entity);
+    }
+
+    @Override
+    public void editOffices(Offices entity) {
+        this.edit(entity);
+    }
+
+    @Override
+    public void deleteOffices(Offices entity) {
+        this.delete(entity);
+    }
+
+    @Override
+    public Offices getOffices(int id) {
+        return this.get(id);
+    }
+
+    @Override
+    public List<Offices> listOffices() {
+        return this.list();
+    }
+
+    @Override
+    public int countOffices() {
+        return this.count();
+    }  
     
 }

@@ -5,9 +5,8 @@
  */
 package org.corporateforce.server.ejb;
 
+import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.corporateforce.server.model.Objectives;
 
 /**
@@ -16,16 +15,39 @@ import org.corporateforce.server.model.Objectives;
  */
 @Stateless
 public class ObjectivesFacade extends AbstractFacade<Objectives> implements ObjectivesFacadeLocal {
-    @PersistenceContext(unitName = "org.corporateforce_CorporateForce_Server_war_0.0.1-SNAPSHOTPU")
-    private EntityManager em;
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
 
     public ObjectivesFacade() {
         super(Objectives.class);
     }
+
+    @Override
+    public Objectives createObjectives(Objectives entity) {
+        return this.create(entity);
+    }
+
+    @Override
+    public void editObjectives(Objectives entity) {
+        this.edit(entity);
+    }
+
+    @Override
+    public void deleteObjectives(Objectives entity) {
+        this.delete(entity);
+    }
+
+    @Override
+    public Objectives getObjectives(int id) {
+        return this.get(id);
+    }
+
+    @Override
+    public List<Objectives> listObjectives() {
+        return this.list();
+    }
+
+    @Override
+    public int countObjectives() {
+        return this.count();
+    }  
     
 }

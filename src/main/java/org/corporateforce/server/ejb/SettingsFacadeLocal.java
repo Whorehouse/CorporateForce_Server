@@ -9,25 +9,12 @@ import java.util.List;
 import javax.ejb.Local;
 import org.corporateforce.server.model.Settings;
 
-/**
- *
- * @author Chep
- */
 @Local
 public interface SettingsFacadeLocal {
-
-    void create(Settings settings);
-
-    void edit(Settings settings);
-
-    void remove(Settings settings);
-
-    Settings find(Object id);
-
-    List<Settings> findAll();
-
-    List<Settings> findRange(int[] range);
-
-    int count();
-    
+    Settings createSettings(Settings entity);
+    void editSettings(Settings entity);
+    void deleteSettings(Settings entity);
+    Settings getSettings(int id);
+    List<Settings> listSettings();
+    int countSettings();    
 }

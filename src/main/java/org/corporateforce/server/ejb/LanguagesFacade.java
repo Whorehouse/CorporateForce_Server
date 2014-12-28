@@ -5,9 +5,8 @@
  */
 package org.corporateforce.server.ejb;
 
+import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.corporateforce.server.model.Languages;
 
 /**
@@ -16,16 +15,39 @@ import org.corporateforce.server.model.Languages;
  */
 @Stateless
 public class LanguagesFacade extends AbstractFacade<Languages> implements LanguagesFacadeLocal {
-    @PersistenceContext(unitName = "org.corporateforce_CorporateForce_Server_war_0.0.1-SNAPSHOTPU")
-    private EntityManager em;
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
 
     public LanguagesFacade() {
         super(Languages.class);
     }
+
+    @Override
+    public Languages createLanguages(Languages entity) {
+        return this.create(entity);
+    }
+
+    @Override
+    public void editLanguages(Languages entity) {
+        this.edit(entity);
+    }
+
+    @Override
+    public void deleteLanguages(Languages entity) {
+        this.delete(entity);
+    }
+
+    @Override
+    public Languages getLanguages(int id) {
+        return this.get(id);
+    }
+
+    @Override
+    public List<Languages> listLanguages() {
+        return this.list();
+    }
+
+    @Override
+    public int countLanguages() {
+        return this.count();
+    }  
     
 }

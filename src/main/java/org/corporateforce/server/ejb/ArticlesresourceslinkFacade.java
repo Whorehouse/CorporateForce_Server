@@ -5,9 +5,8 @@
  */
 package org.corporateforce.server.ejb;
 
+import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.corporateforce.server.model.Articlesresourceslink;
 
 /**
@@ -16,16 +15,39 @@ import org.corporateforce.server.model.Articlesresourceslink;
  */
 @Stateless
 public class ArticlesresourceslinkFacade extends AbstractFacade<Articlesresourceslink> implements ArticlesresourceslinkFacadeLocal {
-    @PersistenceContext(unitName = "org.corporateforce_CorporateForce_Server_war_0.0.1-SNAPSHOTPU")
-    private EntityManager em;
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
 
     public ArticlesresourceslinkFacade() {
         super(Articlesresourceslink.class);
     }
+
+    @Override
+    public Articlesresourceslink createArticlesresourceslink(Articlesresourceslink entity) {
+        return this.create(entity);
+    }
+
+    @Override
+    public void editArticlesresourceslink(Articlesresourceslink entity) {
+        this.edit(entity);
+    }
+
+    @Override
+    public void deleteArticlesresourceslink(Articlesresourceslink entity) {
+        this.delete(entity);
+    }
+
+    @Override
+    public Articlesresourceslink getArticlesresourceslink(int id) {
+        return this.get(id);
+    }
+
+    @Override
+    public List<Articlesresourceslink> listArticlesresourceslink() {
+        return this.list();
+    }
+
+    @Override
+    public int countArticlesresourceslink() {
+        return this.count();
+    }  
     
 }

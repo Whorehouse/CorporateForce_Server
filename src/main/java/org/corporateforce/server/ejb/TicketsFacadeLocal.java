@@ -9,25 +9,12 @@ import java.util.List;
 import javax.ejb.Local;
 import org.corporateforce.server.model.Tickets;
 
-/**
- *
- * @author Chep
- */
 @Local
 public interface TicketsFacadeLocal {
-
-    void create(Tickets tickets);
-
-    void edit(Tickets tickets);
-
-    void remove(Tickets tickets);
-
-    Tickets find(Object id);
-
-    List<Tickets> findAll();
-
-    List<Tickets> findRange(int[] range);
-
-    int count();
-    
+    Tickets createTickets(Tickets entity);
+    void editTickets(Tickets entity);
+    void deleteTickets(Tickets entity);
+    Tickets getTickets(int id);
+    List<Tickets> listTickets();
+    int countTickets();    
 }

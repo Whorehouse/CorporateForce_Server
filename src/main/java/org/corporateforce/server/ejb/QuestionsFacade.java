@@ -5,9 +5,8 @@
  */
 package org.corporateforce.server.ejb;
 
+import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.corporateforce.server.model.Questions;
 
 /**
@@ -16,16 +15,39 @@ import org.corporateforce.server.model.Questions;
  */
 @Stateless
 public class QuestionsFacade extends AbstractFacade<Questions> implements QuestionsFacadeLocal {
-    @PersistenceContext(unitName = "org.corporateforce_CorporateForce_Server_war_0.0.1-SNAPSHOTPU")
-    private EntityManager em;
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
 
     public QuestionsFacade() {
         super(Questions.class);
     }
+
+    @Override
+    public Questions createQuestions(Questions entity) {
+        return this.create(entity);
+    }
+
+    @Override
+    public void editQuestions(Questions entity) {
+        this.edit(entity);
+    }
+
+    @Override
+    public void deleteQuestions(Questions entity) {
+        this.delete(entity);
+    }
+
+    @Override
+    public Questions getQuestions(int id) {
+        return this.get(id);
+    }
+
+    @Override
+    public List<Questions> listQuestions() {
+        return this.list();
+    }
+
+    @Override
+    public int countQuestions() {
+        return this.count();
+    }  
     
 }

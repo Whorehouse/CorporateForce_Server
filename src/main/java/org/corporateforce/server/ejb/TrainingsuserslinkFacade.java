@@ -5,9 +5,8 @@
  */
 package org.corporateforce.server.ejb;
 
+import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.corporateforce.server.model.Trainingsuserslink;
 
 /**
@@ -16,16 +15,39 @@ import org.corporateforce.server.model.Trainingsuserslink;
  */
 @Stateless
 public class TrainingsuserslinkFacade extends AbstractFacade<Trainingsuserslink> implements TrainingsuserslinkFacadeLocal {
-    @PersistenceContext(unitName = "org.corporateforce_CorporateForce_Server_war_0.0.1-SNAPSHOTPU")
-    private EntityManager em;
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
 
     public TrainingsuserslinkFacade() {
         super(Trainingsuserslink.class);
     }
+
+    @Override
+    public Trainingsuserslink createTrainingsuserslink(Trainingsuserslink entity) {
+        return this.create(entity);
+    }
+
+    @Override
+    public void editTrainingsuserslink(Trainingsuserslink entity) {
+        this.edit(entity);
+    }
+
+    @Override
+    public void deleteTrainingsuserslink(Trainingsuserslink entity) {
+        this.delete(entity);
+    }
+
+    @Override
+    public Trainingsuserslink getTrainingsuserslink(int id) {
+        return this.get(id);
+    }
+
+    @Override
+    public List<Trainingsuserslink> listTrainingsuserslink() {
+        return this.list();
+    }
+
+    @Override
+    public int countTrainingsuserslink() {
+        return this.count();
+    }  
     
 }

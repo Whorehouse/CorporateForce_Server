@@ -5,9 +5,8 @@
  */
 package org.corporateforce.server.ejb;
 
+import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.corporateforce.server.model.Settings;
 
 /**
@@ -16,16 +15,39 @@ import org.corporateforce.server.model.Settings;
  */
 @Stateless
 public class SettingsFacade extends AbstractFacade<Settings> implements SettingsFacadeLocal {
-    @PersistenceContext(unitName = "org.corporateforce_CorporateForce_Server_war_0.0.1-SNAPSHOTPU")
-    private EntityManager em;
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
 
     public SettingsFacade() {
         super(Settings.class);
     }
+
+    @Override
+    public Settings createSettings(Settings entity) {
+        return this.create(entity);
+    }
+
+    @Override
+    public void editSettings(Settings entity) {
+        this.edit(entity);
+    }
+
+    @Override
+    public void deleteSettings(Settings entity) {
+        this.delete(entity);
+    }
+
+    @Override
+    public Settings getSettings(int id) {
+        return this.get(id);
+    }
+
+    @Override
+    public List<Settings> listSettings() {
+        return this.list();
+    }
+
+    @Override
+    public int countSettings() {
+        return this.count();
+    }  
     
 }

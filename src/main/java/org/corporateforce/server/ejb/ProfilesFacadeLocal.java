@@ -9,25 +9,12 @@ import java.util.List;
 import javax.ejb.Local;
 import org.corporateforce.server.model.Profiles;
 
-/**
- *
- * @author Chep
- */
 @Local
 public interface ProfilesFacadeLocal {
-
-    void create(Profiles profiles);
-
-    void edit(Profiles profiles);
-
-    void remove(Profiles profiles);
-
-    Profiles find(Object id);
-
-    List<Profiles> findAll();
-
-    List<Profiles> findRange(int[] range);
-
-    int count();
-    
+    Profiles createProfiles(Profiles entity);
+    void editProfiles(Profiles entity);
+    void deleteProfiles(Profiles entity);
+    Profiles getProfiles(int id);
+    List<Profiles> listProfiles();
+    int countProfiles();    
 }

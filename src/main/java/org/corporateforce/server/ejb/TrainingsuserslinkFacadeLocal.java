@@ -9,25 +9,12 @@ import java.util.List;
 import javax.ejb.Local;
 import org.corporateforce.server.model.Trainingsuserslink;
 
-/**
- *
- * @author Chep
- */
 @Local
 public interface TrainingsuserslinkFacadeLocal {
-
-    void create(Trainingsuserslink trainingsuserslink);
-
-    void edit(Trainingsuserslink trainingsuserslink);
-
-    void remove(Trainingsuserslink trainingsuserslink);
-
-    Trainingsuserslink find(Object id);
-
-    List<Trainingsuserslink> findAll();
-
-    List<Trainingsuserslink> findRange(int[] range);
-
-    int count();
-    
+    Trainingsuserslink createTrainingsuserslink(Trainingsuserslink entity);
+    void editTrainingsuserslink(Trainingsuserslink entity);
+    void deleteTrainingsuserslink(Trainingsuserslink entity);
+    Trainingsuserslink getTrainingsuserslink(int id);
+    List<Trainingsuserslink> listTrainingsuserslink();
+    int countTrainingsuserslink();    
 }

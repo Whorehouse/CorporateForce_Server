@@ -9,25 +9,12 @@ import java.util.List;
 import javax.ejb.Local;
 import org.corporateforce.server.model.Results;
 
-/**
- *
- * @author Chep
- */
 @Local
 public interface ResultsFacadeLocal {
-
-    void create(Results results);
-
-    void edit(Results results);
-
-    void remove(Results results);
-
-    Results find(Object id);
-
-    List<Results> findAll();
-
-    List<Results> findRange(int[] range);
-
-    int count();
-    
+    Results createResults(Results entity);
+    void editResults(Results entity);
+    void deleteResults(Results entity);
+    Results getResults(int id);
+    List<Results> listResults();
+    int countResults();    
 }

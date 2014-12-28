@@ -5,9 +5,8 @@
  */
 package org.corporateforce.server.ejb;
 
+import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.corporateforce.server.model.Resources;
 
 /**
@@ -16,16 +15,39 @@ import org.corporateforce.server.model.Resources;
  */
 @Stateless
 public class ResourcesFacade extends AbstractFacade<Resources> implements ResourcesFacadeLocal {
-    @PersistenceContext(unitName = "org.corporateforce_CorporateForce_Server_war_0.0.1-SNAPSHOTPU")
-    private EntityManager em;
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
 
     public ResourcesFacade() {
         super(Resources.class);
     }
+
+    @Override
+    public Resources createResources(Resources entity) {
+        return this.create(entity);
+    }
+
+    @Override
+    public void editResources(Resources entity) {
+        this.edit(entity);
+    }
+
+    @Override
+    public void deleteResources(Resources entity) {
+        this.delete(entity);
+    }
+
+    @Override
+    public Resources getResources(int id) {
+        return this.get(id);
+    }
+
+    @Override
+    public List<Resources> listResources() {
+        return this.list();
+    }
+
+    @Override
+    public int countResources() {
+        return this.count();
+    }  
     
 }

@@ -5,9 +5,8 @@
  */
 package org.corporateforce.server.ejb;
 
+import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.corporateforce.server.model.Chatterresourceslink;
 
 /**
@@ -16,16 +15,39 @@ import org.corporateforce.server.model.Chatterresourceslink;
  */
 @Stateless
 public class ChatterresourceslinkFacade extends AbstractFacade<Chatterresourceslink> implements ChatterresourceslinkFacadeLocal {
-    @PersistenceContext(unitName = "org.corporateforce_CorporateForce_Server_war_0.0.1-SNAPSHOTPU")
-    private EntityManager em;
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
 
     public ChatterresourceslinkFacade() {
         super(Chatterresourceslink.class);
     }
+
+    @Override
+    public Chatterresourceslink createChatterresourceslink(Chatterresourceslink entity) {
+        return this.create(entity);
+    }
+
+    @Override
+    public void editChatterresourceslink(Chatterresourceslink entity) {
+        this.edit(entity);
+    }
+
+    @Override
+    public void deleteChatterresourceslink(Chatterresourceslink entity) {
+        this.delete(entity);
+    }
+
+    @Override
+    public Chatterresourceslink getChatterresourceslink(int id) {
+        return this.get(id);
+    }
+
+    @Override
+    public List<Chatterresourceslink> listChatterresourceslink() {
+        return this.list();
+    }
+
+    @Override
+    public int countChatterresourceslink() {
+        return this.count();
+    }  
     
 }

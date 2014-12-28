@@ -5,9 +5,8 @@
  */
 package org.corporateforce.server.ejb;
 
+import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.corporateforce.server.model.Chatter;
 
 /**
@@ -16,16 +15,39 @@ import org.corporateforce.server.model.Chatter;
  */
 @Stateless
 public class ChatterFacade extends AbstractFacade<Chatter> implements ChatterFacadeLocal {
-    @PersistenceContext(unitName = "org.corporateforce_CorporateForce_Server_war_0.0.1-SNAPSHOTPU")
-    private EntityManager em;
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
 
     public ChatterFacade() {
         super(Chatter.class);
     }
+
+    @Override
+    public Chatter createChatter(Chatter entity) {
+        return this.create(entity);
+    }
+
+    @Override
+    public void editChatter(Chatter entity) {
+        this.edit(entity);
+    }
+
+    @Override
+    public void deleteChatter(Chatter entity) {
+        this.delete(entity);
+    }
+
+    @Override
+    public Chatter getChatter(int id) {
+        return this.get(id);
+    }
+
+    @Override
+    public List<Chatter> listChatter() {
+        return this.list();
+    }
+
+    @Override
+    public int countChatter() {
+        return this.count();
+    }  
     
 }

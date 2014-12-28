@@ -9,25 +9,12 @@ import java.util.List;
 import javax.ejb.Local;
 import org.corporateforce.server.model.Holidays;
 
-/**
- *
- * @author Chep
- */
 @Local
 public interface HolidaysFacadeLocal {
-
-    void create(Holidays holidays);
-
-    void edit(Holidays holidays);
-
-    void remove(Holidays holidays);
-
-    Holidays find(Object id);
-
-    List<Holidays> findAll();
-
-    List<Holidays> findRange(int[] range);
-
-    int count();
-    
+    Holidays createHolidays(Holidays entity);
+    void editHolidays(Holidays entity);
+    void deleteHolidays(Holidays entity);
+    Holidays getHolidays(int id);
+    List<Holidays> listHolidays();
+    int countHolidays();    
 }
