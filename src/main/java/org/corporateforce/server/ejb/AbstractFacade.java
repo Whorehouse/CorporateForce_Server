@@ -7,6 +7,8 @@ package org.corporateforce.server.ejb;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.corporateforce.server.hibernate.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 
@@ -22,7 +24,7 @@ public abstract class AbstractFacade<T> {
 
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
-        this.session = null;
+        this.session = HibernateUtil.getSessionFactory().openSession();
     }
 
     public T create(T entity) {
