@@ -14,29 +14,36 @@
 		<h:outputStylesheet library="css" name="login.css" />
 		<h:outputScript library="javax.faces" name="jsf.js" target="head" />
 	</h:head>
-	<h:body styleClass="login-page">
+	<h:body>
 		<h:form>
 			<p:growl id="messages" showDetail="true" />
-			<p:fieldset styleClass="login-block">
-				<p:commandLink styleClass="login-logo" />
-				<h:outputLabel value="Sign In" />
-				<h:panelGrid columns="1" cellpadding="3"
-					styleClass="login-block-input">
-					<h:outputLabel for="inputLogin" value="Login: " />
-					<p:inputText id="inputLogin" required="true" />
-					<h:outputLabel for="inputPassword" value="Password: " />
-					<p:password id="inputPassword" required="true" />
-				</h:panelGrid>
-				<h:panelGrid columns="1" cellpadding="3"
-					styleClass="login-block-buttons">
-					<p:commandButton value="Sign In" />
-				</h:panelGrid>
-				<div class="welcome-text-small">
-					<p:link value="Register" class="welcome-link-help" />
-					<p:link value="Need help?" class="welcome-link-help" />
-				</div>
-			</p:fieldset>
-			© Copyright 2014-2015 CorporateForce. All rights reserved. Various trademarks held by their respective owners.
+			<div class="login-container">
+				<p:fieldset styleClass="login-block">
+					<p:commandLink styleClass="login-logo" />
+					<div class="login-block-title">
+						<h:outputLabel value="Sign In"
+							styleClass="login-title login-text-big" />
+					</div>
+					<h:panelGrid columns="1" cellpadding="3"
+						styleClass="login-block-input">
+						<h:outputLabel for="inputLogin" value="Login: " />
+						<p:inputText id="inputLogin" required="true" />
+						<h:outputLabel for="inputPassword" value="Password: " />
+						<p:password id="inputPassword" required="true" />
+					</h:panelGrid>
+					<h:panelGrid columns="1" cellpadding="3"
+						styleClass="login-block-buttons">
+						<p:commandButton value="Sign In" />
+					</h:panelGrid>
+					<div class="login-block-links login-text-small">
+						<p:link value="Register" class="login-link" />
+						<p:spacer width="1" height="10" styleClass="login-separator-vert" />
+						<p:link value="Need help?" class="login-link" />
+					</div>
+				</p:fieldset>
+				<div class="login-copyright">© Copyright 2014-2015
+					CorporateForce. All rights reserved.</div>
+			</div>
 		</h:form>
 	</h:body>
 </f:view>
