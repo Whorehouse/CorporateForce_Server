@@ -71,6 +71,5 @@
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
 	<bean id="usersDao" class="org.corporateforce.server.dao.UsersDaoImpl"></bean>
-	<bean id="usersServices" class="org.corporateforce.server.services.UsersServicesImpl"></bean>
 
 </beans>
