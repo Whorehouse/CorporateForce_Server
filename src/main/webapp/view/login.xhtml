@@ -19,6 +19,7 @@
 			<p:growl id="messages" showDetail="true" />
 			<p:fieldset styleClass="login-block">
 				<p:commandLink styleClass="login-logo" />
+				<h:outputLabel value="Sign In" />
 				<h:panelGrid columns="1" cellpadding="3"
 					styleClass="login-block-input">
 					<h:outputLabel for="inputLogin" value="Login: " />
@@ -30,7 +31,12 @@
 					styleClass="login-block-buttons">
 					<p:commandButton value="Sign In" />
 				</h:panelGrid>
+				<div class="welcome-text-small">
+					<p:link value="Register" class="welcome-link-help" />
+					<p:link value="Need help?" class="welcome-link-help" />
+				</div>
 			</p:fieldset>
+			© Copyright 2014-2015 CorporateForce. All rights reserved. Various trademarks held by their respective owners.
 		</h:form>
 	</h:body>
 </f:view>
