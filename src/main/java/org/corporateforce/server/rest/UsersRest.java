@@ -16,7 +16,7 @@ import org.corporateforce.server.model.Users;
 import org.corporateforce.server.services.UsersServices;
 
 @Controller
-@RequestMapping("/usersrest")
+@RequestMapping("/users")
 public class UsersRest {
 
  @Autowired
@@ -39,7 +39,7 @@ public class UsersRest {
  }
 
  /* Ger a single objct in Json form in Spring Rest Services */
- @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+ @RequestMapping(value = "get/{id}", method = RequestMethod.GET)
  public @ResponseBody
  Users getEntity(@PathVariable("id") long id) {
   Users entity = null;

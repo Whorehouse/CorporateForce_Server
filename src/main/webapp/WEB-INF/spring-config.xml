@@ -1,70 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
- xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
- xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
- <context:component-scan base-package="org.corporateforce.server.rest" />
- <mvc:annotation-driven />
+	<context:component-scan base-package="org.corporateforce.server.rest" />
+	<mvc:annotation-driven />
 
- <bean id="dataSource"
-  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-  <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-  <property name="url" value="jdbc:mysql://localhost:3306/corporateforce" />
-  <property name="username" value="root" />
-  <property name="password" value="test" />
- </bean>
+	<mvc:resources location="/resources/images/" mapping="/resources/images/**" />
+	<mvc:resources location="/resources/js/" mapping="/resources/js/**" />
+	<mvc:resources location="/resources/css/" mapping="/resources/css/**" />
+	<mvc:resources location="/resources/icons/" mapping="/resources/icons/**" />
+	<mvc:resources location="/view/" mapping="/view/**" />
 
- <bean id="sessionFactory"
-  class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-  <property name="dataSource" ref="dataSource" />
-  <property name="annotatedClasses">
-   <list>
-    <value>org.corporateforce.server.model.Articles</value>
-    <value>org.corporateforce.server.model.Articlesresourceslink</value>
-    <value>org.corporateforce.server.model.Chatter</value>
-    <value>org.corporateforce.server.model.Chatterresourceslink</value>
-    <value>org.corporateforce.server.model.Contacts</value>
-    <value>org.corporateforce.server.model.Holidays</value>
-    <value>org.corporateforce.server.model.Labels</value>
-    <value>org.corporateforce.server.model.Languages</value>
-    <value>org.corporateforce.server.model.Objectives</value>
-    <value>org.corporateforce.server.model.Offices</value>
-    <value>org.corporateforce.server.model.Profiles</value>
-    <value>org.corporateforce.server.model.Projects</value>
-    <value>org.corporateforce.server.model.Questions</value>
-    <value>org.corporateforce.server.model.Resources</value>
-    <value>org.corporateforce.server.model.Results</value>
-    <value>org.corporateforce.server.model.Roles</value>
-    <value>org.corporateforce.server.model.Settings</value>
-    <value>org.corporateforce.server.model.Tickets</value>
-    <value>org.corporateforce.server.model.Trainings</value>
-    <value>org.corporateforce.server.model.Trainingsuserslink</value>
-    <value>org.corporateforce.server.model.Tutorials</value>
-    <value>org.corporateforce.server.model.Users</value>
-    <value>org.corporateforce.server.model.Worklogs</value>
-   </list>
-  </property>
-  <property name="hibernateProperties">
-   <props>
-    <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
-    <prop key="hibernate.show_sql">true</prop>
-   </props>
-  </property>
- </bean>
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/corporateforce" />
+		<property name="username" value="root" />
+		<property name="password" value="test" />
+	</bean>
 
- <bean id="txManager"
-  class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-  <property name="sessionFactory" ref="sessionFactory" />
- </bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>org.corporateforce.server.model.Articles</value>
+				<value>org.corporateforce.server.model.Articlesresourceslink</value>
+				<value>org.corporateforce.server.model.Chatter</value>
+				<value>org.corporateforce.server.model.Chatterresourceslink</value>
+				<value>org.corporateforce.server.model.Contacts</value>
+				<value>org.corporateforce.server.model.Holidays</value>
+				<value>org.corporateforce.server.model.Labels</value>
+				<value>org.corporateforce.server.model.Languages</value>
+				<value>org.corporateforce.server.model.Objectives</value>
+				<value>org.corporateforce.server.model.Offices</value>
+				<value>org.corporateforce.server.model.Profiles</value>
+				<value>org.corporateforce.server.model.Projects</value>
+				<value>org.corporateforce.server.model.Questions</value>
+				<value>org.corporateforce.server.model.Resources</value>
+				<value>org.corporateforce.server.model.Results</value>
+				<value>org.corporateforce.server.model.Roles</value>
+				<value>org.corporateforce.server.model.Settings</value>
+				<value>org.corporateforce.server.model.Tickets</value>
+				<value>org.corporateforce.server.model.Trainings</value>
+				<value>org.corporateforce.server.model.Trainingsuserslink</value>
+				<value>org.corporateforce.server.model.Tutorials</value>
+				<value>org.corporateforce.server.model.Users</value>
+				<value>org.corporateforce.server.model.Worklogs</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
 
- <bean id="persistenceExceptionTranslationPostProcessor"
-  class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 
- <bean id="usersDao" class="org.corporateforce.server.dao.UsersDaoImpl"></bean>
- <bean id="usersServices" class="org.corporateforce.server.services.UsersServicesImpl"></bean>
- 
+	<bean id="persistenceExceptionTranslationPostProcessor"
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+	<bean id="usersDao" class="org.corporateforce.server.dao.UsersDaoImpl"></bean>
+	<bean id="usersServices" class="org.corporateforce.server.services.UsersServicesImpl"></bean>
+
 </beans>
