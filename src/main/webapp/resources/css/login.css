@@ -32,7 +32,7 @@ body {
 
 .login-logo {
 	padding-left: 170px;
-	padding-bottom: 35px;
+	padding-bottom: 20px;
 	background: url(../resources/images/img_logo_small.png) no-repeat 0 0px;
 }
 
@@ -46,10 +46,6 @@ body {
 	padding-left: 60px;
 	padding-right: 20px;
 	border-radius: 0 5px 5px 0px;
-}
-
-.login-title {
-
 }
 
 .login-text-big {
@@ -109,4 +105,8 @@ body {
 
 .login-separator-vert {
 	background-color: rgb(203, 203, 203);
+}
+
+.ui-inputfield {
+	text-align: center;
 }
