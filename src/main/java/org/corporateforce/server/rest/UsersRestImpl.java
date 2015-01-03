@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.corporateforce.server.model.Users;
 
 @Controller
-@RequestMapping("services/Users")
+@RequestMapping("Users")
 public class UsersRestImpl extends AbstractRest<Users, UsersDaoImpl> {
 
 }

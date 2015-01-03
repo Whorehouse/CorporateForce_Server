@@ -5,14 +5,21 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 	http://www.springframework.org/schema/context
-	http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+	http://www.springframework.org/schema/context/spring-context-3.1.xsd">	
+
+	<context:component-scan base-package="org.corporateforce.server.dao" />
+	<context:component-scan base-package="org.corporateforce.server.jsf" />
  
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/corporateforce" />
-		<property name="username" value="root" />
-		<property name="password" value="test" />
+<!-- 	<bean id="dataSource" -->
+<!-- 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
+<!-- 		<property name="driverClassName" value="com.mysql.jdbc.Driver" /> -->
+<!-- 		<property name="url" value="jdbc:mysql://localhost:3306/corporateforce" /> -->
+<!-- 		<property name="username" value="root" /> -->
+<!-- 		<property name="password" value="test" /> -->
+<!-- 	</bean> -->
+	
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+	    <property name="jndiName" value="java:jboss/datasources/CorporateForce"/>
 	</bean>
 
 	<bean id="sessionFactory"
@@ -60,8 +67,5 @@
 
 	<bean id="persistenceExceptionTranslationPostProcessor"
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
-
-	<context:component-scan base-package="org.corporateforce.server.dao" />
-	<context:component-scan base-package="org.corporateforce.server.jsf" />
  
 </beans>
