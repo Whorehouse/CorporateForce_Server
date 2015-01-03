@@ -13,9 +13,7 @@
 		<param-value>bootstrap</param-value>
 	</context-param>
 	<session-config>
-		<tracking-mode>COOKIE</tracking-mode>
-		<tracking-mode>SSL</tracking-mode>
-		<tracking-mode>URL</tracking-mode>
+		<session-timeout>30</session-timeout>
 	</session-config>
 	<welcome-file-list>
 		<welcome-file>index.jsf</welcome-file>

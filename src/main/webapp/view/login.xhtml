@@ -26,13 +26,13 @@
 					<h:panelGrid columns="1" cellpadding="3"
 						styleClass="login-block-input">
 						<h:outputLabel for="inputLogin" value="Login: " />
-						<p:inputText id="inputLogin" required="true" />
+						<p:inputText id="inputLogin" required="true" value="#{UsersBean.login}" />
 						<h:outputLabel for="inputPassword" value="Password: " />
-						<p:password id="inputPassword" required="true" />
+						<p:password id="inputPassword" required="true" value="#{UsersBean.password}" />
 					</h:panelGrid>
 					<h:panelGrid columns="1" cellpadding="3"
 						styleClass="login-block-buttons">
-						<p:commandButton value="Sign In" />
+						<p:commandButton value="Sign In" actionListener="#{UsersBean.auth}"/>
 					</h:panelGrid>
 					<div class="login-block-links login-text-small">
 						<p:link value="Register" class="login-link" />

@@ -10,11 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 public abstract class AbstractDao<T> {
 
 	 @Autowired
-	 SessionFactory sessionFactory;
+	 public SessionFactory sessionFactory;
 	 
-	 Class<T> entityClass;
-	 Session session = null;
-	 Transaction tx = null;
+	 public Class<T> entityClass;
+	 public Session session = null;
+	 public Transaction tx = null;
 	 
 	 public AbstractDao(Class<T> entityClass) {
 	        this.entityClass = entityClass;
@@ -31,10 +31,11 @@ public abstract class AbstractDao<T> {
 
 	public T getEntityById(int id) throws Exception {
 		  session = sessionFactory.openSession();
-		  T entity = (T) session.load(entityClass, new Integer(id));
+		  T entity = (T)session.load(entityClass, new Integer(id));
 		  tx = session.getTransaction();
 		  session.beginTransaction();
 		  tx.commit();
+		  session.close();
 		  return entity;
 	}
 
@@ -45,8 +46,6 @@ public abstract class AbstractDao<T> {
 		  List<T> entityList = session.createCriteria(entityClass)
 		    .list();
 		  tx.commit();
-		  System.out.println("DANGEROS!!! List users!");
-		  System.out.println(entityList.size());
 		  session.close();
 		  return entityList;
 	}
@@ -57,7 +56,8 @@ public abstract class AbstractDao<T> {
 		  tx = session.getTransaction();
 		  session.beginTransaction();
 		  session.delete(o);
-		  tx.commit();
+		  tx.commit();	  
+		  session.close();
 		  return false;
 	}
 }
