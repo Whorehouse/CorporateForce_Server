@@ -16,23 +16,29 @@
 	</h:head>
 	<h:body>
 		<h:form>
-			<p:growl id="messages" showDetail="true" />
+			<p:outputPanel styleClass="login-block-messages">
+				<p:messages id="messages" autoUpdate="true"
+					closable="true" />
+			</p:outputPanel>
 			<div class="login-container">
 				<p:fieldset styleClass="login-block">
 					<p:commandLink styleClass="login-logo" />
 					<div class="login-block-title login-text-big">
 						<h:outputLabel value="Sign In" />
 					</div>
-					<h:panelGrid columns="1" cellpadding="3"
+					<h:panelGrid columns="1" cellpadding="3" id="fieldsGrid"
 						styleClass="login-block-input">
-						<h:outputLabel for="inputLogin" value="Login: " />
-						<p:inputText id="inputLogin" required="true" value="#{usersBean.login}" />
+						<h:outputLabel for="inputLogin" value="Username: " />
+						<p:inputText id="inputLogin" required="true" label="username"
+							value="#{usersBean.username}" />
 						<h:outputLabel for="inputPassword" value="Password: " />
-						<p:password id="inputPassword" required="true" value="#{usersBean.password}" />
+						<p:password id="inputPassword" required="true" label="password"
+							value="#{usersBean.password}" />
 					</h:panelGrid>
 					<h:panelGrid columns="1" cellpadding="3"
 						styleClass="login-block-buttons">
-						<p:commandButton value="Sign In" actionListener="#{usersBean.auth}"/>
+						<p:commandButton value="Sign In"
+							actionListener="#{usersBean.signIn}" update="fieldsGrid" />
 					</h:panelGrid>
 					<div class="login-block-links login-text-small">
 						<p:link value="Register" class="login-link" />

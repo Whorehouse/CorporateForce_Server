@@ -110,3 +110,21 @@ body {
 .ui-inputfield {
 	text-align: center;
 }
+
+.ui-inputfield.ui-state-error, .ui-widget-header .ui-inputfield.ui-state-error,
+	.ui-widget-content .ui-inputfield.ui-state-error {
+	border: 1px solid #FFA565;
+}
+
+.ui-state-focuse {
+	background-color: rgb(203, 203, 203);
+}
+
+.login-block-messages {
+	margin: auto;
+	position: relative;
+	left: 0;
+	right: 0;
+	width: 90%;
+	z-index: 99999;
+}

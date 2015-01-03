@@ -15,19 +15,13 @@ import org.springframework.stereotype.Component;
 public class UsersBean {
 	
 	@Autowired	
-	UsersDaoImpl usersDao;	
+	private UsersDaoImpl usersDao;	
 	
 	private Users currentUser;
-	private String login;
+	private String username;
 	private String password;
 
 	public void setUsersDao(UsersDaoImpl usersDao) {
-		System.out.println("--> UsersDao set ");
-		if (usersDao!=null) {
-			System.out.println("--> UsersDao not null ");
-		} else {
-			System.out.println("--> UsersDao null");
-		}
 		this.usersDao = usersDao;
 	}
 	
@@ -39,45 +33,41 @@ public class UsersBean {
 		this.currentUser = currentUser;
 	}
 
-	public String getLogin() {
-		System.out.println("--> Get login");
-		return login;
+	public String getUsername() {
+		System.out.println("DEBUG: username: " + username);
+		return username;
 	}
 
-	public void setLogin(String login) {
-		System.out.println("--> Set login");
-		this.login = login;
+	public void setUsername(String value) {
+		this.username = value;
 	}
 
 	public String getPassword() {
-		System.out.println("--> Get password");
+		System.out.println("DEBUG: password: " + password);
 		return password;
 	}
 
-	public void setPassword(String password) {
-		System.out.println("--> Set password");
-		this.password = password;
+	public void setPassword(String value) {
+		this.password = value;
 	}
 	
-	public void auth() throws Exception {
-        System.out.println("--> Auth begin!");
+	public void signIn() throws Exception {
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-        if (login != null && password != null) {
+        if (username != null && password != null) {
             try {
-                Users result = usersDao.loginUsers(login, password);
-                System.err.println("--> User, getting from base: " + result);
+                Users result = usersDao.loginUsers(username, password);
+                System.err.println("DEBUG: UsersBean User: " + result);
                 if (result != null) {
                     currentUser=result;
                     password = "";
-                    context.redirect(context.getRequestContextPath() + "/view/welcome.jsf");
+                    context.redirect(context.getRequestContextPath() + "/view/console.jsf");
                 } else {
-                    //setSessionValue("user", null);
                     currentUser=null;
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка!", "Неверный логин или пароль."));
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Incorrect username or password"));
                 }
             } catch (Exception ex) {
-                System.err.println("--> Auth exception: " + ex.getMessage());
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ошибка!", ex.getMessage()));
+                System.err.println("DEBUG: UsersBean error: " + ex.getMessage());
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", ex.getMessage()));
             }
         }
     }
