@@ -6,15 +6,28 @@ import javax.faces.context.FacesContext;
 
 import org.corporateforce.server.dao.UsersDaoImpl;
 import org.corporateforce.server.model.Users;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+@Component
+@Scope("session")
 public class UsersBean {
 	
+	@Autowired	
 	UsersDaoImpl usersDao;	
+	
 	private Users currentUser;
 	private String login;
 	private String password;
 
 	public void setUsersDao(UsersDaoImpl usersDao) {
+		System.out.println("--> UsersDao set ");
+		if (usersDao!=null) {
+			System.out.println("--> UsersDao not null ");
+		} else {
+			System.out.println("--> UsersDao null");
+		}
 		this.usersDao = usersDao;
 	}
 	
@@ -56,7 +69,7 @@ public class UsersBean {
                 if (result != null) {
                     currentUser=result;
                     password = "";
-                    context.redirect(context.getRequestContextPath() + "/view/index.jsf");
+                    context.redirect(context.getRequestContextPath() + "/view/welcome.jsf");
                 } else {
                     //setSessionValue("user", null);
                     currentUser=null;

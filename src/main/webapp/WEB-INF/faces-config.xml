@@ -16,14 +16,8 @@
         http://java.sun.com/xml/ns/javaee
         http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
 
-	<managed-bean>
-		<managed-bean-name>UsersBean</managed-bean-name>
-		<managed-bean-class>org.corporateforce.server.jsf.UsersBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-		<managed-property>
-			<property-name>usersDao</property-name>
-			<value>#{usersDao}</value>
-		</managed-property>
-	</managed-bean>
+	<application>
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+	</application>
 
 </faces-config>
