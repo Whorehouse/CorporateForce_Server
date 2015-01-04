@@ -98,7 +98,6 @@ public class UsersBean implements Serializable {
 			if (result != null) {
 				currentUser = result;
 				password = "";
-				passwordRepeat = "";
 				context.redirect(context.getRequestContextPath() + "/view/console.jsf");
 			} else {
 				currentUser = null;
@@ -109,7 +108,25 @@ public class UsersBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:", ex.getMessage()));
 		}
 	}
-	
+
+	public void signUp() throws Exception {
+		if (!validateInputValues())
+			return;
+		try {
+			Users result = usersDao.createSimpleUsers(0, 0, 0, 0, username, password);
+			System.err.println("DEBUG: UsersBean User: " + result);
+			if (result != null) {
+				passwordRepeat = "";
+				this.signIn();
+			} else {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:", "Incorrect username or password"));
+			}
+		} catch (Exception ex) {
+			System.err.println("DEBUG: UsersBean error: " + ex.getMessage());
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:", ex.getMessage()));
+		}
+	}
+
 	public static void clearInputValues() {
 		username = "";
 		password = "";

@@ -33,7 +33,7 @@
 					<p:outputPanel styleClass="login-block-bottom">
 						<h:panelGrid columns="1" cellpadding="3" styleClass="login-block-buttons">
 							<p:commandButton value="Sign In" actionListener="#{usersBean.signIn}" update="fieldsGrid" rendered="#{!usersBean.signUpMode}" />
-							<p:commandButton value="Sign Up" actionListener="#{usersBean.signIn}" update="fieldsGrid" rendered="#{usersBean.signUpMode}" />
+							<p:commandButton value="Sign Up" actionListener="#{usersBean.signUp}" update="fieldsGrid" rendered="#{usersBean.signUpMode}" />
 						</h:panelGrid>
 						<div class="login-block-links login-text-small">
 							<p:commandLink value="Sign Up" class="login-link" rendered="#{!usersBean.signUpMode}" actionListener="#{mainBean.actionSignUp}" />
