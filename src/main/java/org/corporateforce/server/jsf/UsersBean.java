@@ -55,6 +55,14 @@ public class UsersBean implements Serializable {
 	public void setPassword(String value) {
 		this.password = value;
 	}
+
+	public void setSignUpMode(Boolean value) {
+		signUpMode = value;
+	}
+	
+	public Boolean getSignUpMode() {
+		return signUpMode;
+	}
 	
 	public void signIn() throws Exception {
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();

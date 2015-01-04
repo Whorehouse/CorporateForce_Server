@@ -23,6 +23,7 @@ public class MainBean implements Serializable {
 	}
 
 	public void actionLogin() throws Exception {
+		UsersBean.signUpMode = false;
 		this.redirect(PAGE_LOGIN);
 	}
 

@@ -23,27 +23,44 @@
 				<p:fieldset styleClass="login-block">
 					<p:link styleClass="login-logo" outcome="/index.jsf" />
 					<div class="login-block-title login-text-big">
-						<h:outputLabel value="Sign In" />
+						<h:outputLabel value="Sign In" rendered="#{!usersBean.signUpMode}" />
+						<h:outputLabel value="Sign Up" rendered="#{usersBean.signUpMode}" />
 					</div>
 					<h:panelGrid columns="1" cellpadding="3" id="fieldsGrid"
 						styleClass="login-block-input">
 						<h:outputLabel for="inputLogin" value="Username: " />
-						<p:inputText id="inputLogin" required="true" label="username"
-							value="#{usersBean.username}" />
+						<p:inputText id="inputLogin" label="username"
+							value="#{usersBean.username}" redisplay="true" />
 						<h:outputLabel for="inputPassword" value="Password: " />
-						<p:password id="inputPassword" required="true" label="password"
-							value="#{usersBean.password}" />
+						<p:password id="inputPassword" label="password"
+							value="#{usersBean.password}" feedback="#{usersBean.signUpMode}"
+							redisplay="true" />
+						<h:outputLabel for="inputPassword" value="Repeat password: "
+							rendered="#{usersBean.signUpMode}" />
+						<p:password id="inputPasswordRepeat" label="password"
+							redisplay="true" rendered="#{usersBean.signUpMode}" />
 					</h:panelGrid>
-					<h:panelGrid columns="1" cellpadding="3"
-						styleClass="login-block-buttons">
-						<p:commandButton value="Sign In"
-							actionListener="#{usersBean.signIn}" update="fieldsGrid" />
-					</h:panelGrid>
-					<div class="login-block-links login-text-small">
-						<p:link value="Register" class="login-link" />
-						<p:spacer width="1" height="10" styleClass="login-separator-vert" />
-						<p:link value="Need help?" class="login-link" />
-					</div>
+					<p:outputPanel styleClass="login-block-bottom">
+						<h:panelGrid columns="1" cellpadding="3"
+							styleClass="login-block-buttons">
+							<p:commandButton value="Sign In"
+								actionListener="#{usersBean.signIn}" update="fieldsGrid"
+								rendered="#{!usersBean.signUpMode}" />
+							<p:commandButton value="Sign Up"
+								actionListener="#{usersBean.signIn}" update="fieldsGrid"
+								rendered="#{usersBean.signUpMode}" />
+						</h:panelGrid>
+						<div class="login-block-links login-text-small">
+							<p:commandLink value="Sign Up" class="login-link"
+								rendered="#{!usersBean.signUpMode}"
+								actionListener="#{mainBean.actionSignUp}" />
+							<p:commandLink value="Sign In" class="login-link"
+								rendered="#{usersBean.signUpMode}"
+								actionListener="#{mainBean.actionLogin}" />
+							<p:spacer width="1" height="10" styleClass="login-separator-vert" />
+							<p:commandLink value="Need help?" class="login-link" />
+						</div>
+					</p:outputPanel>
 				</p:fieldset>
 				<p:outputPanel styleClass="login-copyright">© Copyright 2014-2015 CorporateForce. All rights reserved.</p:outputPanel>
 			</div>

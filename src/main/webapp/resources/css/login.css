@@ -69,14 +69,21 @@ body {
 	float: left;
 }
 
+.login-block-bottom {
+	margin: auto;
+	left: 0;
+	right: 0;
+	position: absolute;
+	top: 320px;
+}
+
 .login-block-buttons {
 	margin: auto;
 	position: relative;
-	top: 170px;
 }
 
 .login-block-links {
-	top: 190px;
+	top: 20px;
 	position: relative;
 }
 
