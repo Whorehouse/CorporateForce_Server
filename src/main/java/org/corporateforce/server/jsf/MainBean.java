@@ -17,18 +17,17 @@ public class MainBean implements Serializable {
 	private static final String PAGE_INDEX = "/index.jsf";
 
 	private void redirect(String page) throws Exception {
-		ExternalContext context = FacesContext.getCurrentInstance()
-				.getExternalContext();
+		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
 		context.redirect(context.getRequestContextPath() + page);
 	}
 
 	public void actionLogin() throws Exception {
-		UsersBean.signUpMode = false;
+		UsersBean.setSignUpMode(false);
 		this.redirect(PAGE_LOGIN);
 	}
 
 	public void actionSignUp() throws Exception {
-		UsersBean.signUpMode = true;
+		UsersBean.setSignUpMode(true);
 		this.redirect(PAGE_LOGIN);
 	}
 

@@ -19,17 +19,18 @@ public class UsersBean implements Serializable {
 
 	public static Boolean signUpMode = false;
 
-	@Autowired	
-	private UsersDaoImpl usersDao;	
-	
+	@Autowired
+	private UsersDaoImpl usersDao;
+
 	private Users currentUser;
-	private String username;
-	private String password;
+	private static String username;
+	private static String password;
+	private static String passwordRepeat;
 
 	public void setUsersDao(UsersDaoImpl usersDao) {
 		this.usersDao = usersDao;
 	}
-	
+
 	public Users getCurrentUser() {
 		return currentUser;
 	}
@@ -44,7 +45,7 @@ public class UsersBean implements Serializable {
 	}
 
 	public void setUsername(String value) {
-		this.username = value;
+		username = value;
 	}
 
 	public String getPassword() {
@@ -53,35 +54,65 @@ public class UsersBean implements Serializable {
 	}
 
 	public void setPassword(String value) {
-		this.password = value;
+		password = value;
 	}
 
-	public void setSignUpMode(Boolean value) {
-		signUpMode = value;
+	public String getPasswordRepeat() {
+		System.out.println("DEBUG: passwordRepeat: " + passwordRepeat);
+		return passwordRepeat;
 	}
-	
+
+	public void setPasswordRepeat(String value) {
+		passwordRepeat = value;
+	}
+
+	public static void setSignUpMode(Boolean value) {
+		signUpMode = value;
+		clearInputValues();
+	}
+
 	public Boolean getSignUpMode() {
 		return signUpMode;
 	}
-	
+
+	private Boolean validateInputValues() {
+		if (!username.equals("") && !password.equals("") && (!signUpMode || (signUpMode && passwordRepeat.equals(password)))) {
+			return true;
+		}
+		if (username.equals(""))
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:", "Empty username"));
+		if (password.equals(""))
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:", "Empty password"));
+		if (!password.equals("") && !passwordRepeat.equals(password))
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:", "Passwords is not equals"));
+		return false;
+	}
+
 	public void signIn() throws Exception {
-        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-        if (username != null && password != null) {
-            try {
-                Users result = usersDao.loginUsers(username, password);
-                System.err.println("DEBUG: UsersBean User: " + result);
-                if (result != null) {
-                    currentUser=result;
-                    password = "";
-                    context.redirect(context.getRequestContextPath() + "/view/console.jsf");
-                } else {
-                    currentUser=null;
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Incorrect username or password"));
-                }
-            } catch (Exception ex) {
-                System.err.println("DEBUG: UsersBean error: " + ex.getMessage());
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", ex.getMessage()));
-            }
-        }
-    }
+		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+		if (!validateInputValues())
+			return;
+		try {
+			Users result = usersDao.loginUsers(username, password);
+			System.err.println("DEBUG: UsersBean User: " + result);
+			if (result != null) {
+				currentUser = result;
+				password = "";
+				passwordRepeat = "";
+				context.redirect(context.getRequestContextPath() + "/view/console.jsf");
+			} else {
+				currentUser = null;
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:", "Incorrect username or password"));
+			}
+		} catch (Exception ex) {
+			System.err.println("DEBUG: UsersBean error: " + ex.getMessage());
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:", ex.getMessage()));
+		}
+	}
+	
+	public static void clearInputValues() {
+		username = "";
+		password = "";
+		passwordRepeat = "";
+	}
 }

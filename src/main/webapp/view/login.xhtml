@@ -1,10 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 <f:view>
 	<h:head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -17,46 +13,31 @@
 	<h:body>
 		<h:form>
 			<p:outputPanel styleClass="login-block-messages">
-				<p:messages id="messages" autoUpdate="true" closable="true" />
+				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 			</p:outputPanel>
 			<div class="login-container">
 				<p:fieldset styleClass="login-block">
-					<p:link styleClass="login-logo" outcome="/index.jsf" />
+					<p:commandLink styleClass="login-logo" actionListener="#{mainBean.actionMainPage}" update="fieldsGrid"/>
 					<div class="login-block-title login-text-big">
 						<h:outputLabel value="Sign In" rendered="#{!usersBean.signUpMode}" />
 						<h:outputLabel value="Sign Up" rendered="#{usersBean.signUpMode}" />
 					</div>
-					<h:panelGrid columns="1" cellpadding="3" id="fieldsGrid"
-						styleClass="login-block-input">
+					<h:panelGrid columns="1" cellpadding="3" id="fieldsGrid" styleClass="login-block-input">
 						<h:outputLabel for="inputLogin" value="Username: " />
-						<p:inputText id="inputLogin" label="username"
-							value="#{usersBean.username}" redisplay="true" />
+						<p:inputText id="inputLogin" label="username" value="#{usersBean.username}" redisplay="true" />
 						<h:outputLabel for="inputPassword" value="Password: " />
-						<p:password id="inputPassword" label="password"
-							value="#{usersBean.password}" feedback="#{usersBean.signUpMode}"
-							redisplay="true" />
-						<h:outputLabel for="inputPassword" value="Repeat password: "
-							rendered="#{usersBean.signUpMode}" />
-						<p:password id="inputPasswordRepeat" label="password"
-							redisplay="true" rendered="#{usersBean.signUpMode}" />
+						<p:password id="inputPassword" label="password" value="#{usersBean.password}" feedback="#{usersBean.signUpMode}" redisplay="true" />
+						<h:outputLabel for="inputPassword" value="Repeat password: " rendered="#{usersBean.signUpMode}" />
+						<p:password id="inputPasswordRepeat" label="password" value="#{usersBean.passwordRepeat}" redisplay="true" rendered="#{usersBean.signUpMode}" />
 					</h:panelGrid>
 					<p:outputPanel styleClass="login-block-bottom">
-						<h:panelGrid columns="1" cellpadding="3"
-							styleClass="login-block-buttons">
-							<p:commandButton value="Sign In"
-								actionListener="#{usersBean.signIn}" update="fieldsGrid"
-								rendered="#{!usersBean.signUpMode}" />
-							<p:commandButton value="Sign Up"
-								actionListener="#{usersBean.signIn}" update="fieldsGrid"
-								rendered="#{usersBean.signUpMode}" />
+						<h:panelGrid columns="1" cellpadding="3" styleClass="login-block-buttons">
+							<p:commandButton value="Sign In" actionListener="#{usersBean.signIn}" update="fieldsGrid" rendered="#{!usersBean.signUpMode}" />
+							<p:commandButton value="Sign Up" actionListener="#{usersBean.signIn}" update="fieldsGrid" rendered="#{usersBean.signUpMode}" />
 						</h:panelGrid>
 						<div class="login-block-links login-text-small">
-							<p:commandLink value="Sign Up" class="login-link"
-								rendered="#{!usersBean.signUpMode}"
-								actionListener="#{mainBean.actionSignUp}" />
-							<p:commandLink value="Sign In" class="login-link"
-								rendered="#{usersBean.signUpMode}"
-								actionListener="#{mainBean.actionLogin}" />
+							<p:commandLink value="Sign Up" class="login-link" rendered="#{!usersBean.signUpMode}" actionListener="#{mainBean.actionSignUp}" />
+							<p:commandLink value="Sign In" class="login-link" rendered="#{usersBean.signUpMode}" actionListener="#{mainBean.actionLogin}" />
 							<p:spacer width="1" height="10" styleClass="login-separator-vert" />
 							<p:commandLink value="Need help?" class="login-link" />
 						</div>
