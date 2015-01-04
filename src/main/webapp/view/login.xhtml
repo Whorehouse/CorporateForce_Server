@@ -17,12 +17,11 @@
 	<h:body>
 		<h:form>
 			<p:outputPanel styleClass="login-block-messages">
-				<p:messages id="messages" autoUpdate="true"
-					closable="true" />
+				<p:messages id="messages" autoUpdate="true" closable="true" />
 			</p:outputPanel>
 			<div class="login-container">
 				<p:fieldset styleClass="login-block">
-					<p:commandLink styleClass="login-logo" />
+					<p:link styleClass="login-logo" outcome="/index.jsf" />
 					<div class="login-block-title login-text-big">
 						<h:outputLabel value="Sign In" />
 					</div>

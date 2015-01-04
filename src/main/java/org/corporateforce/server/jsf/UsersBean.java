@@ -1,5 +1,7 @@
 package org.corporateforce.server.jsf;
 
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -10,10 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+@SuppressWarnings("serial")
 @Component
 @Scope("session")
-public class UsersBean {
-	
+public class UsersBean implements Serializable {
+
+	public static Boolean signUpMode = false;
+
 	@Autowired	
 	private UsersDaoImpl usersDao;	
 	
