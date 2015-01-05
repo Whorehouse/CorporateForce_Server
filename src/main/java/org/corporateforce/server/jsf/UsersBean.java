@@ -74,6 +74,34 @@ public class UsersBean implements Serializable {
 	public Boolean getSignUpMode() {
 		return signUpMode;
 	}
+	
+	public boolean isAuth() {
+		return currentUser!=null;
+	}
+	
+	public boolean isLoginEnabledAccess() {
+		return isLoginEnabledAccess(currentUser);
+	}
+	
+	public boolean isLoginEnabledAccess(Users u) {
+		return u!=null && u.getProfiles()!=null && u.getProfiles().isLoginEnabled();
+	}
+	
+	public boolean isManageUsersAccess() {
+		return isManageUsersAccess(currentUser);
+	}
+	
+	public boolean isManageUsersAccess(Users u) {
+		return u!=null && u.getProfiles()!=null && u.getProfiles().isManageUsers();
+	}
+	
+	public boolean isSystemControlAccess() {
+		return isSystemControlAccess(currentUser);
+	}
+	
+	public boolean isSystemControlAccess(Users u) {
+		return u!=null && u.getProfiles()!=null && u.getProfiles().isSystemControl();
+	}
 
 	private Boolean validateInputValues() {
 		if (!username.equals("") && !password.equals("") && (!signUpMode || (signUpMode && passwordRepeat.equals(password)))) {
@@ -95,10 +123,14 @@ public class UsersBean implements Serializable {
 		try {
 			Users result = usersDao.loginUsers(username, password);
 			System.err.println("DEBUG: UsersBean User: " + result);
-			if (result != null) {
+			if (result != null && isLoginEnabledAccess(result)) {
 				currentUser = result;
 				password = "";
-				context.redirect(context.getRequestContextPath() + "/view/console.jsf");
+				if (isSystemControlAccess()) {
+					context.redirect(context.getRequestContextPath() + "/view/console.jsf");
+				} else {
+					context.redirect(context.getRequestContextPath() + "/view/welcome.jsf");
+				}
 			} else {
 				currentUser = null;
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:", "Incorrect username or password"));
@@ -125,6 +157,12 @@ public class UsersBean implements Serializable {
 			System.err.println("DEBUG: UsersBean error: " + ex.getMessage());
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:", ex.getMessage()));
 		}
+	}
+	
+	public void logout() throws Exception {
+		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+		currentUser = null;
+		context.redirect(context.getRequestContextPath() + "/view/login.jsf");
 	}
 
 	public static void clearInputValues() {

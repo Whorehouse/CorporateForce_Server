@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 public class MainBean implements Serializable {
 
 	private static final String PAGE_LOGIN = "/view/login.jsf";
+	private static final String PAGE_INFO = "/view/info.jsf";
+	private static final String PAGE_CONSOLE = "/view/console.jsf";
 	private static final String PAGE_INDEX = "/index.jsf";
 
 	private void redirect(String page) throws Exception {
@@ -33,5 +35,13 @@ public class MainBean implements Serializable {
 
 	public void actionMainPage() throws Exception {
 		this.redirect(PAGE_INDEX);
+	}
+
+	public void actionInfo() throws Exception {
+		this.redirect(PAGE_INFO);
+	}
+
+	public void actionConsole() throws Exception {
+		this.redirect(PAGE_CONSOLE);
 	}
 }

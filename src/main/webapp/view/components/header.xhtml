@@ -7,14 +7,29 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 	<h:form>
-		<p:growl id="messages"/>
-		<p:commandLink styleClass="menubar-logo" actionListener="#{mainBean.actionMainPage}"/>
+		<p:growl id="messages" />
+		<p:commandLink styleClass="menubar-logo"
+			actionListener="#{mainBean.actionMainPage}" />
 		<p:menubar id="menubar">
-        <f:facet name="options">
-            <p:commandButton value="Login" actionListener="#{mainBean.actionLogin}" />
-            <p:spacer width="3" height="10"/>
-            <p:commandButton value="Sign Up" actionListener="#{mainBean.actionSignUp}" />
-        </f:facet>
+			<f:facet rendered="#{usersBean.currentUser==null}" name="options">
+				<p:commandButton value="Login" rendered="#{!usersBean.isAuth()}"
+					actionListener="#{mainBean.actionLogin}" />
+				<p:spacer width="3" height="10" rendered="#{!usersBean.isAuth()}" />
+				<p:commandButton value="Sign Up" rendered="#{!usersBean.isAuth()}"
+					actionListener="#{mainBean.actionSignUp}" />
+
+				<p:commandLink rendered="#{usersBean.isAuth()}"
+					value="Hello, #{usersBean.currentUser.username}!"
+					actionListener="#{mainBean.actionInfo}" />
+				<p:spacer width="3" height="10" rendered="#{!usersBean.isAuth()}" />
+				<p:commandButton rendered="#{usersBean.isAuth()}" value="Logout"
+					actionListener="#{usersBean.logout}" />
+
+				<p:spacer width="3" height="10"
+					rendered="#{usersBean.isSystemControlAccess()}" />
+				<p:commandButton rendered="#{usersBean.isSystemControlAccess()}"
+					value="Console" actionListener="#{mainBean.actionConsole}" />
+			</f:facet>
 		</p:menubar>
 	</h:form>
 </ui:composition>
