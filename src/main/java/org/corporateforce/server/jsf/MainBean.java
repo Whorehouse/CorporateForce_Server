@@ -34,7 +34,10 @@ public class MainBean implements Serializable {
 	}
 
 	public void actionMainPage() throws Exception {
-		this.redirect(PAGE_INDEX);
+		if (UsersBean.isSignedIn())
+			this.redirect(PAGE_CONSOLE);
+		else
+			this.redirect(PAGE_INDEX);
 	}
 
 	public void actionInfo() throws Exception {

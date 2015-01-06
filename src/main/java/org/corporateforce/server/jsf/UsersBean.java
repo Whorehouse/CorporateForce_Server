@@ -22,7 +22,7 @@ public class UsersBean implements Serializable {
 	@Autowired
 	private UsersDaoImpl usersDao;
 
-	private Users currentUser;
+	private static Users currentUser;
 	private static String username;
 	private static String password;
 	private static String passwordRepeat;
@@ -35,8 +35,8 @@ public class UsersBean implements Serializable {
 		return currentUser;
 	}
 
-	public void setCurrentUser(Users currentUser) {
-		this.currentUser = currentUser;
+	public void setCurrentUser(Users user) {
+		currentUser = user;
 	}
 
 	public String getUsername() {
@@ -75,7 +75,7 @@ public class UsersBean implements Serializable {
 		return signUpMode;
 	}
 	
-	public boolean isSignedIn() {
+	public static boolean isSignedIn() {
 		return currentUser!=null;
 	}
 	
@@ -122,7 +122,7 @@ public class UsersBean implements Serializable {
 			return;
 		try {
 			Users result = usersDao.loginUsers(username, password);
-			System.err.println("DEBUG: UsersBean User: " + result);
+			System.out.println("DEBUG: UsersBean User: " + result);
 			if (result != null && isLoginEnabledAccess(result)) {
 				currentUser = result;
 				clearInputValues();
