@@ -14,7 +14,6 @@ public class Config {
 		try {
 			properties.load(inputStream);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

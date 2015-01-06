@@ -12,17 +12,17 @@
 			actionListener="#{mainBean.actionMainPage}" />
 		<p:menubar id="menubar">
 			<f:facet rendered="#{usersBean.currentUser==null}" name="options">
-				<p:commandButton value="Login" rendered="#{!usersBean.isAuth()}"
+				<p:commandButton value="Login" rendered="#{!usersBean.isSignedIn()}"
 					actionListener="#{mainBean.actionLogin}" />
-				<p:spacer width="3" height="10" rendered="#{!usersBean.isAuth()}" />
-				<p:commandButton value="Sign Up" rendered="#{!usersBean.isAuth()}"
+				<p:spacer width="3" height="10" rendered="#{!usersBean.isSignedIn()}" />
+				<p:commandButton value="Sign Up" rendered="#{!usersBean.isSignedIn()}"
 					actionListener="#{mainBean.actionSignUp}" />
 
-				<p:commandLink rendered="#{usersBean.isAuth()}"
+				<p:commandLink rendered="#{usersBean.isSignedIn()}"
 					value="Hello, #{usersBean.currentUser.username}!"
 					actionListener="#{mainBean.actionInfo}" />
-				<p:spacer width="3" height="10" rendered="#{!usersBean.isAuth()}" />
-				<p:commandButton rendered="#{usersBean.isAuth()}" value="Logout"
+				<p:spacer width="3" height="10" rendered="#{!usersBean.isSignedIn()}" />
+				<p:commandButton rendered="#{usersBean.isSignedIn()}" value="Logout"
 					actionListener="#{usersBean.logout}" />
 
 				<p:spacer width="3" height="10"

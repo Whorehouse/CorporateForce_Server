@@ -75,7 +75,7 @@ public class UsersBean implements Serializable {
 		return signUpMode;
 	}
 	
-	public boolean isAuth() {
+	public boolean isSignedIn() {
 		return currentUser!=null;
 	}
 	
@@ -125,7 +125,7 @@ public class UsersBean implements Serializable {
 			System.err.println("DEBUG: UsersBean User: " + result);
 			if (result != null && isLoginEnabledAccess(result)) {
 				currentUser = result;
-				password = "";
+				clearInputValues();
 				if (isSystemControlAccess()) {
 					context.redirect(context.getRequestContextPath() + "/view/console.jsf");
 				} else {
@@ -148,7 +148,6 @@ public class UsersBean implements Serializable {
 			Users result = usersDao.createSimpleUsers(0, 0, 0, 0, username, password);
 			System.err.println("DEBUG: UsersBean User: " + result);
 			if (result != null) {
-				passwordRepeat = "";
 				this.signIn();
 			} else {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:", "Incorrect username or password"));
@@ -162,7 +161,7 @@ public class UsersBean implements Serializable {
 	public void logout() throws Exception {
 		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
 		currentUser = null;
-		context.redirect(context.getRequestContextPath() + "/view/login.jsf");
+		context.redirect(context.getRequestContextPath() + "/index.jsf");
 	}
 
 	public static void clearInputValues() {
