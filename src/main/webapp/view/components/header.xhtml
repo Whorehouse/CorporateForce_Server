@@ -8,9 +8,9 @@
 		<p:menubar id="menubar">
 
 			<p:menuitem value="Console" styleClass="menubar-menuitem menubar-menuitem-selected" rendered="#{usersBean.isSignedIn()}" actionListener="#{mainBean.actionMainPage}" />
-			<p:menuitem value="Faces" styleClass="menubar-menuitem" rendered="#{usersBean.isSignedIn()}" actionListener="MainBean.actionOpenFaces" />
-			<p:menuitem value="Projects" styleClass="menubar-menuitem" rendered="#{usersBean.isSignedIn()}" actionListener="MainBean.actionOpenProjects" />
-			<p:menuitem value="Trainings" styleClass="menubar-menuitem" rendered="#{usersBean.isSignedIn()}" actionListener="MainBean.actionOpenTrainings" />
+			<p:menuitem value="Faces" styleClass="menubar-menuitem" rendered="#{usersBean.isSignedIn()}" actionListener="#{mainBean.actionOpenFaces}" />
+			<p:menuitem value="Projects" styleClass="menubar-menuitem" rendered="#{usersBean.isSignedIn()}" actionListener="#{mainBean.actionOpenProjects}" />
+			<p:menuitem value="Trainings" styleClass="menubar-menuitem" rendered="#{usersBean.isSignedIn()}" actionListener="#{mainBean.actionOpenTrainings}" />
 
 			<f:facet name="options">
 				<p:outputPanel styleClass="menubar-block-right" rendered="#{!usersBean.isSignedIn()}">

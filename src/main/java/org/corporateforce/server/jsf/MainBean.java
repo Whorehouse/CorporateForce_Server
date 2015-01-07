@@ -32,9 +32,14 @@ public class MainBean implements Serializable {
 		this.usersBean = usersBean;
 	}
 
-	private void redirect(String page) throws Exception {
+	private void redirect(String page, boolean external) throws Exception {
 		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-		context.redirect(context.getRequestContextPath() + page);
+		if (!external) page= context.getRequestContextPath() + page;
+		context.redirect(page);
+	}
+	
+	private void redirect(String page) throws Exception {
+		this.redirect(page,false);		
 	}
 
 	public void actionLogin() throws Exception {
@@ -67,14 +72,14 @@ public class MainBean implements Serializable {
 	}
 
 	public void actionOpenFaces() throws Exception {
-		this.redirect(Config.getUriModule(MODULE_FACES));
+		this.redirect(Config.getUriModule(MODULE_FACES),true);
 	}
 
 	public void actionOpenProjects() throws Exception {
-		this.redirect(Config.getUriModule(MODULE_PROJECTS));
+		this.redirect(Config.getUriModule(MODULE_PROJECTS),true);
 	}
 	
 	public void actionOpenTrainings() throws Exception {
-		this.redirect(Config.getUriModule(MODULE_TRAININGS));
+		this.redirect(Config.getUriModule(MODULE_TRAININGS),true);
 	}
 }
