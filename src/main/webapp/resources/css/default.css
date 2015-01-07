@@ -75,6 +75,15 @@ body {
 	margin-right: -10px;
 }
 
+.manubar-user-image {
+	margin-left: -45px; top : 5px;
+	width: 36px;
+	height: 36px;
+	padding: 3px;
+	position: absolute;
+	top: 5px;
+}
+
 .footer {
 	position: relative;
 	height: 60px;
@@ -208,4 +217,49 @@ body {
 .welcom-block-devices {
 	padding: 30px;
 	line-height: 2.0em;
+}
+
+.page-container {
+	position: relative;
+	top: 65px;
+	padding-bottom: 70px;
+	padding-left: 100px;
+	padding-right: 100px;
+}
+
+.page-block {
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.settings-user-image {
+	width: 150px;
+	height: 150px;
+}
+
+.ui-button-text-only .ui-button-text {
+	font-size: small;
+}
+
+.settings-block {
+	width: 100%;
+}
+
+.settings-block table {
+	width: 100%;
+}
+
+.settings-block-inner {
+	text-align: center;
+}
+
+.ui-panel .ui-panel-titlebar {
+	font-size: small;
+}
+
+.settings-column-left {
+	width: 180px;
+}
+
+.settings-block-panel table {
+	width: auto;
 }

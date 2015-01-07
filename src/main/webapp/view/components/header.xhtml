@@ -19,12 +19,13 @@
 					<p:commandButton value="Sign Up" actionListener="#{mainBean.actionSignUp}" />
 				</p:outputPanel>
 				<p:outputPanel styleClass="menubar-block-right" rendered="#{usersBean.isSignedIn()}">
+					<p:graphicImage styleClass="manubar-user-image" name="images/img_no_photo.png" />
 					<p:menuButton value="#{usersBean.currentUser.username}" iconPos="right">
-						<p:menuitem value="Personalization" actionListener="#{mainBean.actionInfo}" />
+						<p:menuitem value="Settings" actionListener="#{mainBean.actionSettings}" />
 						<p:menuitem value="Logout" outcome="/view/logout.jsf" />
 					</p:menuButton>
 				</p:outputPanel>
-				<p:graphicImage></p:graphicImage>
+
 			</f:facet>
 		</p:menubar>
 	</h:form>
