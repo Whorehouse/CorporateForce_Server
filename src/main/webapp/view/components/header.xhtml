@@ -22,8 +22,8 @@
 					value="Hello, #{usersBean.currentUser.username}!"
 					actionListener="#{mainBean.actionInfo}" />
 				<p:spacer width="3" height="10" rendered="#{!usersBean.isAuth()}" />
-				<p:commandButton rendered="#{usersBean.isAuth()}" value="Logout"
-					actionListener="#{usersBean.logout}" />
+				<p:button id="logoutButton" rendered="#{usersBean.isAuth()}" value="Logout"
+					outcome="/view/logout.jsf"/>
 
 				<p:spacer width="3" height="10"
 					rendered="#{usersBean.isSystemControlAccess()}" />

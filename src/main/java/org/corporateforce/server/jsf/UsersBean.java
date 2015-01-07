@@ -1,16 +1,26 @@
 package org.corporateforce.server.jsf;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import org.corporateforce.server.config.Config;
 import org.corporateforce.server.dao.UsersDaoImpl;
+import org.corporateforce.server.model.Status;
 import org.corporateforce.server.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
 
 @SuppressWarnings("serial")
 @Component
@@ -160,11 +170,15 @@ public class UsersBean implements Serializable {
 	}
 	
 	public void logout() throws Exception {
-		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
 		currentUser = null;
-		context.redirect(context.getRequestContextPath() + "/view/login.jsf");
+		//ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+		//context.redirect(context.getRequestContextPath() + "/view/login.jsf");
 	}
-
+	
+	public List<String> outerModulesURLs() {
+		return new ArrayList<String>(Config.getModules().values());
+	}
+	
 	public static void clearInputValues() {
 		username = "";
 		password = "";

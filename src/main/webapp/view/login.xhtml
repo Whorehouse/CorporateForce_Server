@@ -1,6 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:ui="http://java.sun.com/jsf/facelets" 
+		xmlns:h="http://java.sun.com/jsf/html" 
+		xmlns:f="http://java.sun.com/jsf/core" 
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:c="http://java.sun.com/jsp/jstl/core">
 <f:view>
 	<h:head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -9,6 +14,7 @@
 		</ui:insert>
 		<h:outputStylesheet library="css" name="login.css" />
 		<h:outputScript library="javax.faces" name="jsf.js" target="head" />
+		<h:outputScript library="js" name="loginLogoutModules.js" />		
 	</h:head>
 	<h:body>
 		<h:form>
@@ -24,15 +30,15 @@
 					</div>
 					<h:panelGrid columns="1" cellpadding="3" id="fieldsGrid" styleClass="login-block-input">
 						<h:outputLabel for="inputLogin" value="Username: " />
-						<p:inputText id="inputLogin" label="username" value="#{usersBean.username}" redisplay="true" />
+						<p:inputText id="inputLogin" class="inputLogin" label="username" value="#{usersBean.username}" redisplay="true" />
 						<h:outputLabel for="inputPassword" value="Password: " />
-						<p:password id="inputPassword" label="password" value="#{usersBean.password}" feedback="#{usersBean.signUpMode}" redisplay="true" />
+						<p:password id="inputPassword" class="inputPassword" label="password" value="#{usersBean.password}" feedback="#{usersBean.signUpMode}" redisplay="true" />
 						<h:outputLabel for="inputPassword" value="Repeat password: " rendered="#{usersBean.signUpMode}" />
 						<p:password id="inputPasswordRepeat" label="password" value="#{usersBean.passwordRepeat}" redisplay="true" rendered="#{usersBean.signUpMode}" />
 					</h:panelGrid>
 					<p:outputPanel styleClass="login-block-bottom">
 						<h:panelGrid columns="1" cellpadding="3" styleClass="login-block-buttons">
-							<p:commandButton value="Sign In" actionListener="#{usersBean.signIn}" update="fieldsGrid" rendered="#{!usersBean.signUpMode}" />
+							<p:commandButton value="Sign In" onclick="modulesLogin()" actionListener="#{usersBean.signIn}" update="fieldsGrid" rendered="#{!usersBean.signUpMode}" />
 							<p:commandButton value="Sign Up" actionListener="#{usersBean.signUp}" update="fieldsGrid" rendered="#{usersBean.signUpMode}" />
 						</h:panelGrid>
 						<div class="login-block-links login-text-small">
@@ -45,7 +51,10 @@
 				</p:fieldset>
 				<p:outputPanel styleClass="login-copyright">© Copyright 2014-2015 CorporateForce. All rights reserved.</p:outputPanel>
 			</div>
-		</h:form>
+		</h:form>		
+		<c:forEach var="module" items="#{usersBean.outerModulesURLs()}">
+			<div title="#{module}" style="display:none;" class="moduleURL"></div>
+		</c:forEach>
 	</h:body>
 </f:view>
 </html>
