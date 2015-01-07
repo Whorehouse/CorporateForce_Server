@@ -28,6 +28,20 @@
 								</h:panelGrid>
 							</p:panel>
 							<p:panel header="User information">
+								<h:panelGrid columns="2" cellpadding="5">
+									<h:outputLabel for="firstname" value="First name:" />
+									<p:inplace id="firstname" editor="true">
+										<p:inputText value="firstname" />
+									</p:inplace>
+									<h:outputLabel for="lastname" value="Last name:" />
+									<p:inplace id="lastname" editor="true">
+										<p:inputText value="lastname" />
+									</p:inplace>
+									<h:outputLabel for="nickname" value="Nickname:" />
+									<p:inplace id="nickname" editor="true">
+										<p:inputText value="nickname" />
+									</p:inplace>
+								</h:panelGrid>
 							</p:panel>
 						</h:panelGrid>
 					</h:form>

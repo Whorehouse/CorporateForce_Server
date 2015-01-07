@@ -248,6 +248,10 @@ body {
 	width: 100%;
 }
 
+.settings-block tbody {
+	vertical-align: top;
+}
+
 .settings-block-inner {
 	text-align: center;
 }
