@@ -163,8 +163,8 @@ public class UsersBean implements Serializable {
 	
 	public void logout() throws Exception {
 		currentUser = null;
-		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-		context.redirect(context.getRequestContextPath() + "/index.jsf");
+		//ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+		//context.redirect(context.getRequestContextPath() + "/index.jsf");
 	}
 	
 	public List<String> outerModulesURLs() {
