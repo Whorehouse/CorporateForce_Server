@@ -30,11 +30,11 @@
 					</div>
 					<h:panelGrid columns="1" cellpadding="3" id="fieldsGrid" styleClass="login-block-input">
 						<h:outputLabel for="inputLogin" value="Username: " />
-						<p:inputText id="inputLogin" class="inputLogin" label="username" value="#{usersBean.username}" redisplay="true" />
+						<p:inputText id="inputLogin" class="inputLogin" label="username" value="#{usersBean.username}" redisplay="true" placeholder="Username" />
 						<h:outputLabel for="inputPassword" value="Password: " />
-						<p:password id="inputPassword" class="inputPassword" label="password" value="#{usersBean.password}" feedback="#{usersBean.signUpMode}" redisplay="true" />
+						<p:password id="inputPassword" class="inputPassword" label="password" value="#{usersBean.password}" feedback="#{usersBean.signUpMode}" redisplay="true" placeholder="Password"/>
 						<h:outputLabel for="inputPassword" value="Repeat password: " rendered="#{usersBean.signUpMode}" />
-						<p:password id="inputPasswordRepeat" label="password" value="#{usersBean.passwordRepeat}" redisplay="true" rendered="#{usersBean.signUpMode}" />
+						<p:password id="inputPasswordRepeat" label="password" value="#{usersBean.passwordRepeat}" redisplay="true" rendered="#{usersBean.signUpMode}" placeholder="Repeat password"/>
 					</h:panelGrid>
 					<p:outputPanel styleClass="login-block-bottom">
 						<h:panelGrid columns="1" cellpadding="3" styleClass="login-block-buttons">

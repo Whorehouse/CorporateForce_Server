@@ -6,6 +6,12 @@
 		<p:growl id="messages" />
 		<p:commandLink styleClass="menubar-logo" actionListener="#{mainBean.actionMainPage}" />
 		<p:menubar id="menubar">
+
+			<p:menuitem value="Console" styleClass="menubar-menuitem-selected" rendered="#{usersBean.isSignedIn()}" />
+			<p:menuitem value="Faces" rendered="#{usersBean.isSignedIn()}"  />
+			<p:menuitem value="Projects" rendered="#{usersBean.isSignedIn()}" />
+			<p:menuitem value="Trainings" rendered="#{usersBean.isSignedIn()}" />
+
 			<f:facet name="options">
 				<p:outputPanel rendered="#{!usersBean.isSignedIn()}">
 					<p:commandButton value="Login" actionListener="#{mainBean.actionLogin}" />
