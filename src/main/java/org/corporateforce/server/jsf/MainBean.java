@@ -6,6 +6,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import org.corporateforce.server.config.Config;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +24,13 @@ public class MainBean implements Serializable {
 	private static final String MODULE_FACES = "Faces";
 	private static final String MODULE_PROJECTS = "Projects";
 	private static final String MODULE_TRAININGS = "Trainings";
+	
+	@Autowired
+	UsersBean usersBean;
+
+	public void setUsersBean(UsersBean usersBean) {
+		this.usersBean = usersBean;
+	}
 
 	private void redirect(String page) throws Exception {
 		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
@@ -30,17 +38,17 @@ public class MainBean implements Serializable {
 	}
 
 	public void actionLogin() throws Exception {
-		UsersBean.setSignUpMode(false);
+		usersBean.setSignUpMode(false);
 		this.redirect(PAGE_LOGIN);
 	}
 
 	public void actionSignUp() throws Exception {
-		UsersBean.setSignUpMode(true);
+		usersBean.setSignUpMode(true);
 		this.redirect(PAGE_LOGIN);
 	}
 
 	public void actionMainPage() throws Exception {
-		if (UsersBean.isSignedIn())
+		if (usersBean.isSignedIn())
 			this.redirect(PAGE_CONSOLE);
 		else
 			this.redirect(PAGE_INDEX);

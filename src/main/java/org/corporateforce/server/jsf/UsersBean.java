@@ -20,15 +20,15 @@ import org.springframework.stereotype.Component;
 @Scope("session")
 public class UsersBean implements Serializable {
 
-	public static Boolean signUpMode = false;
+	public Boolean signUpMode = false;
 
 	@Autowired
 	private UsersDaoImpl usersDao;
 
-	private static Users currentUser;
-	private static String username;
-	private static String password;
-	private static String passwordRepeat;
+	private Users currentUser;
+	private String username;
+	private String password;
+	private String passwordRepeat;
 
 	public void setUsersDao(UsersDaoImpl usersDao) {
 		this.usersDao = usersDao;
@@ -69,7 +69,7 @@ public class UsersBean implements Serializable {
 		passwordRepeat = value;
 	}
 
-	public static void setSignUpMode(Boolean value) {
+	public void setSignUpMode(Boolean value) {
 		signUpMode = value;
 		clearInputValues();
 	}
@@ -78,7 +78,7 @@ public class UsersBean implements Serializable {
 		return signUpMode;
 	}
 	
-	public static boolean isSignedIn() {
+	public boolean isSignedIn() {
 		return currentUser!=null;
 	}
 	
@@ -171,7 +171,7 @@ public class UsersBean implements Serializable {
 		return new ArrayList<String>(Config.getModules().values());
 	}
 	
-	public static void clearInputValues() {
+	public void clearInputValues() {
 		username = "";
 		password = "";
 		passwordRepeat = "";
