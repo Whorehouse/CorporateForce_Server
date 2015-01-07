@@ -1,21 +1,29 @@
 @CHARSET "UTF-8";
 
 html, body {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 body {
 	font-size: small;
 	color: rgb(90, 90, 90);
-	background: rgb(255,255,255); /* Old browsers */
-	background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(250,250,250,1) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(250,250,250,1))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(250,250,250,1) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(250,250,250,1) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(250,250,250,1) 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(250,250,250,1) 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#fafafa',GradientType=0 ); /* IE6-9 */
+	background: rgb(255, 255, 255); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%,
+		rgba(250, 250, 250, 1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255,
+		255, 255, 1)), color-stop(100%, rgba(250, 250, 250, 1)));
+	/* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%,
+		rgba(250, 250, 250, 1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(255, 255, 255, 1) 0%,
+		rgba(250, 250, 250, 1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, rgba(255, 255, 255, 1) 0%,
+		rgba(250, 250, 250, 1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%,
+		rgba(250, 250, 250, 1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff',
+		endColorstr='#fafafa', GradientType=0); /* IE6-9 */
 }
 
 .ui-menu.ui-menubar {
@@ -35,11 +43,18 @@ body {
 	padding-right: 5px;
 }
 
-.ui-menu.ui-widget li > .ui-menuitem-link {
+.ui-menu.ui-widget li>.ui-menuitem-link {
 	padding: 5px;
-	margin-top: 2px;
 	color: rgb(90, 90, 90);
 	font-size: medium;
+}
+
+.ui-menu.ui-widget .ui-menu-list {
+	padding-right: 10px;
+}
+
+.menubar-menuitem {
+	margin-top: 2px;
 }
 
 .menubar-menuitem-selected {
@@ -54,6 +69,10 @@ body {
 	padding-bottom: 35px;
 	background: url(../resources/images/img_logo_small.png) no-repeat 0 0px;
 	z-index: 9999;
+}
+
+.menubar-block-right {
+	margin-right: -10px;
 }
 
 .footer {
@@ -144,8 +163,8 @@ body {
 	text-decoration: none;
 	color: #F9FDFF;
 	background: url(../resources/icons/icon_help.png) no-repeat 0 0px;
-    padding-left: 20px;
-    line-height: 1.5em;
+	padding-left: 20px;
+	line-height: 1.5em;
 }
 
 .welcome-link-help:HOVER {
@@ -181,7 +200,7 @@ body {
 	color: white;
 	background-color: #03A9F4;
 }
-	
+
 .welcom-text-center {
 	text-align: center;
 }

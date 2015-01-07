@@ -7,21 +7,23 @@
 		<p:commandLink styleClass="menubar-logo" actionListener="#{mainBean.actionMainPage}" />
 		<p:menubar id="menubar">
 
-			<p:menuitem value="Console" styleClass="menubar-menuitem-selected" rendered="#{usersBean.isSignedIn()}" />
-			<p:menuitem value="Faces" rendered="#{usersBean.isSignedIn()}"  />
-			<p:menuitem value="Projects" rendered="#{usersBean.isSignedIn()}" />
-			<p:menuitem value="Trainings" rendered="#{usersBean.isSignedIn()}" />
+			<p:menuitem value="Console" styleClass="menubar-menuitem menubar-menuitem-selected" rendered="#{usersBean.isSignedIn()}" actionListener="#{mainBean.actionMainPage}" />
+			<p:menuitem value="Faces" styleClass="menubar-menuitem" rendered="#{usersBean.isSignedIn()}" actionListener="MainBean.actionOpenFaces" />
+			<p:menuitem value="Projects" styleClass="menubar-menuitem" rendered="#{usersBean.isSignedIn()}" actionListener="MainBean.actionOpenProjects" />
+			<p:menuitem value="Trainings" styleClass="menubar-menuitem" rendered="#{usersBean.isSignedIn()}" actionListener="MainBean.actionOpenTrainings" />
 
 			<f:facet name="options">
-				<p:outputPanel rendered="#{!usersBean.isSignedIn()}">
+				<p:outputPanel styleClass="menubar-block-right" rendered="#{!usersBean.isSignedIn()}">
 					<p:commandButton value="Login" actionListener="#{mainBean.actionLogin}" />
 					<p:spacer width="3" height="10" />
 					<p:commandButton value="Sign Up" actionListener="#{mainBean.actionSignUp}" />
 				</p:outputPanel>
-				<p:menuButton value="#{usersBean.currentUser.username}" iconPos="right" rendered="#{usersBean.isSignedIn()}">
-					<p:menuitem value="Personalization" actionListener="#{mainBean.actionInfo}" />
-					<p:menuitem value="Logout" outcome="/view/logout.jsf" />
-				</p:menuButton>
+				<p:outputPanel styleClass="menubar-block-right" rendered="#{usersBean.isSignedIn()}">
+					<p:menuButton value="#{usersBean.currentUser.username}" iconPos="right">
+						<p:menuitem value="Personalization" actionListener="#{mainBean.actionInfo}" />
+						<p:menuitem value="Logout" outcome="/view/logout.jsf" />
+					</p:menuButton>
+				</p:outputPanel>
 				<p:graphicImage></p:graphicImage>
 			</f:facet>
 		</p:menubar>
