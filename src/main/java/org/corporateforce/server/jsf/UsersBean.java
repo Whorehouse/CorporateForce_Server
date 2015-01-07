@@ -1,11 +1,14 @@
 package org.corporateforce.server.jsf;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import org.corporateforce.server.config.Config;
 import org.corporateforce.server.dao.UsersDaoImpl;
 import org.corporateforce.server.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -159,11 +162,15 @@ public class UsersBean implements Serializable {
 	}
 	
 	public void logout() throws Exception {
-		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
 		currentUser = null;
+		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
 		context.redirect(context.getRequestContextPath() + "/index.jsf");
 	}
-
+	
+	public List<String> outerModulesURLs() {
+		return new ArrayList<String>(Config.getModules().values());
+	}
+	
 	public static void clearInputValues() {
 		username = "";
 		password = "";
