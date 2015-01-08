@@ -41,6 +41,10 @@ public class UsersBean implements Serializable {
 	public void setCurrentUser(Users user) {
 		currentUser = user;
 	}
+	
+	public List<Users> getUsersList() throws Exception {
+		return this.usersDao.getEntityList();
+	}
 
 	public String getUsername() {
 		System.out.println("DEBUG: username: " + username);

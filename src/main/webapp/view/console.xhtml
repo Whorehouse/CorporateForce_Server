@@ -16,7 +16,35 @@
 
 					</p:tab>
 					<p:tab title="Users">
+						<p:dataTable var="user" value="#{usersBean.usersList}" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" paginator="true"
+							rows="10">
+							<p:column headerText="Username">
+								<h:outputText value="#{user.username}" />
+							</p:column>
+							<p:column headerText="Profile">
+								<h:outputText value="#{user.profiles.name}" />
+							</p:column>
+							<p:column headerText="Role">
+								<h:outputText value="#{user.roles.name}" />
+							</p:column>
+							<p:column headerText="Office">
+								<h:outputText value="#{user.offices.name}" />
 
+							</p:column>
+							<p:column headerText="Manager">
+								<h:outputText value="#{user.users.username}" />
+							</p:column>
+							<p:column headerText="Created">
+								<h:outputText value="#{user.created}">
+									<f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" />
+								</h:outputText>
+							</p:column>
+							<p:column headerText="Updated">
+								<h:outputText value="#{user.updated}">
+									<f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" />
+								</h:outputText>
+							</p:column>
+						</p:dataTable>
 					</p:tab>
 				</p:tabView>
 			</p:panel>
