@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 public class MainBean implements Serializable {
 
 	private static final String PAGE_LOGIN = "/view/login.jsf";
-	private static final String PAGE_SETTINGS = "/view/settings.jsf";
 	private static final String PAGE_CONSOLE = "/view/console.jsf";
 	private static final String PAGE_LOGOUT = "/view/logout.jsf";
 	private static final String PAGE_INDEX = "/index.jsf";
@@ -57,10 +56,6 @@ public class MainBean implements Serializable {
 			this.redirect(PAGE_CONSOLE);
 		else
 			this.redirect(PAGE_INDEX);
-	}
-
-	public void actionSettings() throws Exception {
-		this.redirect(PAGE_SETTINGS);
 	}
 
 	public void actionConsole() throws Exception {
