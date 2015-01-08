@@ -15,10 +15,11 @@ import org.springframework.stereotype.Component;
 @Scope("session")
 public class MainBean implements Serializable {
 
-	private static final String PAGE_LOGIN = "/view/login.jsf";
-	private static final String PAGE_CONSOLE = "/view/console.jsf";
-	private static final String PAGE_LOGOUT = "/view/logout.jsf";
-	private static final String PAGE_INDEX = "/index.jsf";
+	public static final String PAGE_LOGIN = "/login";
+	public static final String PAGE_CONSOLE = "/console";
+	public static final String PAGE_LOGOUT = "/logout";
+	public static final String PAGE_INDEX = "/index";
+	public static final String PAGE_WELCOME = "/welcome";
 	
 	private static final String MODULE_FACES = "Faces";
 	private static final String MODULE_PROJECTS = "Projects";

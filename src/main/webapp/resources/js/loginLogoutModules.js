@@ -1,6 +1,6 @@
 function modulesLogout(){
 	$(".moduleURL").each(function(index){
-		var moduleURL = $(this).attr("title")+"view/logout.jsf";
+		var moduleURL = $(this).attr("title")+"logout";
 		$.ajax(
 			moduleURL,
 			{
@@ -11,12 +11,12 @@ function modulesLogout(){
 			}
 		);
 	});
-	window.location.href="login.jsf";
+	window.location.href="login";
 }
 
 function modulesLogin() {
 	$(".moduleURL").each(function(index){
-		var moduleURL = $(this).attr("title")+"view/login.jsf";
+		var moduleURL = $(this).attr("title")+"login";
 		$.ajax(
 				moduleURL,
 				{

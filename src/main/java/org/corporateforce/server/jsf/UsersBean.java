@@ -130,9 +130,9 @@ public class UsersBean implements Serializable {
 				currentUser = result;
 				clearInputValues();
 				if (isSystemControlAccess()) {
-					context.redirect(context.getRequestContextPath() + "/view/console.jsf");
+					context.redirect(context.getRequestContextPath() + MainBean.PAGE_CONSOLE);
 				} else {
-					context.redirect(context.getRequestContextPath() + "/view/welcome.jsf");
+					context.redirect(context.getRequestContextPath() + MainBean.PAGE_WELCOME);
 				}
 			} else {
 				currentUser = null;
