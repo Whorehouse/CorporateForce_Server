@@ -10,7 +10,7 @@ import org.corporateforce.server.model.Users;
 
 @Controller
 @RequestMapping("Users")
-public class UsersRestImpl extends AbstractRest<Users, UsersDao> {
+public class UsersRest extends AbstractRest<Users, UsersDao> {
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
     public @ResponseBody Users loginUsers(@RequestParam("login") String login, @RequestParam("password") String password){
