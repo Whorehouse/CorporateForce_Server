@@ -21,7 +21,6 @@
 				</p:outputPanel>
 				<p:outputPanel styleClass="menubar-block-right" rendered="#{usersBean.isSignedIn()}">
 					<p:menuButton value="#{usersBean.currentUser.username}" iconPos="right">
-						<p:menuitem value="Персонализация" actionListener="#{mainBean.actionInfo}" />
 						<p:menuitem value="Выход" actionListener="#{mainBean.actionLogout}" />
 					</p:menuButton>
 				</p:outputPanel>
