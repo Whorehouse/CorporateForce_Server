@@ -39,4 +39,8 @@ public class Config {
 		}
 		return res;
 	}
+	
+	public static String getResourcesPath() {
+		return properties.getProperty("resourcesPath");
+	}
 }

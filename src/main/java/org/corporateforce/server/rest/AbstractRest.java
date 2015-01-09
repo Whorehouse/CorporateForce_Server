@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 public abstract class AbstractRest<MODEL, DAO extends AbstractDao<MODEL>> {
+	
 	@Autowired
 	DAO daoService;
 	
@@ -50,7 +51,6 @@ public abstract class AbstractRest<MODEL, DAO extends AbstractDao<MODEL>> {
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public @ResponseBody List<MODEL> getEntityList() {
-
 		List<MODEL> entities = null;
 		try {
 			entities = daoService.getEntityList();
