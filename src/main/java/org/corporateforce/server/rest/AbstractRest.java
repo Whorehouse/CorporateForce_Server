@@ -16,49 +16,63 @@ public abstract class AbstractRest<MODEL, DAO extends AbstractDao<MODEL>> {
 	@Autowired
 	DAO daoService;
 	
-	/* Submit form in Spring Restful Services */
-	@RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody Status addEntity(@RequestBody MODEL entity) {
+	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody MODEL addEntity(@RequestBody MODEL entity) {
 		try {
-			daoService.addEntity(entity);
-			return new Status(1, "Entity added Successfully !");
+			MODEL res = daoService.addEntity(entity);
+			return res;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody MODEL updateEntity(@RequestBody MODEL entity) {
+		try {
+			MODEL res = daoService.updateEntity(entity);
+			return res;
 		} catch (Exception e) {
 			// e.printStackTrace();
-			return new Status(0, e.toString());
+			return null;
 		}
-
 	}
 
-	/* Ger a single objct in Json form in Spring Rest Services */
-	@RequestMapping(value = "get/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
 	public @ResponseBody MODEL getEntity(@PathVariable("id") int id) {
 		MODEL entity = null;
 		try {
 			entity = daoService.getEntityById(id);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return entity;
 	}
 
-	/* Getting List of objects in Json format in Spring Restful Services */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public @ResponseBody List<MODEL> getEntities() {
+	public @ResponseBody List<MODEL> getEntityList() {
 
 		List<MODEL> entities = null;
 		try {
 			entities = daoService.getEntityList();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		return entities;
 	}
+	
+	@RequestMapping(value = "/listExclude/{id}", method = RequestMethod.GET)
+	public @ResponseBody List<MODEL> getEntityListExclude(@PathVariable("id") int id) {
+		List<MODEL> entities = null;
+		try {
+			entities = daoService.getEntityListExclude(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return entities;
+	}
 
-	/* Delete an object from DB in Spring Restful Services */
-	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public @ResponseBody Status deleteEntity(@PathVariable("id") int id) {
 		try {
 			daoService.deleteEntity(id);
@@ -66,6 +80,14 @@ public abstract class AbstractRest<MODEL, DAO extends AbstractDao<MODEL>> {
 		} catch (Exception e) {
 			return new Status(0, e.toString());
 		}
-
+	}
+	
+	@RequestMapping(value = "/count", method = RequestMethod.GET)
+	public @ResponseBody int countEntities() {
+		try {			
+			return daoService.countEntities();
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 }
