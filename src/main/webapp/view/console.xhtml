@@ -6,40 +6,40 @@
 		<div class="page-container">
 			<p:panel header="Managment" styleClass="page-block">
 				<p:tabView>
-					<p:tab title="Profiles">
+					<p:tab title="Профили">
 
 					</p:tab>
-					<p:tab title="Roles">
+					<p:tab title="Роли">
 
 					</p:tab>
-					<p:tab title="Offices">
+					<p:tab title="Офисы">
 
 					</p:tab>
-					<p:tab title="Users">
+					<p:tab title="Пользователи">
 						<p:dataTable var="user" value="#{usersBean.usersList}" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" paginator="true"
 							rows="10">
-							<p:column headerText="Username">
+							<p:column headerText="Логин">
 								<h:outputText value="#{user.username}" />
 							</p:column>
-							<p:column headerText="Profile">
+							<p:column headerText="Профиль">
 								<h:outputText value="#{user.profiles.name}" />
 							</p:column>
-							<p:column headerText="Role">
+							<p:column headerText="Роль">
 								<h:outputText value="#{user.roles.name}" />
 							</p:column>
-							<p:column headerText="Office">
+							<p:column headerText="Офис">
 								<h:outputText value="#{user.offices.name}" />
 
 							</p:column>
-							<p:column headerText="Manager">
+							<p:column headerText="Менеджер">
 								<h:outputText value="#{user.users.username}" />
 							</p:column>
-							<p:column headerText="Created">
+							<p:column headerText="Создан">
 								<h:outputText value="#{user.created}">
 									<f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" />
 								</h:outputText>
 							</p:column>
-							<p:column headerText="Updated">
+							<p:column headerText="Обновлен">
 								<h:outputText value="#{user.updated}">
 									<f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" />
 								</h:outputText>

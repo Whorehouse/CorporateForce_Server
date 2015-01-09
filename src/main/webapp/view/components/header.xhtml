@@ -5,26 +5,27 @@
 	<h:form>
 		<p:growl id="messages" />
 		<p:commandLink styleClass="menubar-logo" actionListener="#{mainBean.actionMainPage}" />
+		
 		<p:menubar id="menubar">
 
-			<p:menuitem value="Console" styleClass="menubar-menuitem menubar-menuitem-selected" rendered="#{usersBean.isSignedIn()}" actionListener="#{mainBean.actionMainPage}" />
-			<p:menuitem value="Faces" styleClass="menubar-menuitem" rendered="#{usersBean.isSignedIn()}" actionListener="#{mainBean.actionOpenFaces}" />
-			<p:menuitem value="Projects" styleClass="menubar-menuitem" rendered="#{usersBean.isSignedIn()}" actionListener="#{mainBean.actionOpenProjects}" />
-			<p:menuitem value="Trainings" styleClass="menubar-menuitem" rendered="#{usersBean.isSignedIn()}" actionListener="#{mainBean.actionOpenTrainings}" />
+			<p:menuitem value="Консоль" styleClass="menubar-menuitem menubar-menuitem-selected" rendered="#{usersBean.isSignedIn()}" actionListener="#{mainBean.actionMainPage}" />
+			<p:menuitem value="Лица" styleClass="menubar-menuitem" rendered="#{usersBean.isSignedIn()}" actionListener="#{mainBean.actionOpenFaces}" />
+			<p:menuitem value="Проекты" styleClass="menubar-menuitem" rendered="#{usersBean.isSignedIn()}" actionListener="#{mainBean.actionOpenProjects}" />
+			<p:menuitem value="Тренинги" styleClass="menubar-menuitem" rendered="#{usersBean.isSignedIn()}" actionListener="#{mainBean.actionOpenTrainings}" />
 
 			<f:facet name="options">
 				<p:outputPanel styleClass="menubar-block-right" rendered="#{!usersBean.isSignedIn()}">
-					<p:commandButton value="Login" actionListener="#{mainBean.actionLogin}" />
+					<p:commandButton value="Вход" actionListener="#{mainBean.actionLogin}" />
 					<p:spacer width="3" height="10" />
-					<p:commandButton value="Sign Up" actionListener="#{mainBean.actionSignUp}" />
+					<p:commandButton value="Регистрация" actionListener="#{mainBean.actionSignUp}" />
 				</p:outputPanel>
 				<p:outputPanel styleClass="menubar-block-right" rendered="#{usersBean.isSignedIn()}">
-					<p:graphicImage styleClass="manubar-user-image" name="images/img_no_photo.png" />
 					<p:menuButton value="#{usersBean.currentUser.username}" iconPos="right">
-						<p:menuitem value="Logout" outcome="/view/logout.jsf" />
+						<p:menuitem value="Персонализация" actionListener="#{mainBean.actionInfo}" />
+						<p:menuitem value="Выход" outcome="/logout" />
 					</p:menuButton>
 				</p:outputPanel>
-
+				<p:graphicImage></p:graphicImage>
 			</f:facet>
 		</p:menubar>
 	</h:form>

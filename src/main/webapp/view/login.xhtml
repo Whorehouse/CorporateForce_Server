@@ -25,31 +25,31 @@
 				<p:fieldset styleClass="login-block">
 					<p:commandLink styleClass="login-logo" actionListener="#{mainBean.actionMainPage}" update="fieldsGrid"/>
 					<div class="login-block-title login-text-big">
-						<h:outputLabel value="Sign In" rendered="#{!usersBean.signUpMode}" />
-						<h:outputLabel value="Sign Up" rendered="#{usersBean.signUpMode}" />
+						<h:outputLabel value="Вход" rendered="#{!usersBean.signUpMode}" />
+						<h:outputLabel value="Регистрация" rendered="#{usersBean.signUpMode}" />
 					</div>
 					<h:panelGrid columns="1" cellpadding="3" id="fieldsGrid" styleClass="login-block-input">
-						<h:outputLabel for="inputLogin" value="Username: " />
-						<p:inputText id="inputLogin" class="inputLogin" label="username" value="#{usersBean.username}" redisplay="true" placeholder="Username" />
-						<h:outputLabel for="inputPassword" value="Password: " />
-						<p:password id="inputPassword" class="inputPassword" label="password" value="#{usersBean.password}" feedback="#{usersBean.signUpMode}" redisplay="true" placeholder="Password"/>
-						<h:outputLabel for="inputPassword" value="Repeat password: " rendered="#{usersBean.signUpMode}" />
-						<p:password id="inputPasswordRepeat" label="password" value="#{usersBean.passwordRepeat}" redisplay="true" rendered="#{usersBean.signUpMode}" placeholder="Repeat password"/>
+						<h:outputLabel for="inputLogin" value="Логин: " />
+						<p:inputText id="inputLogin" class="inputLogin" label="username" value="#{usersBean.username}" redisplay="true" placeholder="Логин" />
+						<h:outputLabel for="inputPassword" value="Пароль: " />
+						<p:password id="inputPassword" class="inputPassword" label="password" value="#{usersBean.password}" feedback="#{usersBean.signUpMode}" redisplay="true" placeholder="Пароль"/>
+						<h:outputLabel for="inputPassword" value="Подтверждение пароля: " rendered="#{usersBean.signUpMode}" />
+						<p:password id="inputPasswordRepeat" label="password" value="#{usersBean.passwordRepeat}" redisplay="true" rendered="#{usersBean.signUpMode}" placeholder="Подтверждение пароля"/>
 					</h:panelGrid>
 					<p:outputPanel styleClass="login-block-bottom">
 						<h:panelGrid columns="1" cellpadding="3" styleClass="login-block-buttons">
-							<p:commandButton value="Sign In" onclick="modulesLogin()" actionListener="#{usersBean.signIn}" update="fieldsGrid" rendered="#{!usersBean.signUpMode}" />
-							<p:commandButton value="Sign Up" actionListener="#{usersBean.signUp}" update="fieldsGrid" rendered="#{usersBean.signUpMode}" />
+							<p:commandButton value="Войти" onclick="modulesLogin()" actionListener="#{usersBean.signIn}" update="fieldsGrid" rendered="#{!usersBean.signUpMode}" />
+							<p:commandButton value="Зарегистрироваться" actionListener="#{usersBean.signUp}" update="fieldsGrid" rendered="#{usersBean.signUpMode}" />
 						</h:panelGrid>
 						<div class="login-block-links login-text-small">
-							<p:commandLink value="Sign Up" class="login-link" rendered="#{!usersBean.signUpMode}" actionListener="#{mainBean.actionSignUp}" />
-							<p:commandLink value="Sign In" class="login-link" rendered="#{usersBean.signUpMode}" actionListener="#{mainBean.actionLogin}" />
+							<p:commandLink value="Зарегистрироваться" class="login-link" rendered="#{!usersBean.signUpMode}" actionListener="#{mainBean.actionSignUp}" />
+							<p:commandLink value="Войти" class="login-link" rendered="#{usersBean.signUpMode}" actionListener="#{mainBean.actionLogin}" />
 							<p:spacer width="1" height="10" styleClass="login-separator-vert" />
-							<p:commandLink value="Need help?" class="login-link" />
+							<p:commandLink value="Нужна помощь?" class="login-link" />
 						</div>
 					</p:outputPanel>
 				</p:fieldset>
-				<p:outputPanel styleClass="login-copyright">© Copyright 2014-2015 CorporateForce. All rights reserved.</p:outputPanel>
+				<p:outputPanel styleClass="login-copyright">© Copyright 2014-2015 CorporateForce. Все права защищены.</p:outputPanel>
 			</div>
 		</h:form>		
 		<c:forEach var="module" items="#{usersBean.outerModulesURLs()}">
