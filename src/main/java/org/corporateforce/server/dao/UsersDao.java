@@ -8,13 +8,13 @@ import org.hibernate.criterion.Order;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UsersDaoImpl extends AbstractDao<Users> {
+public class UsersDao extends AbstractDao<Users> {
 
-	public UsersDaoImpl() {
+	public UsersDao() {
 		super(Users.class);
 	}
 
-	public UsersDaoImpl(Class<Users> entityClass) {
+	public UsersDao(Class<Users> entityClass) {
 		super(entityClass);
 	}
 

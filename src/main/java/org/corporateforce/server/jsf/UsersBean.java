@@ -9,7 +9,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import org.corporateforce.server.config.Config;
-import org.corporateforce.server.dao.UsersDaoImpl;
+import org.corporateforce.server.dao.UsersDao;
 import org.corporateforce.server.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -23,14 +23,14 @@ public class UsersBean implements Serializable {
 	public Boolean signUpMode = false;
 
 	@Autowired
-	private UsersDaoImpl usersDao;
+	private UsersDao usersDao;
 
 	private Users currentUser;
 	private String username;
 	private String password;
 	private String passwordRepeat;
 
-	public void setUsersDao(UsersDaoImpl usersDao) {
+	public void setUsersDao(UsersDao usersDao) {
 		this.usersDao = usersDao;
 	}
 

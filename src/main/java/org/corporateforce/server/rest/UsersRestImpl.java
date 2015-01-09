@@ -1,6 +1,6 @@
 package org.corporateforce.server.rest;
 
-import org.corporateforce.server.dao.UsersDaoImpl;
+import org.corporateforce.server.dao.UsersDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,7 +10,7 @@ import org.corporateforce.server.model.Users;
 
 @Controller
 @RequestMapping("Users")
-public class UsersRestImpl extends AbstractRest<Users, UsersDaoImpl> {
+public class UsersRestImpl extends AbstractRest<Users, UsersDao> {
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
     public @ResponseBody Users loginUsers(@RequestParam("login") String login, @RequestParam("password") String password){
