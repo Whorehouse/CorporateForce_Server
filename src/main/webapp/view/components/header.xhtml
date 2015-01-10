@@ -20,11 +20,11 @@
 					<p:commandButton value="Регистрация" actionListener="#{mainBean.actionSignUp}" />
 				</p:outputPanel>
 				<p:outputPanel styleClass="menubar-block-right" rendered="#{usersBean.isSignedIn()}">
+					<p:graphicImage styleClass="manubar-user-image" name="images/img_no_photo.png" />
 					<p:menuButton value="#{usersBean.currentUser.username}" iconPos="right">
 						<p:menuitem value="Выход" actionListener="#{mainBean.actionLogout}" />
 					</p:menuButton>
 				</p:outputPanel>
-				<p:graphicImage></p:graphicImage>
 			</f:facet>
 		</p:menubar>
 	</h:form>
