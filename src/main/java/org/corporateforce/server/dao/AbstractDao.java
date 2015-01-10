@@ -15,80 +15,115 @@ public abstract class AbstractDao<T> {
 	public SessionFactory sessionFactory;
 
 	public Class<T> entityClass;
-	public Session session = null;
-	public Transaction tx = null;
 
 	public AbstractDao(Class<T> entityClass) {
 		this.entityClass = entityClass;
 	}
 
 	public T addEntity(T entity) throws Exception {
-		session = sessionFactory.openSession();
-		tx = session.beginTransaction();
-		session.save(entity);
-		tx.commit();
-		session.close();
-		return entity;
+			Session session = sessionFactory.openSession();
+			Transaction tx = session.beginTransaction();
+			try {				
+				session.save(entity);
+				tx.commit();
+			} catch (Exception e) {
+				tx.rollback();
+			} finally {
+				session.close();
+			}
+			return entity;
 	}
 
 	public T updateEntity(T entity) throws Exception {
-		session = sessionFactory.openSession();
-		tx = session.beginTransaction();
-		session.update(entity);
-		tx.commit();
-		session.close();
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			session.update(entity);
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+		} finally {
+			session.close();
+		}
 		return entity;
 	}
 
 	public T getEntityById(int id) throws Exception {
-		session = sessionFactory.openSession();
-		tx = session.beginTransaction();
-		T entity = (T)session.get(entityClass, new Integer(id));
-		tx.commit();
-		session.close();
+		T entity = null;
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			entity = (T)session.get(entityClass, new Integer(id));
+			tx.commit();			
+		} catch (Exception e) {
+			tx.rollback();
+		} finally {
+			session.close();
+		}
 		return entity;
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<T> getEntityList() throws Exception {
-		session = sessionFactory.openSession();
-		tx = session.beginTransaction();
-		List<T> entityList = session.createCriteria(entityClass).list();
-		tx.commit();
-		session.close();
+		List<T> entityList = null;
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		try { 
+			entityList = session.createCriteria(entityClass).list();
+			tx.commit();			
+		} catch (Exception e) {
+			tx.rollback();
+		} finally {
+			session.close();
+		}
 		return entityList;
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<T> getEntityListExclude(int id) throws Exception {
-		session = sessionFactory.openSession();
-		tx = session.beginTransaction();
-		List<T> entityList = session.createCriteria(entityClass)
+		List<T> entityList = null;
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		try { 
+			entityList = session.createCriteria(entityClass)
 				.add(Restrictions.ne("ID", id)).list();
-		tx.commit();
-		session.close();
+			tx.commit();			
+		} catch (Exception e) {
+			tx.rollback();
+		} finally {
+			session.close();
+		}
 		return entityList;
 	}
 
 	public boolean deleteEntity(int id) throws Exception {
-		session = sessionFactory.openSession();
-		tx = session.getTransaction();
-		session.beginTransaction();
-		Object o = session.load(entityClass, id);
-		session.delete(o);
-		tx.commit();
-		session.close();
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			Object o = session.load(entityClass, id);
+			session.delete(o);
+			tx.commit();			
+		} catch (Exception e) {
+			tx.rollback();
+		} finally {
+			session.close();
+		}
 		return false;
 	}
 
 	public int countEntities() throws Exception {
 		Long res = (long) 0;
-		session = sessionFactory.openSession();
-		tx = session.beginTransaction();
-		res = (Long) session.createCriteria(entityClass)
-				.setProjection(Projections.rowCount()).uniqueResult();
-		tx.commit();
-		session.close();
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		try {		
+			res = (Long) session.createCriteria(entityClass)
+					.setProjection(Projections.rowCount()).uniqueResult();
+			tx.commit();			
+		} catch (Exception e) {
+			tx.rollback();
+		} finally {
+			session.close();
+		}
 		return res.intValue();
 	}
 }
