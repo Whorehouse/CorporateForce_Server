@@ -87,7 +87,7 @@ public abstract class AbstractDao<T> {
 		Transaction tx = session.beginTransaction();
 		try { 
 			entityList = session.createCriteria(entityClass)
-				.add(Restrictions.ne("ID", id)).list();
+				.add(Restrictions.not(Restrictions.idEq(id))).list();
 			tx.commit();			
 		} catch (Exception e) {
 			tx.rollback();
