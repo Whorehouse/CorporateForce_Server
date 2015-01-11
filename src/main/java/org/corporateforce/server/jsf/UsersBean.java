@@ -3,6 +3,7 @@ package org.corporateforce.server.jsf;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
@@ -30,6 +31,10 @@ public class UsersBean implements Serializable {
 	private String password;
 	private String passwordRepeat;
 
+	private Users editUser;
+	
+	private List<Users> usersList = null;
+
 	public void setUsersDao(UsersDao usersDao) {
 		this.usersDao = usersDao;
 	}
@@ -43,7 +48,9 @@ public class UsersBean implements Serializable {
 	}
 	
 	public List<Users> getUsersList() throws Exception {
-		return this.usersDao.getEntityList();
+		if (usersList != null) return usersList;
+		usersList = usersDao.getEntityList();
+		return usersList;
 	}
 
 	public String getUsername() {
@@ -210,4 +217,26 @@ public class UsersBean implements Serializable {
     		return "resources/images/img_no_photo.png";
     	}
     }
+
+	/**
+	 * @return the editUser
+	 */
+	public Users getEditUser() {
+		return editUser;
+	}
+
+	/**
+	 * @param editUser the editUser to set
+	 */
+	public void setEditUser(Users editUser) {
+		System.out.println("DEBUG: editUser: " + editUser);
+		this.editUser = editUser;
+	}
+	
+	public void actionEdit() throws NumberFormatException, Exception {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+        String id = params.get("editUserId");
+        this.setEditUser(usersDao.getEntityById(Integer.parseInt(id)));
+	}
 }
