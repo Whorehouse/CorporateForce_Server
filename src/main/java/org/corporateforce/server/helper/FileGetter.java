@@ -20,6 +20,11 @@ public class FileGetter {
 	
 	public static ResponseEntity<byte[]> responseFile(String relativePathDir, String filename) throws FileNotFoundException, IOException {
 		File file = new File(Config.getResourcesPath() + File.separator	+ relativePathDir + File.separator + filename);
+		if (!file.exists()) {
+			final HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.IMAGE_PNG);
+			return new ResponseEntity<byte[]>(IOUtils.toByteArray(FileGetter.class.getClassLoader().getResourceAsStream("/img_no_photo.png")), headers, HttpStatus.CREATED);
+		}
 		final HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(getFileType(filename));
 		return new ResponseEntity<byte[]>(IOUtils.toByteArray(new FileInputStream(file)), headers, HttpStatus.CREATED);
