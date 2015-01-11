@@ -29,6 +29,7 @@
 			<list>
 				<value>org.corporateforce.server.model.Articles</value>
 				<value>org.corporateforce.server.model.Articlesresourceslink</value>
+				<value>org.corporateforce.server.model.Avatars</value>
 				<value>org.corporateforce.server.model.Chatter</value>
 				<value>org.corporateforce.server.model.Chatterresourceslink</value>
 				<value>org.corporateforce.server.model.Contacts</value>

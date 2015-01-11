@@ -1,8 +1,13 @@
 package org.corporateforce.server.rest;
 
+import java.io.IOException;
 import java.util.List;
 
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.corporateforce.server.dao.AbstractDao;
+import org.corporateforce.server.model.Contacts;
 import org.corporateforce.server.model.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -89,5 +94,10 @@ public abstract class AbstractRest<MODEL, DAO extends AbstractDao<MODEL>> {
 		} catch (Exception e) {
 			return 0;
 		}
+	}
+	
+	public static <T> T jsonToModel(String json, Class<T> modelClass) throws JsonParseException, JsonMappingException, IOException {
+		T res = new ObjectMapper().readValue(json, modelClass);
+		return res;
 	}
 }

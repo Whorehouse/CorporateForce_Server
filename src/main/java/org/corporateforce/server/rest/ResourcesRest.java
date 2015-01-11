@@ -1,17 +1,21 @@
 package org.corporateforce.server.rest;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.corporateforce.server.config.Config;
+import org.corporateforce.server.dao.ContactsDao;
 import org.corporateforce.server.dao.ResourcesDao;
+import org.corporateforce.server.helper.FileGetter;
+import org.corporateforce.server.helper.FileUploader;
+import org.corporateforce.server.model.Avatars;
 import org.corporateforce.server.model.Contacts;
 import org.corporateforce.server.model.Resources;
+import org.corporateforce.server.model.Users;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -27,59 +31,32 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("Resources")
 public class ResourcesRest extends AbstractRest<Resources, ResourcesDao> {
-
-	@RequestMapping(value = "/uploadImage", method = RequestMethod.POST)
-	public @ResponseBody Resources uploadImage(@RequestParam MultipartFile file, @RequestParam Contacts contacts)
-			throws IllegalStateException, IOException {
-		Resources res = null;		
-		String rootPath = Config.getResourcesPath()+File.separator+"images";
-		File dir = new File(rootPath);
-		if (!dir.exists())
-			dir.mkdirs();
-		File serverFile = new File(dir.getAbsolutePath()
-				+ File.separator + file.getOriginalFilename());
-		
-		if (!file.isEmpty()) {
-			try {			
-				byte[] bytes = file.getBytes();
-				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-				stream.write(bytes);
-				stream.close();
-				System.out.println("You successfully uploaded " + serverFile.getAbsolutePath() + "!");
-				Resources resource = new Resources();
-				resource.setContacts(contacts);
-				resource.setFilename(file.getOriginalFilename());
-				resource.setName(file.getOriginalFilename());
-				resource.setFiletype(getExtension(file.getOriginalFilename()));
-				res = daoService.addEntity(resource);
-			} catch (Exception e) {
-				System.out.println("You failed to upload " + serverFile.getAbsolutePath() + " => " + e.getMessage());
-			}
-		} else {
-			System.out.println("You failed to upload " + serverFile.getAbsolutePath() + " because the file was empty.");
-		}
+	
+	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
+	public @ResponseBody Resources uploadFile(
+			@RequestParam MultipartFile file,
+			@RequestParam("users") String jsonUsers)
+			throws Exception {
+		Resources res = null;
+		Users users = jsonToModel(jsonUsers, Users.class);
+		File savedFile = FileUploader.saveFileForUser(users, file);		
+		Resources resource = new Resources();
+		resource.setUsers(users);
+		resource.setFilename(savedFile.getName());
+		resource.setName(file.getOriginalFilename());
+		resource.setFiletype(FileGetter.getExtension(file.getOriginalFilename()));
+		res = daoService.addEntity(resource);
 		return res;
 	}
-	
-	@RequestMapping("/showImage/{image:.+}")
-	public ResponseEntity<byte[]> showImage(@PathVariable String image) throws IOException {
-	    File file = new File(Config.getResourcesPath()+File.separator+"images"+File.separator+image);
-	    final HttpHeaders headers = new HttpHeaders();
-	    headers.setContentType(getFileType(image));
-	    return new ResponseEntity<byte[]>(IOUtils.toByteArray(new FileInputStream(file)), headers, HttpStatus.CREATED);
+
+	@RequestMapping("/showFile/{id}/{filename:.+}")
+	public ResponseEntity<byte[]> showImage(@PathVariable int id,
+			@PathVariable String filename) throws IOException {
+		return FileGetter.responseFileForUser(id, filename);
 	}
-	
-	public static String getExtension(String filename) {
-		return FilenameUtils.getExtension(filename);		
-	}
-	
-	public MediaType getFileType(String filename) {
-		if (getExtension(filename).equalsIgnoreCase("jpeg") || getExtension(filename).equalsIgnoreCase("jpg")) {
-			return MediaType.IMAGE_JPEG;
-		} else if (getExtension(filename).equalsIgnoreCase("png")) {
-			return MediaType.IMAGE_PNG;
-		} else {
-			return MediaType.ALL;
-		}
+
+	@RequestMapping("/showResource/{id}")
+	public ResponseEntity<byte[]> showResource(@PathVariable int id) throws Exception {
+		return FileGetter.responseFileForResource(daoService.getEntityById(id));
 	}
 }

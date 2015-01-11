@@ -27,7 +27,8 @@ public abstract class AbstractDao<T> {
 				session.save(entity);
 				tx.commit();
 			} catch (Exception e) {
-				tx.rollback();
+				if (tx!=null) tx.rollback();
+			    	throw e;
 			} finally {
 				session.close();
 			}

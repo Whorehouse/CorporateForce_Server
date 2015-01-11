@@ -109,6 +109,12 @@ public class UsersBean implements Serializable {
 	public boolean isSystemControlAccess(Users u) {
 		return u!=null && u.getProfiles()!=null && u.getProfiles().isSystemControl();
 	}
+	
+	public void updateUser() throws Exception {
+		if (currentUser!=null) {
+			setCurrentUser(usersDao.getEntityById(currentUser.getId()));
+		}
+	}
 
 	private Boolean validateInputValues() {
 		if (!username.equals("") && !password.equals("") && (!signUpMode || (signUpMode && passwordRepeat.equals(password)))) {
@@ -180,4 +186,28 @@ public class UsersBean implements Serializable {
 		password = "";
 		passwordRepeat = "";
 	}
+	
+	public boolean isExistContacts() {
+		return isExistContacts(currentUser);
+	}
+    
+	public boolean isExistAvatar() {
+		return isExistAvatar(currentUser);
+	}
+	
+	public boolean isExistContacts(Users u) {
+		return (u!=null && u.getContacts()!=null) ? true : false;
+	}
+	
+	public boolean isExistAvatar(Users u) {
+		return (isExistContacts(u)&&u.getContacts().getAvatars()!=null) ? true : false;
+	}
+    
+    public String getAvatar() {
+    	if (isExistAvatar()) {
+    		return "Avatars/showAvatar/"+currentUser.getContacts().getAvatars().getId();
+    	} else {
+    		return "resources/images/img_no_photo.png";
+    	}
+    }
 }
