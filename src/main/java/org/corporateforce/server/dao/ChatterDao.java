@@ -26,13 +26,14 @@ public class ChatterDao extends AbstractDao<Chatter> {
 		Transaction tx = session.beginTransaction();
 		try { 
 			entityList = session.createCriteria(entityClass)
-				.add(Restrictions.eq("chatter.usersByParent", u)).list();
+				.add(Restrictions.eq("usersByParent", u)).list();
 			tx.commit();			
 		} catch (Exception e) {
 			tx.rollback();
 		} finally {
 			session.close();
 		}
+		System.out.println("ListForParent:"+entityList);
 		return entityList;
 	}
 	
@@ -42,13 +43,14 @@ public class ChatterDao extends AbstractDao<Chatter> {
 		Transaction tx = session.beginTransaction();
 		try { 
 			entityList = session.createCriteria(entityClass)
-				.add(Restrictions.eq("chatter.usersByCreator", u)).list();
+				.add(Restrictions.eq("usersByCreator", u)).list();
 			tx.commit();			
 		} catch (Exception e) {
 			tx.rollback();
 		} finally {
 			session.close();
 		}
+		System.out.println("ListForCreator:"+entityList);
 		return entityList;
 	}
 }
