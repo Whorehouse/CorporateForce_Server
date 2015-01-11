@@ -19,8 +19,8 @@ public class ChatterRest extends AbstractRest<Chatter, ChatterDao> {
 	@Autowired
 	UsersDao usersDao;
 
-	@RequestMapping(value = "/listByParent/{id}", method = RequestMethod.GET)
-	public @ResponseBody List<Chatter> listByParent(@PathVariable int id) {
+	@RequestMapping(value = "/listForParent/{id}", method = RequestMethod.GET)
+	public @ResponseBody List<Chatter> listForParent(@PathVariable int id) {
 		List<Chatter> entities = null;
 		try {
 			entities = daoService.getListForParent(usersDao.getEntityById(id));
@@ -30,8 +30,8 @@ public class ChatterRest extends AbstractRest<Chatter, ChatterDao> {
 		return entities;
 	}
 	
-	@RequestMapping(value = "/listByCreator/{id}", method = RequestMethod.GET)
-	public @ResponseBody List<Chatter> listByCreator(@PathVariable int id) {
+	@RequestMapping(value = "/listForCreator/{id}", method = RequestMethod.GET)
+	public @ResponseBody List<Chatter> listForCreator(@PathVariable int id) {
 		List<Chatter> entities = null;
 		try {
 			entities = daoService.getListForCreator(usersDao.getEntityById(id));
