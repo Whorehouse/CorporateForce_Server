@@ -7,7 +7,6 @@ import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.corporateforce.server.dao.AbstractDao;
-import org.corporateforce.server.model.Contacts;
 import org.corporateforce.server.model.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

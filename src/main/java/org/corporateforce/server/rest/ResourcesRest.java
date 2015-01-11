@@ -1,24 +1,13 @@
 package org.corporateforce.server.rest;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.IOUtils;
-import org.corporateforce.server.config.Config;
-import org.corporateforce.server.dao.ContactsDao;
 import org.corporateforce.server.dao.ResourcesDao;
 import org.corporateforce.server.helper.FileGetter;
 import org.corporateforce.server.helper.FileUploader;
-import org.corporateforce.server.model.Avatars;
-import org.corporateforce.server.model.Contacts;
 import org.corporateforce.server.model.Resources;
 import org.corporateforce.server.model.Users;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
