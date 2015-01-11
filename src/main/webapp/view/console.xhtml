@@ -19,9 +19,9 @@
 							<p:dataTable rendered="false" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" paginator="true" rows="10">
 							</p:dataTable>
 						</p:tab>
-						<p:tab title="Пользователи" id="tabUsers">
-							<p:dataTable id="tableUsers" var="user" value="#{usersBean.usersList}" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-								paginator="true" rows="10">
+						<p:tab title="Пользователи">
+							<p:dataTable var="user" value="#{usersBean.usersList}" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" paginator="true"
+								rows="10">
 								<p:column headerText="Логин">
 									<h:outputText value="#{user.username}" />
 								</p:column>
@@ -48,18 +48,21 @@
 									</h:outputText>
 								</p:column>
 								<p:column headerText="Операции">
-									<p:commandButton onsuccess="PF('editUserDialog').show();" value="Изменить" action="#{usersBean.actionEdit}" update="@([id$=editUserName])">
+									<p:commandButton value="Изменить" update="@([id$=editUserDialogGrid])" action="#{usersBean.actionEdit}" onsuccess="PF('editUserDialog').show();" process="@this">
 										<f:param name="editUserId" value="#{user.id}" />
 									</p:commandButton>
 									<p:commandButton value="Удалить" />
 								</p:column>
 							</p:dataTable>
-							<p:dialog header="Редактирование пользователя" widgetVar="editUserDialog" modal="true" rendered="#{usersBean.editUser != null}">
-								<p:panelGrid columns="2" cellpadding="3">
+
+							<p:dialog header="Редактирование пользователя" widgetVar="editUserDialog" modal="true">
+								<p:panelGrid columns="2" cellpadding="3" id="editUserDialogGrid">
 									<p:outputLabel for="editUserName" value="Имя: " />
 									<p:inputText id="editUserName" value="#{usersBean.editUser.username}" />
 									<p:outputLabel value="Профиль: " />
-									<p:inputText id="editProfile" />
+									<p:selectOneMenu id="editProfile" value="#{usersBean.editUser != null ? usersBean.editUser.profiles.id : ''}" style="width:100%"  filter="true" filterMatchMode="startsWith">
+										<f:selectItems value="#{profilesBean.profilesMap}" />
+									</p:selectOneMenu>
 									<p:outputLabel value="Роль: " />
 									<p:inputText id="editRole" />
 									<p:outputLabel value="Офис: " />

@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 import org.corporateforce.server.config.Config;
 import org.corporateforce.server.dao.UsersDao;
@@ -233,10 +234,16 @@ public class UsersBean implements Serializable {
 		this.editUser = editUser;
 	}
 	
-	public void actionEdit() throws NumberFormatException, Exception {
-        FacesContext fc = FacesContext.getCurrentInstance();
+	public void actionEdit() {
+		FacesContext fc = FacesContext.getCurrentInstance();
         Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
         String id = params.get("editUserId");
-        this.setEditUser(usersDao.getEntityById(Integer.parseInt(id)));
+        try {
+			this.setEditUser(usersDao.getEntityById(Integer.parseInt(id)));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
