@@ -8,12 +8,76 @@
 				<p:panel header="Управление" styleClass="page-block">
 					<p:tabView id="manageContainer">
 						<p:tab title="Профили">
-							<p:dataTable rendered="false" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" paginator="true" rows="10">
+							<p:dataTable var="profile" value="#{profilesBean.profilesList}" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+								paginator="true" rows="10" id="profilesTable">
+								<p:column headerText="Имя">
+									<h:outputText value="#{profile.name}" />
+								</p:column>
+								<p:column headerText="Вход разрешен">
+									<p:selectBooleanCheckbox value="#{profile.loginEnabled}" />
+								</p:column>
+								<p:column headerText="Управление параметрами">
+									<p:selectBooleanCheckbox value="#{profile.systemControl}" />
+								</p:column>
+								<p:column headerText="Управление пользователями">
+									<p:selectBooleanCheckbox value="#{profile.manageUsers}" />
+								</p:column>
+								<p:column headerText="Операции">
+									<p:commandButton value="Изменить" update="@([id$=editProfileDialogGrid])" action="#{profilesBean.actionEdit}" onsuccess="PF('editProfileDialog').show();" process="@this">
+										<f:param name="editProfileId" value="#{profile.id}" />
+									</p:commandButton>
+									<p:commandButton value="Удалить" action="#{profilesBean.actionDelete}" update="@([id$=profilesTable])" process="@this">
+										<f:param name="deleteProfileId" value="#{profile.id}" />
+									</p:commandButton>
+								</p:column>
 							</p:dataTable>
+							<h:form id="editProfileForm">
+								<p:dialog header="Редактирование профиля" widgetVar="editProfileDialog" modal="true" styleClass="console-dialog">
+									<p:panelGrid columns="2" cellpadding="3" id="editProfileDialogGrid">
+										<p:outputLabel for="editProfileName" value="Имя: " />
+										<p:inputText id="editProfileName" value="#{profilesBean.editProfile.name}" />
+										<p:outputLabel value="Вход разрешен: " />
+										<p:selectBooleanCheckbox value="#{profilesBean.editProfile.loginEnabled}" />
+										<p:outputLabel value="Управление параметрами: " />
+										<p:selectBooleanCheckbox value="#{profilesBean.editProfile.systemControl}" />
+										<p:outputLabel value="Управление пользователями: " />
+										<p:selectBooleanCheckbox value="#{profilesBean.editProfile.manageUsers}" />
+									</p:panelGrid>
+									<div class="console-dialog-buttons-bottom">
+										<p:commandButton value="Сохранить" action="#{profilesBean.saveEditProfile}" onsuccess="PF('editProfileDialog').hide();" update="@([id$=profilesTable])" />
+									</div>
+								</p:dialog>
+							</h:form>
 						</p:tab>
 						<p:tab title="Роли">
-							<p:dataTable rendered="false" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" paginator="true" rows="10">
+							<p:dataTable var="role" value="#{rolesBean.rolesList}" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+								paginator="true" rows="10" id="rolesTable">
+								<p:column headerText="Имя">
+									<h:outputText value="#{role.name}" />
+								</p:column>
+								<p:column headerText="Родитель">
+									<h:outputText value="#{role.roles.name}" />
+								</p:column>
+								<p:column headerText="Операции">
+									<p:commandButton value="Изменить" update="@([id$=editRoleDialogGrid])" action="#{rolesBean.actionEdit}" onsuccess="PF('editRoleDialog').show();" process="@this">
+										<f:param name="editRoleId" value="#{role.id}" />
+									</p:commandButton>
+									<p:commandButton value="Удалить" action="#{rolesBean.actionDelete}" update="@([id$=rolesTable])" process="@this">
+										<f:param name="deleteRoleId" value="#{role.id}" />
+									</p:commandButton>
+								</p:column>
 							</p:dataTable>
+							<h:form id="editRoleForm">
+								<p:dialog header="Редактирование роли" widgetVar="editRoleDialog" modal="true" styleClass="console-dialog">
+									<p:panelGrid columns="2" cellpadding="3" id="editRoleDialogGrid">
+										<p:outputLabel for="editRoleName" value="Имя: " />
+										<p:inputText id="editRoleName" value="#{rolesBean.editRole.name}" />
+									</p:panelGrid>
+									<div class="console-dialog-buttons-bottom">
+										<p:commandButton value="Сохранить" action="#{rolesBean.saveEditRole}" onsuccess="PF('editRoleDialog').hide();" update="@([id$=rolesTable])" />
+									</div>
+								</p:dialog>
+							</h:form>
 						</p:tab>
 						<p:tab title="Офисы">
 							<p:dataTable rendered="false" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" paginator="true" rows="10">
@@ -57,7 +121,7 @@
 								</p:column>
 							</p:dataTable>
 
-							<h:form id="editForm">
+							<h:form id="editUserForm">
 								<p:dialog header="Редактирование пользователя" widgetVar="editUserDialog" modal="true" styleClass="console-dialog">
 									<p:panelGrid columns="2" cellpadding="3" id="editUserDialogGrid">
 										<p:outputLabel for="editUserName" value="Имя: " />
