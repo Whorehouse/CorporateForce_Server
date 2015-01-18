@@ -21,7 +21,7 @@
 						</p:tab>
 						<p:tab title="Пользователи">
 							<p:dataTable var="user" value="#{usersBean.usersList}" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" paginator="true"
-								rows="10">
+								rows="10" id="usersTable">
 								<p:column headerText="Логин">
 									<h:outputText value="#{user.username}" />
 								</p:column>
@@ -51,27 +51,42 @@
 									<p:commandButton value="Изменить" update="@([id$=editUserDialogGrid])" action="#{usersBean.actionEdit}" onsuccess="PF('editUserDialog').show();" process="@this">
 										<f:param name="editUserId" value="#{user.id}" />
 									</p:commandButton>
-									<p:commandButton value="Удалить" />
+									<p:commandButton value="Удалить" action="#{usersBean.actionDelete}" update="@([id$=usersTable])" process="@this">
+										<f:param name="deleteUserId" value="#{user.id}" />
+									</p:commandButton>
 								</p:column>
 							</p:dataTable>
 
-							<p:dialog header="Редактирование пользователя" widgetVar="editUserDialog" modal="true">
-								<p:panelGrid columns="2" cellpadding="3" id="editUserDialogGrid">
-									<p:outputLabel for="editUserName" value="Имя: " />
-									<p:inputText id="editUserName" value="#{usersBean.editUser.username}" />
-									<p:outputLabel value="Профиль: " />
-									<p:selectOneMenu id="editProfile" value="#{usersBean.editUser != null ? usersBean.editUser.profiles.id : ''}" style="width:100%"  filter="true" filterMatchMode="startsWith">
-										<f:selectItems value="#{profilesBean.profilesMap}" />
-									</p:selectOneMenu>
-									<p:outputLabel value="Роль: " />
-									<p:inputText id="editRole" />
-									<p:outputLabel value="Офис: " />
-									<p:inputText id="editOffice" />
-									<p:outputLabel value="Менеджер: " />
-									<p:inputText id="editManager" />
-								</p:panelGrid>
-								<p:commandButton value="Сохранить" />
-							</p:dialog>
+							<h:form id="editForm">
+								<p:dialog header="Редактирование пользователя" widgetVar="editUserDialog" modal="true" styleClass="console-dialog">
+									<p:panelGrid columns="2" cellpadding="3" id="editUserDialogGrid">
+										<p:outputLabel for="editUserName" value="Имя: " />
+										<p:inputText id="editUserName" value="#{usersBean.editUser.username}" />
+										<p:outputLabel value="Профиль: " />
+										<p:selectOneMenu id="editProfile" value="#{usersBean.editUser != null ? usersBean.editUser.profiles.id : ''}" style="width:100%" filter="true" filterMatchMode="startsWith">
+											<f:selectItems value="#{profilesBean.profilesMap}" />
+										</p:selectOneMenu>
+										<p:outputLabel value="Роль: " />
+										<p:selectOneMenu id="editRole" value="#{usersBean.editUser != null ? usersBean.editUser.roles.id : ''}" style="width:100%" filter="true" filterMatchMode="startsWith">
+											<f:selectItem itemLabel="Нет" itemValue="-1" />
+											<f:selectItems value="#{rolesBean.rolesMap}" />
+										</p:selectOneMenu>
+										<p:outputLabel value="Офис: " />
+										<p:selectOneMenu id="editOffice" value="#{usersBean.editUser != null ? usersBean.editUser.offices.id : ''}" style="width:100%" filter="true" filterMatchMode="startsWith">
+											<f:selectItem itemLabel="Нет" itemValue="-1" />
+											<f:selectItems value="#{officesBean.officesMap}" />
+										</p:selectOneMenu>
+										<p:outputLabel value="Менеджер: " />
+										<p:selectOneMenu id="editManager" value="#{usersBean.editUser != null ? usersBean.editUser.users.id : ''}" style="width:100%" filter="true" filterMatchMode="startsWith">
+											<f:selectItem itemLabel="Нет" itemValue="-1" />
+											<f:selectItems value="#{usersBean.usersMap}" />
+										</p:selectOneMenu>
+									</p:panelGrid>
+									<div class="console-dialog-buttons-bottom">
+										<p:commandButton value="Сохранить" action="#{usersBean.saveEditUser}" onsuccess="PF('editUserDialog').hide();" update="@([id$=usersTable])" />
+									</div>
+								</p:dialog>
+							</h:form>
 						</p:tab>
 					</p:tabView>
 				</p:panel>

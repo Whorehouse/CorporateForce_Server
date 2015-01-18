@@ -2,13 +2,13 @@ package org.corporateforce.server.jsf;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 
 import org.corporateforce.server.config.Config;
 import org.corporateforce.server.dao.UsersDao;
@@ -33,7 +33,7 @@ public class UsersBean implements Serializable {
 	private String passwordRepeat;
 
 	private Users editUser;
-	
+
 	private List<Users> usersList = null;
 
 	public void setUsersDao(UsersDao usersDao) {
@@ -47,11 +47,16 @@ public class UsersBean implements Serializable {
 	public void setCurrentUser(Users user) {
 		currentUser = user;
 	}
-	
+
 	public List<Users> getUsersList() throws Exception {
-		if (usersList != null) return usersList;
+		if (usersList != null)
+			return usersList;
 		usersList = usersDao.getEntityList();
 		return usersList;
+	}
+
+	public void refreshUsersList() throws Exception {
+		usersList = usersDao.getEntityList();
 	}
 
 	public String getUsername() {
@@ -89,37 +94,37 @@ public class UsersBean implements Serializable {
 	public Boolean getSignUpMode() {
 		return signUpMode;
 	}
-	
+
 	public boolean isSignedIn() {
-		return currentUser!=null;
+		return currentUser != null;
 	}
-	
+
 	public boolean isLoginEnabledAccess() {
 		return isLoginEnabledAccess(currentUser);
 	}
-	
+
 	public boolean isLoginEnabledAccess(Users u) {
-		return u!=null && u.getProfiles()!=null && u.getProfiles().isLoginEnabled();
+		return u != null && u.getProfiles() != null && u.getProfiles().isLoginEnabled();
 	}
-	
+
 	public boolean isManageUsersAccess() {
 		return isManageUsersAccess(currentUser);
 	}
-	
+
 	public boolean isManageUsersAccess(Users u) {
-		return u!=null && u.getProfiles()!=null && u.getProfiles().isManageUsers();
+		return u != null && u.getProfiles() != null && u.getProfiles().isManageUsers();
 	}
-	
+
 	public boolean isSystemControlAccess() {
 		return isSystemControlAccess(currentUser);
 	}
-	
+
 	public boolean isSystemControlAccess(Users u) {
-		return u!=null && u.getProfiles()!=null && u.getProfiles().isSystemControl();
+		return u != null && u.getProfiles() != null && u.getProfiles().isSystemControl();
 	}
-	
+
 	public void updateUser() throws Exception {
-		if (currentUser!=null) {
+		if (currentUser != null) {
 			setCurrentUser(usersDao.getEntityById(currentUser.getId()));
 		}
 	}
@@ -178,46 +183,46 @@ public class UsersBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:", ex.getMessage()));
 		}
 	}
-	
+
 	public void logout() throws Exception {
 		currentUser = null;
-		//ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-		//context.redirect(context.getRequestContextPath() + "/index.jsf");
+		// ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+		// context.redirect(context.getRequestContextPath() + "/index.jsf");
 	}
-	
+
 	public List<String> outerModulesURLs() {
 		return new ArrayList<String>(Config.getModules().values());
 	}
-	
+
 	public void clearInputValues() {
 		username = "";
 		password = "";
 		passwordRepeat = "";
 	}
-	
+
 	public boolean isExistContacts() {
 		return isExistContacts(currentUser);
 	}
-    
+
 	public boolean isExistAvatar() {
 		return isExistAvatar(currentUser);
 	}
-	
+
 	public boolean isExistContacts(Users u) {
-		return (u!=null && u.getContacts()!=null) ? true : false;
+		return (u != null && u.getContacts() != null) ? true : false;
 	}
-	
+
 	public boolean isExistAvatar(Users u) {
-		return (isExistContacts(u)&&u.getContacts().getAvatars()!=null) ? true : false;
+		return (isExistContacts(u) && u.getContacts().getAvatars() != null) ? true : false;
 	}
-    
-    public String getAvatar() {
-    	if (isExistAvatar()) {
-    		return "Avatars/showAvatar/"+currentUser.getContacts().getAvatars().getId();
-    	} else {
-    		return "resources/images/img_no_photo.png";
-    	}
-    }
+
+	public String getAvatar() {
+		if (isExistAvatar()) {
+			return "Avatars/showAvatar/" + currentUser.getContacts().getAvatars().getId();
+		} else {
+			return "resources/images/img_no_photo.png";
+		}
+	}
 
 	/**
 	 * @return the editUser
@@ -227,23 +232,54 @@ public class UsersBean implements Serializable {
 	}
 
 	/**
-	 * @param editUser the editUser to set
+	 * @param editUser
+	 *            the editUser to set
 	 */
 	public void setEditUser(Users editUser) {
 		System.out.println("DEBUG: editUser: " + editUser);
 		this.editUser = editUser;
+		if (this.editUser.getUsers() == null)
+			this.editUser.setUsers(new Users());
 	}
-	
+
 	public void actionEdit() {
 		FacesContext fc = FacesContext.getCurrentInstance();
-        Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-        String id = params.get("editUserId");
-        try {
+		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+		String id = params.get("editUserId");
+		try {
 			this.setEditUser(usersDao.getEntityById(Integer.parseInt(id)));
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public Map<String, Integer> getUsersMap() throws Exception {
+		List<Users> users = editUser != null ? this.usersDao.getEntityListExclude(editUser.getId()) : this.usersDao.getEntityList();
+		Map<String, Integer> result = new HashMap<String, Integer>();
+		for (Users u : users) {
+			result.put(u.getUsername(), u.getId());
+		}
+		return result;
+	}
+
+	public void saveEditUser() throws Exception {
+		usersDao.updateEntity(editUser);
+		refreshUsersList();
+	}
+	
+	public void actionDelete() {
+		FacesContext fc = FacesContext.getCurrentInstance();
+		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+		String id = params.get("deleteUserId");
+		try {
+			usersDao.deleteEntity(Integer.parseInt(id));
+			refreshUsersList();
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
 	}
 }

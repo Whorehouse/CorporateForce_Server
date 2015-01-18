@@ -1,8 +1,11 @@
 package org.corporateforce.server.dao;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.corporateforce.server.model.Roles;
 import org.corporateforce.server.model.Users;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -212,4 +215,5 @@ public class UsersDao extends AbstractDao<Users> {
 			session.close();
 		}
 	}
+
 }
