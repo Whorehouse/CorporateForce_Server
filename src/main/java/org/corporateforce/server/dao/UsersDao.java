@@ -1,5 +1,6 @@
 package org.corporateforce.server.dao;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import org.corporateforce.server.model.Users;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -211,5 +213,63 @@ public class UsersDao extends AbstractDao<Users> {
 		} finally {
 			session.close();
 		}
+	}
+	
+	//---------------Custom
+	
+	public boolean isManager(int id) throws Exception {
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		boolean res = false;
+		try {			
+			BigInteger countSub = (BigInteger)session.createSQLQuery("SELECT COUNT(*) FROM `users` WHERE `users`.`MANAGER`=:id")
+					.setLong("id", id).uniqueResult();
+			System.out.println(countSub);
+			tx.commit();
+			if (countSub.intValue()>0) {
+				res=true;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			tx.rollback();
+		} finally {
+			session.close();
+		}
+		return res;
+	}
+	
+	public boolean isManager(int manager, int user) throws Exception {
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		boolean res = false;
+		try {			
+			BigInteger countSub = (BigInteger)session.createSQLQuery("SELECT COUNT(*) FROM `users` WHERE `users`.`MANAGER`=:manager AND `users`.`ID`=:user")
+					.setLong("manager", manager).setLong("user", user).uniqueResult();
+			tx.commit();
+			if (countSub.intValue()>0) {
+				res=true;
+			}
+		} catch (Exception e) {
+			tx.rollback();
+		} finally {
+			session.close();
+		}
+		return res;
+	}
+	
+	public List<Users> listByManager(int id) throws Exception {
+		Users manager = getEntityById(id);
+		List<Users> res = null;
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		try {			
+			res = session.createCriteria(Users.class).add(Restrictions.eq("users",manager)).list();
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+		} finally {
+			session.close();
+		}
+		return res;
 	}
 }
