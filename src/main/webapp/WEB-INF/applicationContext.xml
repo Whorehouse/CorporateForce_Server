@@ -27,6 +27,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="annotatedClasses">
 			<list>
+				<value>org.corporateforce.server.model.Answers</value>
 				<value>org.corporateforce.server.model.Articles</value>
 				<value>org.corporateforce.server.model.Articlesresourceslink</value>
 				<value>org.corporateforce.server.model.Avatars</value>
