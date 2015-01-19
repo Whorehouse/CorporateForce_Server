@@ -2,12 +2,9 @@ package org.corporateforce.server.rest;
 
 import java.util.List;
 
-import org.corporateforce.server.dao.QuestionsDao;
 import org.corporateforce.server.dao.ResultsDao;
 import org.corporateforce.server.dao.TrainingsDao;
 import org.corporateforce.server.dao.UsersDao;
-import org.corporateforce.server.model.Answers;
-import org.corporateforce.server.model.Questions;
 import org.corporateforce.server.model.Results;
 import org.corporateforce.server.model.Trainings;
 import org.corporateforce.server.model.Users;

@@ -3,10 +3,8 @@ package org.corporateforce.server.dao;
 import java.math.BigInteger;
 
 import org.corporateforce.server.model.Trainings;
-import org.corporateforce.server.model.Users;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 
 @Service

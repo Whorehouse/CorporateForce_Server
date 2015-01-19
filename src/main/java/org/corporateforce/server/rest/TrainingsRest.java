@@ -1,10 +1,6 @@
 package org.corporateforce.server.rest;
 
-import java.util.List;
-
 import org.corporateforce.server.dao.TrainingsDao;
-import org.corporateforce.server.model.Answers;
-import org.corporateforce.server.model.Questions;
 import org.corporateforce.server.model.Trainings;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
