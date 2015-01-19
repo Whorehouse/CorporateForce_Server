@@ -43,6 +43,7 @@ public abstract class AbstractDao<T> {
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
+			System.out.println(e);
 		} finally {
 			session.close();
 		}

@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.context.FacesContext;
+
 import org.corporateforce.server.dao.OfficesDao;
 import org.corporateforce.server.model.Offices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,10 @@ public class OfficesBean implements Serializable {
 	@Autowired
 	private OfficesDao officesDao;
 
+	private Offices editOffice;
+	
+	private List<Offices> officesList = null;
+	
 	public OfficesDao getOfficesDao() {
 		return officesDao;
 	}
@@ -36,4 +42,54 @@ public class OfficesBean implements Serializable {
 		return result;
 	}
 
+	public Offices getEditOffice() {
+		return editOffice;
+	}
+
+	public void setEditOffice(Offices editOffice) {
+		this.editOffice = editOffice;
+	}
+
+	public List<Offices> getOfficesList() throws Exception {
+		if (officesList != null)
+			return officesList;
+		officesList = officesDao.getEntityList();
+		return officesList;
+	}
+
+	public void refreshOfficesList() throws Exception {
+		officesList = officesDao.getEntityList();
+	}
+	
+	public void actionEdit() {
+		FacesContext fc = FacesContext.getCurrentInstance();
+		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+		String id = params.get("editOfficeId");
+		try {
+			this.setEditOffice(officesDao.getEntityById(Integer.parseInt(id)));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void saveEditOffice() throws Exception {
+		officesDao.updateEntity(editOffice);
+		refreshOfficesList();
+	}
+	
+	public void actionDelete() {
+		FacesContext fc = FacesContext.getCurrentInstance();
+		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+		String id = params.get("deleteOfficeId");
+		try {
+			officesDao.deleteEntity(Integer.parseInt(id));
+			refreshOfficesList();
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+	}
 }

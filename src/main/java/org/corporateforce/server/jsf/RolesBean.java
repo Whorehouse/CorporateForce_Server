@@ -54,6 +54,8 @@ public class RolesBean implements Serializable {
 	 */
 	public void setEditRole(Roles editRole) {
 		this.editRole = editRole;
+		if (this.editRole.getRoles() == null)
+			this.editRole.setRoles(new Roles());
 	}
 
 	public List<Roles> getRolesList() throws Exception {
