@@ -32,15 +32,13 @@ public class Questions implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Trainings trainings;
-	private short index;
 	private String body;
 
 	public Questions() {
 	}
 
-	public Questions(Trainings trainings, short index, String body) {
+	public Questions(Trainings trainings, String body) {
 		this.trainings = trainings;
-		this.index = index;
 		this.body = body;
 	}
 
@@ -63,15 +61,6 @@ public class Questions implements java.io.Serializable {
 
 	public void setTrainings(Trainings trainings) {
 		this.trainings = trainings;
-	}
-
-	@Column(name = "INDEX", nullable = false)
-	public short getIndex() {
-		return this.index;
-	}
-
-	public void setIndex(short index) {
-		this.index = index;
 	}
 
 	@Column(name = "BODY", nullable = false, length = 16777215)
