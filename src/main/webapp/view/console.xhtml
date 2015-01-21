@@ -33,7 +33,7 @@
 							</p:dataTable>
 							<h:form id="editProfileForm">
 								<p:dialog header="Редактирование профиля" widgetVar="editProfileDialog" modal="true" styleClass="console-dialog">
-									<p:panelGrid columns="2" cellpadding="3" id="editProfileDialogGrid">
+									<h:panelGrid columns="2" cellpadding="3" id="editProfileDialogGrid">
 										<p:outputLabel for="editProfileName" value="Имя: " />
 										<p:inputText id="editProfileName" value="#{profilesBean.editProfile.name}" />
 										<p:outputLabel value="Вход разрешен: " />
@@ -42,7 +42,7 @@
 										<p:selectBooleanCheckbox value="#{profilesBean.editProfile.systemControl}" />
 										<p:outputLabel value="Управление пользователями: " />
 										<p:selectBooleanCheckbox value="#{profilesBean.editProfile.manageUsers}" />
-									</p:panelGrid>
+									</h:panelGrid>
 									<div class="console-dialog-buttons-bottom">
 										<p:commandButton value="Сохранить" actionListener="#{profilesBean.saveEditProfile}" onsuccess="PF('editProfileDialog').hide();" update="@([id$=profilesTable])"
 											process="@this,editProfileForm" />
@@ -70,7 +70,7 @@
 							</p:dataTable>
 							<h:form id="editRoleForm">
 								<p:dialog header="Редактирование роли" widgetVar="editRoleDialog" modal="true" styleClass="console-dialog">
-									<p:panelGrid columns="2" cellpadding="3" id="editRoleDialogGrid">
+									<h:panelGrid columns="2" cellpadding="3" id="editRoleDialogGrid">
 										<p:outputLabel for="editRoleName" value="Имя: " />
 										<p:inputText id="editRoleName" value="#{rolesBean.editRole.name}" />
 										<p:outputLabel for="editRoleParent" value="Родитель: " />
@@ -78,7 +78,7 @@
 											<f:selectItem itemLabel="Нет" itemValue="-1" />
 											<f:selectItems value="#{rolesBean.rolesMap}" />
 										</p:selectOneMenu>
-									</p:panelGrid>
+									</h:panelGrid>
 									<div class="console-dialog-buttons-bottom">
 										<p:commandButton value="Сохранить" actionListener="#{rolesBean.saveEditRole}" onsuccess="PF('editRoleDialog').hide();" update="@([id$=rolesTable])" process="@this,editRoleForm" />
 									</div>
@@ -105,12 +105,12 @@
 							</p:dataTable>
 							<h:form id="editOfficeForm">
 								<p:dialog header="Редактирование офиса" widgetVar="editOfficeDialog" modal="true" styleClass="console-dialog">
-									<p:panelGrid columns="2" cellpadding="3" id="editOfficeDialogGrid">
+									<h:panelGrid columns="2" cellpadding="3" id="editOfficeDialogGrid">
 										<p:outputLabel for="editOfficeName" value="Название: " />
 										<p:inputText id="editOfficeName" value="#{officesBean.editOffice.name}" />
 										<p:outputLabel for="editOfficeAddress" value="Адрес: " />
 										<p:inputText id="editOfficeAddress" value="#{officesBean.editOffice.address}" />
-									</p:panelGrid>
+									</h:panelGrid>
 									<div class="console-dialog-buttons-bottom">
 										<p:commandButton value="Сохранить" action="#{officesBean.saveEditOffice}" onsuccess="PF('editOfficeDialog').hide();" update="@([id$=officesTable])" process="@this,editOfficeForm" />
 									</div>
@@ -157,7 +157,7 @@
 
 							<h:form id="editUserForm">
 								<p:dialog header="Редактирование пользователя" widgetVar="editUserDialog" modal="true" styleClass="console-dialog">
-									<p:panelGrid columns="2" cellpadding="3" id="editUserDialogGrid">
+									<h:panelGrid columns="2" cellpadding="3" id="editUserDialogGrid">
 										<p:outputLabel for="editUserName" value="Имя: " />
 										<p:inputText id="editUserName" value="#{usersBean.editUser.username}" />
 										<p:outputLabel value="Профиль: " />
@@ -179,7 +179,7 @@
 											<f:selectItem itemLabel="Нет" itemValue="-1" />
 											<f:selectItems value="#{usersBean.usersMap}" />
 										</p:selectOneMenu>
-									</p:panelGrid>
+									</h:panelGrid>
 									<div class="console-dialog-buttons-bottom">
 										<p:commandButton value="Сохранить" action="#{usersBean.saveEditUser}" onsuccess="PF('editUserDialog').hide();" update="@([id$=usersTable])" process="@this,editUserForm" />
 									</div>
