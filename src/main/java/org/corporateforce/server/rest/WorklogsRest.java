@@ -36,8 +36,8 @@ public class WorklogsRest extends AbstractRest<Worklogs, WorklogsDao>  {
 		return entities;		
 	}
 	
-	@RequestMapping(value = "/listByTicketAndUser/{id}/{id}", method = RequestMethod.GET)
-	public @ResponseBody List<Worklogs> listByTicket(@PathVariable("id") int tid, @PathVariable("id") int uid) throws Exception {
+	@RequestMapping(value = "/listByTicketAndUser/{tid}/{uid}", method = RequestMethod.GET)
+	public @ResponseBody List<Worklogs> listByTicket(@PathVariable("tid") int tid, @PathVariable("uid") int uid) throws Exception {
 		Tickets tickets = ticketsDao.getEntityById(tid);
 		Users users = usersDao.getEntityById(uid);
 		List<Worklogs> entities = null;
