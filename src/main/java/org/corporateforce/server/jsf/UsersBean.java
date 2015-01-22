@@ -171,7 +171,7 @@ public class UsersBean implements Serializable {
 		if (!validateInputValues())
 			return;
 		try {
-			Users result = usersDao.createSimpleUsers(0, 0, 0, 0, username, password);
+			Users result = usersDao.createSimpleUsers(1, 1, 1, 6, username, password);
 			System.err.println("DEBUG: UsersBean User: " + result);
 			if (result != null) {
 				this.signIn();

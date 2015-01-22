@@ -61,7 +61,7 @@ public class UsersDao extends AbstractDao<Users> {
 		try {
 			id = (Integer) session
 				.createSQLQuery(
-						"CALL `userCreate`(:profile, :office, :role, :manager, :username, :password)")
+						"SELECT `userCreate`(:profile, :office, :role, :manager, :username, :password)")
 				.setLong("profile", profile).setLong("office", office)
 				.setLong("role", role).setLong("manager", manager)
 				.setString("username", username)
