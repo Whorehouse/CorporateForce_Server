@@ -1,4 +1,4 @@
-package org.corporateforce.server.jsf;
+package org.corporateforce.server.session;
 
 import java.io.Serializable;
 

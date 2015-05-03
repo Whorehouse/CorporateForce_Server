@@ -1,88 +1,70 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:b="http://bootsfaces.net/ui">
-<f:view>
-	<h:head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<title>CorporateForce</title>
-		<h:outputStylesheet library="css" name="default.css" />
-		<h:outputScript library="javax.faces" name="jsf.js" target="head" />
-	</h:head>
-	<h:body>
-		<h:form>
-			<b:container>
-				<b:row>
-					<b:column>
-						<h1>Hello, world!</h1>
-					</b:column>
-				</b:row>
-			</b:container>
+	xmlns:b="http://bootsfaces.net/ui"
+	template="/view/templates/common.xhtml">
+	<ui:define name="body">
+		<h:outputScript library="js" name="login-scripts.js" target="head" />
 
-			<p:outputPanel styleClass="login-block-messages">
-				<p:messages id="messages" showDetail="true" autoUpdate="true"
-					closable="true" />
-			</p:outputPanel>
-			<div class="login-container">
-				<p:fieldset styleClass="login-block">
-					<p:commandLink styleClass="login-logo"
-						actionListener="#{mainBean.actionMainPage}" update="fieldsGrid" />
-					<div class="login-block-title login-text-big">
-						<h:outputLabel value="Вход" rendered="#{!usersBean.signUpMode}" />
-						<h:outputLabel value="Регистрация"
-							rendered="#{usersBean.signUpMode}" />
-					</div>
-					<h:panelGrid columns="1" cellpadding="3" id="fieldsGrid"
-						styleClass="login-block-input">
-						<h:outputLabel for="inputLogin" value="Логин: " />
-						<p:inputText id="inputLogin" class="inputLogin" label="username"
-							value="#{usersBean.username}" redisplay="true"
-							placeholder="Логин" />
-						<h:outputLabel for="inputPassword" value="Пароль: " />
-						<p:password id="inputPassword" class="inputPassword"
-							label="password" value="#{usersBean.password}"
-							feedback="#{usersBean.signUpMode}" redisplay="true"
-							placeholder="Пароль" />
-						<h:outputLabel for="inputPassword" value="Подтверждение пароля: "
-							rendered="#{usersBean.signUpMode}" />
-						<p:password id="inputPasswordRepeat" label="password"
-							value="#{usersBean.passwordRepeat}" redisplay="true"
-							rendered="#{usersBean.signUpMode}"
-							placeholder="Подтверждение пароля" />
-					</h:panelGrid>
-					<p:outputPanel styleClass="login-block-bottom">
-						<h:panelGrid columns="1" cellpadding="3"
-							styleClass="login-block-buttons">
-							<p:commandButton value="Войти" onclick="modulesLogin()"
-								actionListener="#{usersBean.signIn}" update="fieldsGrid"
-								rendered="#{!usersBean.signUpMode}" />
-							<p:commandButton value="Зарегистрироваться"
-								actionListener="#{usersBean.signUp}" update="fieldsGrid"
-								rendered="#{usersBean.signUpMode}" />
-						</h:panelGrid>
-						<div class="login-block-links login-text-small">
-							<p:commandLink value="Зарегистрироваться" class="login-link"
-								rendered="#{!usersBean.signUpMode}"
-								actionListener="#{mainBean.actionSignUp}" />
-							<p:commandLink value="Войти" class="login-link"
-								rendered="#{usersBean.signUpMode}"
-								actionListener="#{mainBean.actionLogin}" />
-							<p:spacer width="1" height="10" styleClass="login-separator-vert" />
-							<p:commandLink value="Нужна помощь?" class="login-link" />
+		<!-- Dialogs -->
+		<ui:include src="/view/components/loginHelpDlg.xhtml" />
+
+		<!-- Content -->
+		<b:jumbotron id="loginPageContent">
+			<div id="loginContainer">
+				<b:panel id="loginPanel">
+					<f:facet name="heading">
+						<h:form id="loginFormHead" prependId="false">
+							<h:outputLabel value="Вход в систему" />
+							<h:commandButton id="btnModeToogle"
+								value="#{loginController.modeSignIn() ? 'Регистрация' : 'Вход'}"
+								action="#{loginController.toogleMode}"
+								styleClass="btn #{loginController.modeSignIn() ? 'btn-primary' : 'btn-success'} control-right">
+									<f:ajax render="loginPanel"/>
+							</h:commandButton>
+						</h:form>
+					</f:facet>
+					<h:form id="loginFormMain">
+						<div class="login-panel-block login-panel-block-top login-panel-block-buttons">
+							<button id="buttonHelp" class="btn btn-default control-right"
+								data-target="#helpDialog" data-toggle="modal"
+								onclick="return false;">?</button>
 						</div>
-					</p:outputPanel>
-				</p:fieldset>
-				<p:outputPanel styleClass="login-copyright">© Copyright 2014-2015 CorporateForce. Все права защищены.</p:outputPanel>
+						<div class="login-panel-block login-panel-block-input">
+							<span>
+								<b:inputText placeholder="Имя пользователя" fieldSize="sm">
+									<f:facet name="prepend">
+										<b:iconAwesome name="user" id="user"/>
+									</f:facet>
+								</b:inputText>
+								<b:inputText placeholder="Пароль" fieldSize="sm" type="password">
+									<f:facet name="prepend">
+										<b:iconAwesome name="key" id="password"/>
+									</f:facet>
+								</b:inputText>
+							</span>
+						</div>
+						<div class="login-panel-block control-content-center">
+							<b:commandButton id="btnSignIn" value="Войти" look="success" />
+						</div>
+						<div class="login-panel-block control-content-center login-panel-block-buttons">
+							<b:commandButton id="btnForgotPassword" value="Забыли пароль?" look="link" />
+						</div>
+					</h:form>
+					<div class="login-panel-block login-panel-block-logo control-content-center">
+						<span>
+							<h:graphicImage value="/resources/images/img_logo_small.png" />
+						</span>
+					</div>
+				</b:panel>
+				<div class="login-footer control-content-center">
+					CorporateForce © 2014-2015
+				</div>
 			</div>
-		</h:form>
-		<c:forEach var="module" items="#{usersBean.outerModulesURLs()}">
-			<div title="#{module}" style="display: none;" class="moduleURL"></div>
-		</c:forEach>
-	</h:body>
-</f:view>
-</html>
+		</b:jumbotron>
+	</ui:define>
+</ui:composition>

@@ -3,11 +3,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
 
-	<url-mapping id="welcome">
-		<pattern value="/welcome" />
-		<view-id value="/view/pages/welcome.jsf" />
-	</url-mapping>
-
 	<url-mapping id="login">
 		<pattern value="/login" />
 		<view-id value="/view/pages/login.jsf" />

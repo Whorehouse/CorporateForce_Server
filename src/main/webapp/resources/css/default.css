@@ -1,6 +1,150 @@
 @CHARSET "UTF-8";
 
+/* common styles */
+
 html, body {
 	margin: 0;
 	padding: 0;
+	width: 100%;
+	height: 100%;
+}
+
+html {
+	overflow: hidden;
+}
+
+body {
+	overflow: auto;
+}
+
+.control-right {
+	float: right;
+}
+
+.control-left {
+	float: left;
+}
+
+.control-content-center {
+	text-align: center;
+}
+
+.control-clear:AFTER {
+	content: ".";
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+/* login page styles */
+
+#loginPageContent {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	font-family: sans-serif;
+	background-color: #2A6396;
+}
+
+#loginContainer {
+	display: none;
+	position: absolute;
+	width: 380px;
+	height: 500px;
+}
+
+#loginPanel {
+	height: 90%;
+	margin-bottom: 0px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.3);
+	overflow: hidden;
+}
+
+#loginPanel .panel-body {
+	padding: 0px;
+	height: 88%;
+}
+
+#loginPanel .btn-link, .btn-link:hover, .btn-link:focus, .btn-link:active {
+	text-decoration: none;
+}
+
+#loginFormHead {
+	font-size: medium;
+	padding-top: 5px;
+}
+
+#loginFormHead label {
+	font-weight: normal;
+}
+
+#loginFormHead .btn {
+	font-size: small;
+	padding: 5px 12px;
+	margin-top: -4px;
+}
+
+#loginFormMain {
+	height: 83%;
+}
+
+.login-panel-block {
+	display: block;
+	position: relative;
+	width: 100%;
+}
+
+.login-panel-block-buttons {
+	padding: 10px;
+}
+
+.login-panel-block-buttons button {
+	font-size: small;
+	padding: 2px 8px;
+}
+
+.login-panel-block-top {
+	padding: 11px;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+.login-panel-block-logo {
+	display: table;
+	height: 60px;
+}
+
+.login-panel-block-logo span {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.login-panel-block-input {
+	display: table;
+	height: 65%;
+	padding: 0px 40px;
+}
+
+.login-panel-block-input span {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.login-panel-block-input input {
+	text-align: center;
+}
+
+.login-panel-block-input i {
+	width: 10px;
+}
+
+.login-footer {
+	height: 10%;
+	padding: 8px;
+	font-size: small;
+	color: #FFF;
+	text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
 }

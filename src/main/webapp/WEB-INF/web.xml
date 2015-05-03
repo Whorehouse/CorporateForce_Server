@@ -9,7 +9,7 @@
 		<session-timeout>30</session-timeout>
 	</session-config>
 	<welcome-file-list>
-		<welcome-file>/view/pages/redirect.jsf</welcome-file>
+		<welcome-file>/view/pages/init.jsf</welcome-file>
 	</welcome-file-list>
 
 	<!-- Faces Config -->
@@ -24,6 +24,10 @@
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
 		<param-value>bootstrap</param-value>
+	</context-param>
+	<context-param>
+		<param-name>BootsFaces_USETHEME</param-name>
+		<param-value>true</param-value>
 	</context-param>
 
 	<!-- JSF Mapping -->
