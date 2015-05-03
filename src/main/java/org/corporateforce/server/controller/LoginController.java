@@ -1,5 +1,7 @@
 package org.corporateforce.server.controller;
 
+import java.io.Serializable;
+
 import org.corporateforce.server.session.UsersBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -7,7 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope("session")
-public class LoginController {
+public class LoginController implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	// session beans
 
@@ -58,16 +61,27 @@ public class LoginController {
 	public void setPasswordRepeat(String passwordRepeat) {
 		this.passwordRepeat = passwordRepeat;
 	}
+	
+	public Integer errorMessage = null;
+
+	public Integer getErrorMessage() {
+		return errorMessage;
+	}
 
 	// controller methods
 
 	public void toogleMode() {
 		this.loginMode = this.loginMode == LOGIN_MODE_REGISTRATION ? LOGIN_MODE_SIGNIN : LOGIN_MODE_REGISTRATION;
+		this.username= "";
+		this.password = "";
+		this.passwordRepeat = "";
 	}
 	
 	public Boolean modeSignIn() {
 		return this.loginMode == LOGIN_MODE_REGISTRATION ? false : true;
 	}
 
-	
+	public void signIn() {
+		System.out.println("SignIn");
+	}
 }

@@ -11,49 +11,67 @@
 		<h:outputScript library="js" name="login-scripts.js" target="head" />
 
 		<!-- Dialogs -->
-		<ui:include src="/view/components/loginHelpDlg.xhtml" />
+		<ui:include src="/view/components/login/help.xhtml" />
+		<ui:include src="/view/components/login/passwordRestore.xhtml" />
 
 		<!-- Content -->
 		<b:jumbotron id="loginPageContent">
 			<div id="loginContainer">
 				<b:panel id="loginPanel">
+					<ui:include src="/view/components/wait.xhtml" />
 					<f:facet name="heading">
 						<h:form id="loginFormHead" prependId="false">
-							<h:outputLabel value="Вход в систему" />
-							<h:commandButton id="btnModeToogle"
+							<h:outputLabel value="#{loginController.modeSignIn() ? 'Вход в систему' : 'Регистрация в системе'}" />
+							<h:commandButton id="btnModeToogle" type="button"
 								value="#{loginController.modeSignIn() ? 'Регистрация' : 'Вход'}"
-								action="#{loginController.toogleMode}"
+								action="#{loginController.toogleMode()}"
 								styleClass="btn #{loginController.modeSignIn() ? 'btn-primary' : 'btn-success'} control-right">
-									<f:ajax render="loginPanel"/>
+									<f:ajax render="loginPanel" />
 							</h:commandButton>
 						</h:form>
 					</f:facet>
 					<h:form id="loginFormMain">
 						<div class="login-panel-block login-panel-block-top login-panel-block-buttons">
-							<button id="buttonHelp" class="btn btn-default control-right"
+							<button id="btnHelp" class="btn btn-default control-right"
 								data-target="#helpDialog" data-toggle="modal"
 								onclick="return false;">?</button>
 						</div>
-						<div class="login-panel-block login-panel-block-input">
+						<h:panelGroup styleClass="login-panel-block login-panel-block-input" rendered="#{loginController.modeSignIn()}">
 							<span>
-								<b:inputText placeholder="Имя пользователя" fieldSize="sm">
+								<b:inputText placeholder="Имя пользователя" fieldSize="sm" value="#{loginController.username}">
 									<f:facet name="prepend">
 										<b:iconAwesome name="user" id="user"/>
 									</f:facet>
 								</b:inputText>
-								<b:inputText placeholder="Пароль" fieldSize="sm" type="password">
+								<b:inputText placeholder="Пароль" fieldSize="sm" type="password" value="#{loginController.password}">
 									<f:facet name="prepend">
 										<b:iconAwesome name="key" id="password"/>
 									</f:facet>
 								</b:inputText>
 							</span>
-						</div>
-						<div class="login-panel-block control-content-center">
-							<b:commandButton id="btnSignIn" value="Войти" look="success" />
-						</div>
-						<div class="login-panel-block control-content-center login-panel-block-buttons">
-							<b:commandButton id="btnForgotPassword" value="Забыли пароль?" look="link" />
-						</div>
+						</h:panelGroup>
+						<h:panelGroup styleClass="login-panel-block login-panel-block-input" rendered="#{!loginController.modeSignIn()}">
+							<span>
+								<b:inputText placeholder="Имя пользователя" fieldSize="sm" value="#{loginController.username}"/>
+								<b:inputText placeholder="Пароль" fieldSize="sm" type="password" value="#{loginController.password}"/>
+								<b:inputText placeholder="Подтверждение пароля" fieldSize="sm" type="password" value="#{loginController.passwordRepeat}"/>
+							</span>
+						</h:panelGroup>
+						<h:panelGrid class="login-panel-table control-content-center" columns="1">
+							<h:commandButton id="btnSignIn"
+								value="#{loginController.modeSignIn() ? 'Войти' : 'Зарегистрироваться'}"
+								styleClass="btn #{loginController.modeSignIn() ? 'btn-success' : 'btn-primary'}"
+								action="#{loginController.signIn()}">
+									<f:ajax render="loginPanel" onevent="showWaitStatus()" />
+							</h:commandButton>
+							<h:outputText value="Неверное имя пользователя или пароль" styleClass="message-error login-message-error"
+											rendered="#{loginController.errorMessage != null}"/>
+						</h:panelGrid>
+						<h:panelGroup rendered="#{loginController.modeSignIn()}" class="login-panel-block control-content-center login-panel-block-buttons">
+							<button id="btnForgotPassword" class="btn btn-link"
+								data-target="#passwordRestoreDialog" data-toggle="modal"
+								onclick="return false;">Забыли пароль?</button>
+						</h:panelGroup>
 					</h:form>
 					<div class="login-panel-block login-panel-block-logo control-content-center">
 						<span>
