@@ -135,11 +135,12 @@ body {
 	display: table;
 	height: 55%;
 	padding: 0px 40px;
+	padding-bottom: 15px;
 }
 
 .login-panel-block-input span {
 	display: table-cell;
-	vertical-align: middle;
+	vertical-align: bottom;
 }
 
 .login-panel-block-input input {

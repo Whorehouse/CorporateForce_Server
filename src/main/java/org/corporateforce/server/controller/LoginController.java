@@ -72,6 +72,7 @@ public class LoginController implements Serializable {
 
 	public void toogleMode() {
 		this.loginMode = this.loginMode == LOGIN_MODE_REGISTRATION ? LOGIN_MODE_SIGNIN : LOGIN_MODE_REGISTRATION;
+		System.out.println("Login mode: " + this.loginMode);
 		this.username= "";
 		this.password = "";
 		this.passwordRepeat = "";

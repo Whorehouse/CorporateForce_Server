@@ -26,11 +26,11 @@
 								value="#{loginController.modeSignIn() ? 'Регистрация' : 'Вход'}"
 								action="#{loginController.toogleMode()}"
 								styleClass="btn #{loginController.modeSignIn() ? 'btn-primary' : 'btn-success'} control-right">
-									<f:ajax render="loginPanel" />
+									<f:ajax render="loginPanel loginFormMain"/>
 							</h:commandButton>
 						</h:form>
 					</f:facet>
-					<h:form id="loginFormMain">
+					<h:form id="loginFormMain" prependId="false">
 						<div class="login-panel-block login-panel-block-top login-panel-block-buttons">
 							<button id="btnHelp" class="btn btn-default control-right"
 								data-target="#helpDialog" data-toggle="modal"
@@ -62,7 +62,7 @@
 								value="#{loginController.modeSignIn() ? 'Войти' : 'Зарегистрироваться'}"
 								styleClass="btn #{loginController.modeSignIn() ? 'btn-success' : 'btn-primary'}"
 								action="#{loginController.signIn()}">
-									<f:ajax render="loginPanel" onevent="showWaitStatus()" />
+									<f:ajax render="loginPanel loginFormHead" onevent="waitStatus"/>
 							</h:commandButton>
 							<h:outputText value="Неверное имя пользователя или пароль" styleClass="message-error login-message-error"
 											rendered="#{loginController.errorMessage != null}"/>

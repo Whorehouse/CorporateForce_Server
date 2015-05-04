@@ -16,5 +16,25 @@
 		function showWaitStatus() {
 			$("#waitStatus").show();
 		}
+
+		function hideWaitStatus() {
+			$("#waitStatus").hide();
+		}
+
+		function waitStatus(data) {
+			var status = data.status;
+			switch (status) {
+			case "begin": // Before the ajax request is sent.
+				showWaitStatus();
+				break;
+
+			case "complete": // After the ajax response is arrived.
+				hideWaitStatus();
+				break;
+
+			case "success": // After update of HTML DOM based on ajax response..
+				break;
+			}
+		}
 	</script>
 </ui:composition>
