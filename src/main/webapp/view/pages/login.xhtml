@@ -21,7 +21,7 @@
 					<ui:include src="/view/components/wait.xhtml" />
 					<f:facet name="heading">
 						<h:form id="loginFormHead" prependId="false">
-							<h:outputLabel value="#{loginController.modeSignIn() ? 'Вход в систему' : 'Регистрация в системе'}" />
+							<h:outputLabel value="#{loginController.modeSignIn() ? loginController.getTextLabel('header_sign_in') : loginController.getTextLabel('header_sign_up')}" />
 							<h:commandButton id="btnModeToogle" type="button"
 								value="#{loginController.modeSignIn() ? 'Регистрация' : 'Вход'}"
 								action="#{loginController.toogleMode()}"
@@ -61,10 +61,10 @@
 							<h:commandButton id="btnSignIn"
 								value="#{loginController.modeSignIn() ? 'Войти' : 'Зарегистрироваться'}"
 								styleClass="btn #{loginController.modeSignIn() ? 'btn-success' : 'btn-primary'}"
-								action="#{loginController.signIn()}">
-									<f:ajax render="loginPanel loginFormHead" onevent="waitStatus"/>
+								action="#{loginController.acceptInputValues()}">
+									<f:ajax render="loginPanel loginFormHead" onevent="waitStatus" execute="loginFormMain"/>
 							</h:commandButton>
-							<h:outputText value="Неверное имя пользователя или пароль" styleClass="message-error login-message-error"
+							<h:outputText value="#{loginController.getTextLabel(loginController.errorMessage)}" styleClass="message-error login-message-error"
 											rendered="#{loginController.errorMessage != null}"/>
 						</h:panelGrid>
 						<h:panelGroup rendered="#{loginController.modeSignIn()}" class="login-panel-block control-content-center login-panel-block-buttons">

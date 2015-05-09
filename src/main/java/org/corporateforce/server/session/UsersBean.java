@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import org.corporateforce.server.config.Config;
@@ -17,28 +16,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-@SuppressWarnings("serial")
 @Component
 @Scope("session")
 public class UsersBean implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-	public Boolean signUpMode = false;
+	// autowired objects
 
 	@Autowired
 	private UsersDao usersDao;
 
-	private Users currentUser;
-	private String username;
-	private String password;
-	private String passwordRepeat;
-
-	private Users editUser;
-
-	private List<Users> usersList = null;
-
 	public void setUsersDao(UsersDao usersDao) {
 		this.usersDao = usersDao;
 	}
+
+	// variables
+
+	private Users currentUser;
 
 	public Users getCurrentUser() {
 		return currentUser;
@@ -47,6 +41,71 @@ public class UsersBean implements Serializable {
 	public void setCurrentUser(Users user) {
 		currentUser = user;
 	}
+
+	// methods
+
+	public Boolean signIn(String username, String password) {
+		try {
+			Users result = usersDao.loginUsers(username, password);
+			if (result != null && isLoginEnabledAccess(result)) {
+				this.currentUser = result;
+				return true;
+			} else {
+				this.currentUser = null;
+				return false;
+			}
+		} catch (Exception e) {
+			System.out.println("DEBUG: UsersBean error: " + e.getMessage());
+			return false;
+		}
+	}
+
+	public Boolean signUp(String username, String password) {
+		try {
+			Users result = usersDao.createSimpleUsers(1, 1, 1, 6, username, password);
+			if (result != null) {
+				this.currentUser = result;
+				return true;
+			} else return false;
+		} catch (Exception e) {
+			System.out.println("DEBUG: UsersBean error: " + e.getMessage());
+			return false;
+		}
+	}
+
+
+
+	// ------------------------------------------------------------
+	// ------------------------------------------------------------
+
+	private Boolean validateInputValues() {
+		if (!username.equals("") && !password.equals("")
+				&& (!signUpMode || (signUpMode && passwordRepeat.equals(password)))) {
+			return true;
+		}
+		if (username.equals(""))
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:", "Empty username"));
+		if (password.equals(""))
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:", "Empty password"));
+		if (!password.equals("") && !passwordRepeat.equals(password))
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:",
+							"Passwords is not equals"));
+		return false;
+	}
+	
+	public Boolean signUpMode = false;
+
+	private String username;
+	private String password;
+	private String passwordRepeat;
+
+	private Users editUser;
+
+	private List<Users> usersList = null;
 
 	public List<Users> getUsersList() throws Exception {
 		if (usersList != null)
@@ -129,64 +188,12 @@ public class UsersBean implements Serializable {
 		}
 	}
 
-	private Boolean validateInputValues() {
-		if (!username.equals("") && !password.equals("") && (!signUpMode || (signUpMode && passwordRepeat.equals(password)))) {
-			return true;
-		}
-		if (username.equals(""))
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:", "Empty username"));
-		if (password.equals(""))
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:", "Empty password"));
-		if (!password.equals("") && !passwordRepeat.equals(password))
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:", "Passwords is not equals"));
-		return false;
-	}
 
-	public void signIn() throws Exception {
-		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-		if (!validateInputValues())
-			return;
-		try {
-			Users result = usersDao.loginUsers(username, password);
-			System.out.println("DEBUG: UsersBean User: " + result);
-			if (result != null && isLoginEnabledAccess(result)) {
-				currentUser = result;
-				clearInputValues();
-				if (isSystemControlAccess()) {
-					context.redirect(context.getRequestContextPath() + MainBean.PAGE_CONSOLE);
-				} else {
-					context.redirect(context.getRequestContextPath() + MainBean.PAGE_WELCOME);
-				}
-			} else {
-				currentUser = null;
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:", "Incorrect username or password"));
-			}
-		} catch (Exception ex) {
-			System.err.println("DEBUG: UsersBean error: " + ex.getMessage());
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:", ex.getMessage()));
-		}
-	}
-
-	public void signUp() throws Exception {
-		if (!validateInputValues())
-			return;
-		try {
-			Users result = usersDao.createSimpleUsers(1, 1, 1, 6, username, password);
-			System.err.println("DEBUG: UsersBean User: " + result);
-			if (result != null) {
-				this.signIn();
-			} else {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:", "Incorrect username or password"));
-			}
-		} catch (Exception ex) {
-			System.err.println("DEBUG: UsersBean error: " + ex.getMessage());
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:", ex.getMessage()));
-		}
-	}
 
 	public void logout() throws Exception {
 		currentUser = null;
-		// ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+		// ExternalContext context =
+		// FacesContext.getCurrentInstance().getExternalContext();
 		// context.redirect(context.getRequestContextPath() + "/index.jsf");
 	}
 
@@ -256,7 +263,8 @@ public class UsersBean implements Serializable {
 	}
 
 	public Map<String, Integer> getUsersMap() throws Exception {
-		List<Users> users = editUser != null ? this.usersDao.getEntityListExclude(editUser.getId()) : this.usersDao.getEntityList();
+		List<Users> users = editUser != null ? this.usersDao.getEntityListExclude(editUser.getId())
+				: this.usersDao.getEntityList();
 		Map<String, Integer> result = new HashMap<String, Integer>();
 		for (Users u : users) {
 			result.put(u.getUsername(), u.getId());
@@ -268,7 +276,7 @@ public class UsersBean implements Serializable {
 		usersDao.updateEntity(editUser);
 		refreshUsersList();
 	}
-	
+
 	public void actionDelete() {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
@@ -280,6 +288,6 @@ public class UsersBean implements Serializable {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}		
+		}
 	}
 }

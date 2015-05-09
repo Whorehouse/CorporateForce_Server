@@ -8,6 +8,11 @@
 		<view-id value="/view/pages/login.jsf" />
 	</url-mapping>
 
+	<url-mapping id="main">
+		<pattern value="/main" />
+		<view-id value="/view/pages/main.jsf" />
+	</url-mapping>
+
 	<url-mapping id="logout">
 		<pattern value="/logout" />
 		<view-id value="/view/pages/logout.jsf" />
