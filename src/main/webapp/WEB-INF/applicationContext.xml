@@ -34,8 +34,6 @@
 				<value>org.corporateforce.server.model.Chatterresourceslink</value>
 				<value>org.corporateforce.server.model.Contacts</value>
 				<value>org.corporateforce.server.model.Holidays</value>
-				<value>org.corporateforce.server.model.Labels</value>
-				<value>org.corporateforce.server.model.Languages</value>
 				<value>org.corporateforce.server.model.Objectives</value>
 				<value>org.corporateforce.server.model.Offices</value>
 				<value>org.corporateforce.server.model.Profiles</value>
