@@ -58,7 +58,7 @@ public class UsersBean implements Serializable {
 
 	public Boolean signUp(String username, String password) {
 		try {
-			Users result = usersDao.createSimpleUsers(1, 1, 1, 6, username, password);
+			Users result = usersDao.createSimpleUsers(1, null, null, null, username, password);
 			if (result != null) {
 				this.currentUser = result;
 				return true;
@@ -73,25 +73,6 @@ public class UsersBean implements Serializable {
 
 	// ------------------------------------------------------------
 	// ------------------------------------------------------------
-
-	private Boolean validateInputValues() {
-		if (!username.equals("") && !password.equals("")
-				&& (!signUpMode || (signUpMode && passwordRepeat.equals(password)))) {
-			return true;
-		}
-		if (username.equals(""))
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:", "Empty username"));
-		if (password.equals(""))
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:", "Empty password"));
-		if (!password.equals("") && !passwordRepeat.equals(password))
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:",
-							"Passwords is not equals"));
-		return false;
-	}
 	
 	public Boolean signUpMode = false;
 

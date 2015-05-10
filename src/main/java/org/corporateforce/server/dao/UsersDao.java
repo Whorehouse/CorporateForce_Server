@@ -52,8 +52,8 @@ public class UsersDao extends AbstractDao<Users> {
 		return res;
 	}
 
-	public Users createSimpleUsers(int profile, int office, int role,
-			int manager, String username, String password) throws Exception {
+	public Users createSimpleUsers(Integer profile, Integer office, Integer role,
+			Integer manager, String username, String password) throws Exception {
 		Users res = null;		
 		Integer id = 0;
 		Session session = sessionFactory.openSession();
