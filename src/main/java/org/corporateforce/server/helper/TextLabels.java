@@ -12,7 +12,7 @@ public class TextLabels {
 		// text
 		labelsTemp.put("header_sign_in", "Вход в систему");
 		labelsTemp.put("header_sign_up", "Регистрация в системе");
-		//errors
+		// errors
 		labelsTemp.put("error_empty_fields", "Не все поля заполнены");
 		labelsTemp.put("error_username_or_password", "Неверное имя пользователя или пароль");
 		LABELS = Collections.unmodifiableMap(labelsTemp);

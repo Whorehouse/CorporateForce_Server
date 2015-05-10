@@ -95,6 +95,15 @@ public class LoginController extends AbstractController implements Serializable 
 		return this.loginMode == LOGIN_MODE_REGISTRATION ? false : true;
 	}
 
+	private void doRedirect() {
+		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+		try {
+			context.redirect(context.getRequestContextPath() + "/" + Constants.PAGE_MAIN);
+		} catch (Exception e) {
+			System.out.println("DEBUG: UsersBean error: " + e.getMessage());
+		}
+	}
+
 	public void acceptInputValues() {
 		this.errorMessage = null;
 		if ((username != null && password != null) &&
@@ -124,13 +133,7 @@ public class LoginController extends AbstractController implements Serializable 
 		this.errorMessage = LOGIN_ERROR_EMPTY_FIELDS;
 	}
 
-	private void doRedirect() {
-		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-		try {
-			context.redirect(context.getRequestContextPath() + "/" + Constants.PAGE_MAIN);
-		} catch (Exception e) {
-			System.out.println("DEBUG: UsersBean error: " + e.getMessage());
-		}
+	public void checkSignedInUser() {
+		if (usersBean.isUserSignedIn()) doRedirect();
 	}
-
 }

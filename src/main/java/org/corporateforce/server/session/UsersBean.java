@@ -34,15 +34,11 @@ public class UsersBean implements Serializable {
 
 	private Users currentUser;
 
-	public Users getCurrentUser() {
-		return currentUser;
-	}
-
-	public void setCurrentUser(Users user) {
-		currentUser = user;
-	}
-
 	// methods
+
+	public Boolean isUserSignedIn() {
+		return currentUser != null;
+	}
 
 	public Boolean signIn(String username, String password) {
 		try {
@@ -184,7 +180,7 @@ public class UsersBean implements Serializable {
 
 	public void updateUser() throws Exception {
 		if (currentUser != null) {
-			setCurrentUser(usersDao.getEntityById(currentUser.getId()));
+			//setCurrentUser(usersDao.getEntityById(currentUser.getId()));
 		}
 	}
 
