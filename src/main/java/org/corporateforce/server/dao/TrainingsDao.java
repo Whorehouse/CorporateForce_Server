@@ -18,7 +18,7 @@ public class TrainingsDao extends AbstractDao<Trainings> {
 		super(entityClass);
 	}
 	
-	public boolean isTutorialed(int id) {
+	public boolean isTutorialed(Integer id) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		boolean res = false;

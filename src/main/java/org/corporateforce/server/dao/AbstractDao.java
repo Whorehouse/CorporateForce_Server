@@ -50,7 +50,7 @@ public abstract class AbstractDao<T> {
 		return entity;
 	}
 
-	public T getEntityById(int id) throws Exception {
+	public T getEntityById(Integer id) throws Exception {
 		T entity = null;
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
@@ -82,7 +82,7 @@ public abstract class AbstractDao<T> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<T> getEntityListExclude(int id) throws Exception {
+	public List<T> getEntityListExclude(Integer id) throws Exception {
 		List<T> entityList = null;
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
@@ -98,7 +98,7 @@ public abstract class AbstractDao<T> {
 		return entityList;
 	}
 
-	public boolean deleteEntity(int id) throws Exception {
+	public boolean deleteEntity(Integer id) throws Exception {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		try {
@@ -113,7 +113,7 @@ public abstract class AbstractDao<T> {
 		return false;
 	}
 
-	public int countEntities() throws Exception {
+	public Integer countEntities() throws Exception {
 		Long res = (long) 0;
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();

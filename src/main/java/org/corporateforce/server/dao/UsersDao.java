@@ -24,7 +24,7 @@ public class UsersDao extends AbstractDao<Users> {
 
 	public Users loginUsers(String username, String password) throws Exception {
 		Users res = null;
-		int id = 0;
+		Integer id = 0;
 		System.out.println("--> DAO Users login begin!");
 		System.out.println("--> Open session");
 		Session session = sessionFactory.openSession();
@@ -78,9 +78,9 @@ public class UsersDao extends AbstractDao<Users> {
 		return res;
 	}
 
-	public Users createWithContactsUsers(int profile, int office, int role,
-			int manager, String username, String password, String firstname,
-			String lastname, int gender, Date date) throws Exception {
+	public Users createWithContactsUsers(Integer profile, Integer office, Integer role,
+			Integer manager, String username, String password, String firstname,
+			String lastname, Integer gender, Date date) throws Exception {
 		Users res = null;		
 		Integer id = 0;
 		Session session = sessionFactory.openSession();
@@ -157,7 +157,7 @@ public class UsersDao extends AbstractDao<Users> {
 		return res;
 	}
 
-	public void changeManagerUsers(int id, int manager) throws Exception {
+	public void changeManagerUsers(Integer id, Integer manager) throws Exception {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		try {			
@@ -171,7 +171,7 @@ public class UsersDao extends AbstractDao<Users> {
 		}
 	}
 
-	public void changeOfficeUsers(int id, int office) throws Exception {
+	public void changeOfficeUsers(Integer id, Integer office) throws Exception {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		try {			
@@ -186,7 +186,7 @@ public class UsersDao extends AbstractDao<Users> {
 
 	}
 
-	public void changeProfileUsers(int id, int profile) throws Exception {
+	public void changeProfileUsers(Integer id, Integer profile) throws Exception {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		try {			
@@ -201,7 +201,7 @@ public class UsersDao extends AbstractDao<Users> {
 
 	}
 
-	public void changeRoleUsers(int id, int role) throws Exception {
+	public void changeRoleUsers(Integer id, Integer role) throws Exception {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		try {			
@@ -217,7 +217,7 @@ public class UsersDao extends AbstractDao<Users> {
 	
 	//---------------Custom
 	
-	public boolean isManager(int id) throws Exception {
+	public boolean isManager(Integer id) throws Exception {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		boolean res = false;
@@ -238,7 +238,7 @@ public class UsersDao extends AbstractDao<Users> {
 		return res;
 	}
 	
-	public boolean isManager(int manager, int user) throws Exception {
+	public boolean isManager(Integer manager, Integer user) throws Exception {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		boolean res = false;
@@ -257,7 +257,7 @@ public class UsersDao extends AbstractDao<Users> {
 		return res;
 	}
 	
-	public List<Users> listByManager(int id) throws Exception {
+	public List<Users> listByManager(Integer id) throws Exception {
 		Users manager = getEntityById(id);
 		List<Users> res = null;
 		Session session = sessionFactory.openSession();
