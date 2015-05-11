@@ -1,41 +1,66 @@
 package org.corporateforce.server.config;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Properties;
+import java.util.TreeMap;
 
+import org.corporateforce.server.dao.SettingsDao;
+import org.corporateforce.server.model.Settings;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+@Component
+@Scope("session")
 public class Config {
+	
+	@Autowired
+	private static SettingsDao settingsDao;
 
-	public static Properties properties;
+	public void setSettingsDao(SettingsDao settingsDao) {
+		Config.settingsDao = settingsDao;
+	}
 
+	private static Map<String, String> properties;
+
+	public static String getProperty(String pname, String pdefault) {
+		if (properties.containsKey(pname)) {
+			return properties.get(pname);
+		} else {
+			return pdefault;
+		}
+	}
+	
 	static {
-		properties = new Properties();
-		InputStream inputStream = Config.class.getClassLoader()
-				.getResourceAsStream("/corporateforce.properties");
+		properties = new TreeMap<String, String>();
+		List<Settings> settings = null;
 		try {
-			properties.load(inputStream);
-		} catch (IOException e) {
+			settings = settingsDao.getEntityList();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		for (Settings s : settings) {
+			properties.put(s.getPname(), s.getPvalue());
 		}
 	}
 
 	public static boolean isEnabledModule(String module) {
 		return (properties.containsKey("enable" + module) && Integer
-				.valueOf(properties.getProperty("enable" + module, "0")) == 1) ? true
+				.valueOf(getProperty("enable" + module, "0")) == 1) ? true
 				: false;
 	}
 
 	public static String getUriModule(String module) {
-		return isEnabledModule(module) ? properties.getProperty("uri" + module,
+		return isEnabledModule(module) ? getProperty("uri" + module,
 				"http://localhost:8080/") : null;
 	}
 
 	public static Map<String, String> getModules() {
 		Map<String, String> res = new HashMap<String, String>();
 		if (properties.containsKey("clients")) {
-			String[] modules = properties.getProperty("clients").split(",");
+			String[] modules = getProperty("clients","").split(",");
 			for (String module : modules) {
 				String uri = getUriModule(module);
 				if (uri != null)
@@ -46,6 +71,6 @@ public class Config {
 	}
 
 	public static String getResourcesPath() {
-		return properties.getProperty("resourcesPath");
+		return getProperty("resourcesPath","C:\\uploadFiles\\");
 	}
 }
