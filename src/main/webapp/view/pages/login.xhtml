@@ -26,7 +26,7 @@
 						<h:form id="loginFormHead" prependId="false">
 							<h:outputLabel value="#{loginController.modeSignIn() ? loginController.getTextLabel('header_sign_in') : loginController.getTextLabel('header_sign_up')}" />
 							<h:commandButton id="btnModeToogle" type="button"
-								value="#{loginController.modeSignIn() ? 'Регистрация' : 'Вход'}"
+								value="#{loginController.modeSignIn() ? loginController.getTextLabel('button_toggle_sign_up') : loginController.getTextLabel('button_toggle_sign_in')}"
 								action="#{loginController.toogleMode()}"
 								styleClass="btn #{loginController.modeSignIn() ? 'btn-primary' : 'btn-success'} control-right">
 									<f:ajax render="loginPanel loginFormMain"/>
@@ -41,12 +41,12 @@
 						</div>
 						<h:panelGroup styleClass="login-panel-block login-panel-block-input" rendered="#{loginController.modeSignIn()}">
 							<span>
-								<b:inputText placeholder="Имя пользователя" fieldSize="sm" value="#{loginController.username}">
+								<b:inputText placeholder="#{loginController.getTextLabel('input_username')}" fieldSize="sm" value="#{loginController.username}">
 									<f:facet name="prepend">
 										<b:iconAwesome name="user" id="user"/>
 									</f:facet>
 								</b:inputText>
-								<b:inputText placeholder="Пароль" fieldSize="sm" type="password" value="#{loginController.password}">
+								<b:inputText placeholder="#{loginController.getTextLabel('input_password')}" fieldSize="sm" type="password" value="#{loginController.password}">
 									<f:facet name="prepend">
 										<b:iconAwesome name="key" id="password"/>
 									</f:facet>
@@ -55,14 +55,14 @@
 						</h:panelGroup>
 						<h:panelGroup styleClass="login-panel-block login-panel-block-input" rendered="#{!loginController.modeSignIn()}">
 							<span>
-								<b:inputText placeholder="Имя пользователя" fieldSize="sm" value="#{loginController.username}"/>
-								<b:inputText placeholder="Пароль" fieldSize="sm" type="password" value="#{loginController.password}"/>
-								<b:inputText placeholder="Подтверждение пароля" fieldSize="sm" type="password" value="#{loginController.passwordRepeat}"/>
+								<b:inputText placeholder="#{loginController.getTextLabel('input_username')}" fieldSize="sm" value="#{loginController.username}"/>
+								<b:inputText placeholder="#{loginController.getTextLabel('input_password')}" fieldSize="sm" type="password" value="#{loginController.password}"/>
+								<b:inputText placeholder="#{loginController.getTextLabel('input_password_repeat')}" fieldSize="sm" type="password" value="#{loginController.passwordRepeat}"/>
 							</span>
 						</h:panelGroup>
 						<h:panelGrid class="login-panel-table control-content-center" columns="1">
 							<h:commandButton id="btnSignIn"
-								value="#{loginController.modeSignIn() ? 'Войти' : 'Зарегистрироваться'}"
+								value="#{loginController.modeSignIn() ? loginController.getTextLabel('button_submit_sign_in') : loginController.getTextLabel('button_submit_sign_up')}"
 								styleClass="btn #{loginController.modeSignIn() ? 'btn-success' : 'btn-primary'}"
 								action="#{loginController.acceptInputValues()}">
 									<f:ajax render="loginPanel loginFormHead" onevent="waitStatus" execute="loginFormMain"/>
@@ -73,7 +73,7 @@
 						<h:panelGroup rendered="#{loginController.modeSignIn()}" class="login-panel-block control-content-center login-panel-block-buttons">
 							<button id="btnForgotPassword" class="btn btn-link"
 								data-target="#passwordRestoreDialog" data-toggle="modal"
-								onclick="return false;">Забыли пароль?</button>
+								onclick="return false;">#{loginController.getTextLabel('button_forgot_password')}</button>
 						</h:panelGroup>
 					</h:form>
 					<div class="login-panel-block login-panel-block-logo control-content-center">

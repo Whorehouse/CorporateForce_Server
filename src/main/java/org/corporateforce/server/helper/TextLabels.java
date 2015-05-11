@@ -12,9 +12,19 @@ public class TextLabels {
 		// text
 		labelsTemp.put("header_sign_in", "Вход в систему");
 		labelsTemp.put("header_sign_up", "Регистрация в системе");
+		labelsTemp.put("button_toggle_sign_in", "Вход");
+		labelsTemp.put("button_toggle_sign_up", "Регистрация");
+		labelsTemp.put("button_submit_sign_in", "Войти");
+		labelsTemp.put("button_submit_sign_up", "Зарегистрироваться");
+		labelsTemp.put("button_forgot_password", "Забыли пароль?");
+		labelsTemp.put("input_username", "Имя пользователя");
+		labelsTemp.put("input_password", "Пароль");
+		labelsTemp.put("input_password_repeat", "Подтверждение пароля");
 		// errors
 		labelsTemp.put("error_empty_fields", "Не все поля заполнены");
 		labelsTemp.put("error_username_or_password", "Неверное имя пользователя или пароль");
+		labelsTemp.put("error_username_exists", "Пользователь с таким именем уже существует");
+		labelsTemp.put("error_passwords_dont_match", "Пароли не совпадают");
 		LABELS = Collections.unmodifiableMap(labelsTemp);
 	}
 
