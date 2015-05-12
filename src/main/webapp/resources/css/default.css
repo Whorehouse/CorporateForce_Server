@@ -17,6 +17,10 @@ body {
 	overflow: auto;
 }
 
+.control-block {
+	display: block;
+}
+
 .control-right {
 	float: right;
 }
@@ -186,4 +190,27 @@ body {
 	display: table-cell;
 	vertical-align: middle;
 	text-align: center;
+}
+
+.header-block-logo {
+	display: table;
+	height: 50px;
+	left: 15px;
+	top: 0px;
+	position: relative;
+	z-index: 999999;
+}
+
+.header-block-logo span {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+@media (min-width: 768px) {
+
+	.container>.navbar-header, .container-fluid>.navbar-header,
+	.container>.navbar-collapse, .container-fluid>.navbar-collapse {
+		margin-left: 200px;
+	}
+
 }
