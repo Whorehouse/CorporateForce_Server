@@ -1,5 +1,20 @@
 @CHARSET "UTF-8";
 
+/* override */
+
+@media (min-width: 768px) {
+
+	.container>.navbar-header, .container-fluid>.navbar-header,
+	.container>.navbar-collapse, .container-fluid>.navbar-collapse {
+		margin-left: 200px;
+	}
+
+}
+
+.navbar {
+	box-shadow: 0 0 5px;
+}
+
 /* common styles */
 
 html, body {
@@ -204,13 +219,4 @@ body {
 .header-block-logo span {
 	display: table-cell;
 	vertical-align: middle;
-}
-
-@media (min-width: 768px) {
-
-	.container>.navbar-header, .container-fluid>.navbar-header,
-	.container>.navbar-collapse, .container-fluid>.navbar-collapse {
-		margin-left: 200px;
-	}
-
 }
