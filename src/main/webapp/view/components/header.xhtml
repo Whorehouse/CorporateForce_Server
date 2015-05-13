@@ -9,16 +9,28 @@
 	<h:form>
 		<div class="control-block header-block-logo">
 			<span>
-				<h:graphicImage value="/resources/images/img_logo_small.png" />
+				<h:graphicImage value="/resources/images/img_logo_small.png"/>
 			</span>
 		</div>
 		<b:navBar inverse="true" fixed="top" fluid="true">
 			<b:navbarLinks>
-				<b:navLink value="Администрирование" href="#"/>
+				<b:navLink value="Администрирование" href="#" />
 				<b:navLink value="Люди" href="#"/>
 				<b:navLink value="Проекты" href="#"/>
 				<b:navLink value="Тренинги" href="#"/>
 			</b:navbarLinks>
+
+			<div class="control-block control-right header-block-user">
+				<span>
+					<h:form>
+							<h:outputLabel value="Username" styleClass="header-text-user"/>
+							<h:commandButton type="button" value="Выход"
+								styleClass="btn btn-sm btn-primary">
+								<f:ajax render="loginPanel loginFormMain" />
+							</h:commandButton>
+					</h:form>
+				</span>
+			</div>
 		</b:navBar>
 	</h:form>
 </ui:composition>
