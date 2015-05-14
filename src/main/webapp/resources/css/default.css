@@ -212,7 +212,7 @@ body {
 	height: 50px;
 	left: 15px;
 	top: 0px;
-	position: relative;
+	position: fixed;
 	z-index: 999999;
 }
 
