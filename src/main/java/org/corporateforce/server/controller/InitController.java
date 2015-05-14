@@ -2,10 +2,6 @@ package org.corporateforce.server.controller;
 
 import java.io.Serializable;
 
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-
-import org.corporateforce.server.helper.Constants;
 import org.corporateforce.server.session.UsersBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;

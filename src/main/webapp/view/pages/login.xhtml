@@ -9,7 +9,7 @@
 	xmlns:b="http://bootsfaces.net/ui"
 	template="/view/templates/common.xhtml">
 	<ui:define name="body">
-		<h:inputHidden value="#{loginController.checkSignedInUser()}"/>
+		<h:inputHidden value="#{loginController.initController()}"/>
 
 		<h:outputScript library="js" name="login-scripts.js" target="head" />
 
