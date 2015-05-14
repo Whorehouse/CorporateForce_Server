@@ -5,10 +5,10 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:b="http://bootsfaces.net/ui">
-	<b:modal id="helpDialog" title="Помощь">
-				Введите имя пользователя и пароль.
-				<f:facet name="footer">
-			<b:button value="Закрыть" look="primary" dismiss="modal" onclick="return false;" />
+	<b:modal id="helpDialog" title="#{loginController.getTextLabel('title_help')}">
+		#{loginController.getTextLabel('textarea_login_help')}
+		<f:facet name="footer">
+			<b:button value="#{loginController.getTextLabel('button_close')}" look="primary" dismiss="modal" onclick="return false;" />
 		</f:facet>
 	</b:modal>
 </ui:composition>

@@ -14,7 +14,7 @@
 		</div>
 		<b:navBar inverse="true" fixed="top" fluid="true">
 			<b:navbarLinks>
-				<b:navLink value="Администрирование" href="#" active="true" />
+				<b:navLink value="Администрирование" href="/" active="true" />
 				<b:navLink value="Люди" href="#"/>
 				<b:navLink value="Проекты" href="#"/>
 				<b:navLink value="Тренинги" href="#"/>
@@ -22,12 +22,16 @@
 
 			<div class="control-block control-right header-block-user">
 				<span>
-					<h:form>
-							<h:outputLabel value="Username" styleClass="header-text-user"/>
-							<h:commandButton type="button" value="Выход"
-								styleClass="btn btn-sm btn-primary">
-								<f:ajax render="loginPanel loginFormMain" />
+					<h:form id="headerUserForm">
+						<h:panelGrid columns="2">
+							<h:outputLabel value="#{headerController.userName}" styleClass="header-text-user"/>
+							<h:commandButton type="button"
+								value="#{headerController.getTextLabel('button_sign_out')}"
+								styleClass="btn btn-sm btn-primary"
+								action="#{headerController.signOut()}">
+									<f:ajax render="" execute="headerUserForm"/>
 							</h:commandButton>
+						</h:panelGrid>
 					</h:form>
 				</span>
 			</div>

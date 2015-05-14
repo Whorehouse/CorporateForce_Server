@@ -17,9 +17,16 @@ public class TextLabels {
 		labelsTemp.put("button_submit_sign_in", "Войти");
 		labelsTemp.put("button_submit_sign_up", "Зарегистрироваться");
 		labelsTemp.put("button_forgot_password", "Забыли пароль?");
+		labelsTemp.put("button_close", "Закрыть");
+		labelsTemp.put("button_sign_out", "Выйти");
 		labelsTemp.put("input_username", "Имя пользователя");
 		labelsTemp.put("input_password", "Пароль");
 		labelsTemp.put("input_password_repeat", "Подтверждение пароля");
+		labelsTemp.put("title_help", "Помощь");
+		labelsTemp.put("title_password_restore", "Восстановление пароля");
+		// text areas
+		labelsTemp.put("textarea_login_help", "Введите имя пользователя и пароль.");
+		labelsTemp.put("textarea_login_password_restore", "Для восстановления пароля обратитесь к администратору.");
 		// errors
 		labelsTemp.put("error_empty_fields", "Не все поля заполнены");
 		labelsTemp.put("error_username_or_password", "Неверное имя пользователя или пароль");

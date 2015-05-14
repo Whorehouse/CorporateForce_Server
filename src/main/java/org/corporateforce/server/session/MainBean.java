@@ -43,12 +43,12 @@ public class MainBean implements Serializable {
 	}
 
 	public void actionLogin() throws Exception {
-		usersBean.setSignUpMode(false);
+		//usersBean.setSignUpMode(false);
 		this.redirect(PAGE_LOGIN);
 	}
 
 	public void actionSignUp() throws Exception {
-		usersBean.setSignUpMode(true);
+	//	usersBean.setSignUpMode(true);
 		this.redirect(PAGE_LOGIN);
 	}
 

@@ -1,16 +1,12 @@
 package org.corporateforce.server.session;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-
-import org.corporateforce.server.config.Config;
 import org.corporateforce.server.dao.UsersDao;
+import org.corporateforce.server.helper.Constants;
 import org.corporateforce.server.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -59,80 +55,43 @@ public class UsersBean implements Serializable {
 	public Boolean signUp(String username, String password) {
 		try {
 			Users result = usersDao.createSimpleUsers(1, null, null, null, username, password);
-			if (result != null) {
-				this.currentUser = result;
-				return true;
-			} else return false;
+			if (result == null)
+				return false;
+			this.currentUser = result;
+			return true;
 		} catch (Exception e) {
 			System.out.println("DEBUG: UsersBean error: " + e.getMessage());
 			return false;
 		}
 	}
 
+	public void signOut() {
+		this.currentUser = null;
+	}
 
-
-	// ------------------------------------------------------------
-	// ------------------------------------------------------------
-	
-	public Boolean signUpMode = false;
-
-	private String username;
-	private String password;
-	private String passwordRepeat;
-
-	private Users editUser;
-
-	private List<Users> usersList = null;
+	public String getUserPictureURL() {
+		return isExistUserPicture() && isUserSignedIn() ? Constants.PATH_USER_PICTURES
+				+ currentUser.getContacts().getAvatars().getId() : Constants.IMAGE_NO_USER_PICTURE;
+	}
 
 	public List<Users> getUsersList() throws Exception {
-		if (usersList != null)
-			return usersList;
-		usersList = usersDao.getEntityList();
-		return usersList;
+		return this.usersDao.getEntityList();
 	}
 
-	public void refreshUsersList() throws Exception {
-		usersList = usersDao.getEntityList();
+	public Map<String, Integer> getUsersMap(Integer excludeId) throws Exception {
+		List<Users> users = excludeId != null ? this.usersDao.getEntityListExclude(excludeId)
+				: this.usersDao.getEntityList();
+		Map<String, Integer> result = new HashMap<String, Integer>();
+		for (Users u : users) {
+			result.put(u.getUsername(), u.getId());
+		}
+		return result;
 	}
 
-	public String getUsername() {
-		System.out.println("DEBUG: username: " + username);
-		return username;
-	}
-
-	public void setUsername(String value) {
-		username = value;
-	}
-
-	public String getPassword() {
-		System.out.println("DEBUG: password: " + password);
-		return password;
-	}
-
-	public void setPassword(String value) {
-		password = value;
-	}
-
-	public String getPasswordRepeat() {
-		System.out.println("DEBUG: passwordRepeat: " + passwordRepeat);
-		return passwordRepeat;
-	}
-
-	public void setPasswordRepeat(String value) {
-		passwordRepeat = value;
-	}
-
-	public void setSignUpMode(Boolean value) {
-		signUpMode = value;
-		clearInputValues();
-	}
-
-	public Boolean getSignUpMode() {
-		return signUpMode;
-	}
-
-	public boolean isSignedIn() {
-		return currentUser != null;
+	public String getCurrentUserFullName() {
+		if (this.currentUser == null) return null;
+		return isExistContact() ? this.currentUser.getContacts().getFirstname() + " "
+				+ this.currentUser.getContacts().getLastname() : this.currentUser.getUsername();
 	}
 
 	public boolean isLoginEnabledAccess() {
@@ -159,112 +118,40 @@ public class UsersBean implements Serializable {
 		return u != null && u.getProfiles() != null && u.getProfiles().isSystemControl();
 	}
 
-	public void updateUser() throws Exception {
-		if (currentUser != null) {
-			//setCurrentUser(usersDao.getEntityById(currentUser.getId()));
-		}
+	public boolean isExistContact() {
+		return isExistContact(currentUser);
 	}
 
-
-
-	public void logout() throws Exception {
-		currentUser = null;
-		// ExternalContext context =
-		// FacesContext.getCurrentInstance().getExternalContext();
-		// context.redirect(context.getRequestContextPath() + "/index.jsf");
-	}
-
-	public List<String> outerModulesURLs() {
-		return new ArrayList<String>(Config.getModules().values());
-	}
-
-	public void clearInputValues() {
-		username = "";
-		password = "";
-		passwordRepeat = "";
-	}
-
-	public boolean isExistContacts() {
-		return isExistContacts(currentUser);
-	}
-
-	public boolean isExistAvatar() {
-		return isExistAvatar(currentUser);
-	}
-
-	public boolean isExistContacts(Users u) {
+	public boolean isExistContact(Users u) {
 		return (u != null && u.getContacts() != null) ? true : false;
 	}
 
-	public boolean isExistAvatar(Users u) {
-		return (isExistContacts(u) && u.getContacts().getAvatars() != null) ? true : false;
+	public boolean isExistUserPicture() {
+		return isExistUserPicture(currentUser);
 	}
 
-	public String getAvatar() {
-		if (isExistAvatar()) {
-			return "Avatars/showAvatar/" + currentUser.getContacts().getAvatars().getId();
-		} else {
-			return "resources/images/img_no_photo.png";
-		}
+	public boolean isExistUserPicture(Users u) {
+		return (isExistContact(u) && u.getContacts().getAvatars() != null) ? true : false;
 	}
 
-	/**
-	 * @return the editUser
+	/*
+	 * public void actionEdit() { FacesContext fc =
+	 * FacesContext.getCurrentInstance(); Map<String, String> params =
+	 * fc.getExternalContext().getRequestParameterMap(); String id =
+	 * params.get("editUserId"); try { //
+	 * this.setEditUser(usersDao.getEntityById(Integer.parseInt(id))); } catch
+	 * (NumberFormatException e) { e.printStackTrace(); } catch (Exception e) {
+	 * e.printStackTrace(); } }
+	 * 
+	 * public void saveEditUser() throws Exception { //
+	 * usersDao.updateEntity(editUser); // refreshUsersList(); }
+	 * 
+	 * public void actionDelete() { FacesContext fc =
+	 * FacesContext.getCurrentInstance(); Map<String, String> params =
+	 * fc.getExternalContext().getRequestParameterMap(); String id =
+	 * params.get("deleteUserId"); try {
+	 * usersDao.deleteEntity(Integer.parseInt(id)); // refreshUsersList(); }
+	 * catch (NumberFormatException e) { e.printStackTrace(); } catch (Exception
+	 * e) { e.printStackTrace(); } }
 	 */
-	public Users getEditUser() {
-		return editUser;
-	}
-
-	/**
-	 * @param editUser
-	 *            the editUser to set
-	 */
-	public void setEditUser(Users editUser) {
-		System.out.println("DEBUG: editUser: " + editUser);
-		this.editUser = editUser;
-		if (this.editUser.getUsers() == null)
-			this.editUser.setUsers(new Users());
-	}
-
-	public void actionEdit() {
-		FacesContext fc = FacesContext.getCurrentInstance();
-		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-		String id = params.get("editUserId");
-		try {
-			this.setEditUser(usersDao.getEntityById(Integer.parseInt(id)));
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public Map<String, Integer> getUsersMap() throws Exception {
-		List<Users> users = editUser != null ? this.usersDao.getEntityListExclude(editUser.getId())
-				: this.usersDao.getEntityList();
-		Map<String, Integer> result = new HashMap<String, Integer>();
-		for (Users u : users) {
-			result.put(u.getUsername(), u.getId());
-		}
-		return result;
-	}
-
-	public void saveEditUser() throws Exception {
-		usersDao.updateEntity(editUser);
-		refreshUsersList();
-	}
-
-	public void actionDelete() {
-		FacesContext fc = FacesContext.getCurrentInstance();
-		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-		String id = params.get("deleteUserId");
-		try {
-			usersDao.deleteEntity(Integer.parseInt(id));
-			refreshUsersList();
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 }
