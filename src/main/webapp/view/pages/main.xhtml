@@ -18,6 +18,24 @@
 			<h:panelGroup rendered="#{mainController.sidebarLinkNotSelected()}">
 				<ui:include src="/view/components/main/start.xhtml"/>
 			</h:panelGroup>
+			<h:panelGroup rendered="#{mainController.sidebarLinkUsers()}">
+				<ui:include src="/view/components/main/users.xhtml"/>
+			</h:panelGroup>
+			<h:panelGroup rendered="#{mainController.sidebarLinkProfiles()}">
+				<ui:include src="/view/components/main/profiles.xhtml"/>
+			</h:panelGroup>
+			<h:panelGroup rendered="#{mainController.sidebarLinkRoles()}">
+				<ui:include src="/view/components/main/roles.xhtml"/>
+			</h:panelGroup>
+			<h:panelGroup rendered="#{mainController.sidebarLinkOffices()}">
+				<ui:include src="/view/components/main/offices.xhtml"/>
+			</h:panelGroup>
+			<h:panelGroup rendered="#{mainController.sidebarLinkSettings()}">
+				<ui:include src="/view/components/main/settings.xhtml"/>
+			</h:panelGroup>
+			<h:panelGroup rendered="#{mainController.sidebarLinkSupport()}">
+				<ui:include src="/view/components/main/support.xhtml"/>
+			</h:panelGroup>
 		</h:panelGroup>
 
 	</ui:define>
