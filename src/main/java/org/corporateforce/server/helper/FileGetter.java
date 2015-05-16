@@ -7,7 +7,6 @@ import java.io.IOException;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
-import org.corporateforce.server.config.Config;
 import org.corporateforce.server.model.Avatars;
 import org.corporateforce.server.model.Resources;
 import org.corporateforce.server.model.Users;

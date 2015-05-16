@@ -30,6 +30,13 @@ public class ProfilesBean implements Serializable {
 	public void setEditProfile(Profiles editProfile) {
 		this.editProfile = editProfile;
 	}
+	
+	@Autowired
+	private UsersBean usersBean;
+
+	public void setUsersBean(UsersBean usersBean) {
+		this.usersBean = usersBean;
+	}
 
 	private List<Profiles> profilesList = null;
 	
@@ -79,17 +86,18 @@ public class ProfilesBean implements Serializable {
 		refreshProfilesList();
 	}
 	
-	public void actionDelete() {
+	public Boolean actionDelete() {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-		String id = params.get("deleteProfileId");
 		try {
-			profilesDao.deleteEntity(Integer.parseInt(id));
+			Integer id = Integer.parseInt(params.get("deleteProfileId"));
+			if (id==usersBean.getCurrentUser().getProfiles().getId()) return false;
+			profilesDao.deleteEntity(id);
 			refreshProfilesList();
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}		
 	}
 }

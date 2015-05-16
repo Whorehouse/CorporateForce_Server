@@ -33,6 +33,13 @@ public class OfficesBean implements Serializable {
 		this.officesDao = officesDao;
 	}
 	
+	@Autowired
+	private UsersBean usersBean;
+
+	public void setUsersBean(UsersBean usersBean) {
+		this.usersBean = usersBean;
+	}
+	
 	public Map<String, Integer> getOfficesMap() throws Exception {
 		List<Offices> offices = this.officesDao.getEntityList();
 		Map<String, Integer> result = new HashMap<String, Integer>();
@@ -79,17 +86,18 @@ public class OfficesBean implements Serializable {
 		refreshOfficesList();
 	}
 	
-	public void actionDelete() {
+	public Boolean actionDelete() {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-		String id = params.get("deleteOfficeId");
 		try {
-			officesDao.deleteEntity(Integer.parseInt(id));
+			Integer id = Integer.parseInt(params.get("deleteOfficeId"));
+			if (id==usersBean.getCurrentUser().getOffices().getId()) return false;
+			officesDao.deleteEntity(id);
 			refreshOfficesList();
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}		
 	}
 }
