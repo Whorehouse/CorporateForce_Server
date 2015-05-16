@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.apache.commons.io.FilenameUtils;
-import org.corporateforce.server.config.Config;
 import org.corporateforce.server.model.Users;
 import org.springframework.web.multipart.MultipartFile;
 

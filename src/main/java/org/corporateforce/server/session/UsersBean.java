@@ -34,6 +34,10 @@ public class UsersBean implements Serializable {
 
 	// methods
 
+	public Users getCurrentUser() {
+		return currentUser;
+	}
+
 	public Boolean isUserSignedIn() {
 		return currentUser != null;
 	}
@@ -67,8 +71,14 @@ public class UsersBean implements Serializable {
 		}
 	}
 
-	public void signOut() {
-		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+	public Boolean signOut() {
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+			return true;
+		} catch (Exception e) {
+			System.out.println("DEBUG: UsersBean error: " + e.getMessage());
+			return false;
+		}
 	}
 
 	public String getUserPictureURL() {
@@ -136,7 +146,7 @@ public class UsersBean implements Serializable {
 		return (isExistContact(u) && u.getContacts().getAvatars() != null) ? true : false;
 	}
 	
-	public boolean saveOrUpdate(Users u) {
+	public boolean update(Users u) {
 		try {
 			usersDao.updateUsers(u.getId(), u.getProfiles().getId(), u.getOffices().getId(), 
 					u.getRoles().getId(), u.getUsers().getId(), u.getUsername());
@@ -147,8 +157,13 @@ public class UsersBean implements Serializable {
 		}
 	}
 	
-	public boolean remove(Users u) {
+	public Boolean update() {
+		return (currentUser!=null && update(currentUser));
+	}
+	
+	public Boolean remove(Users u) {
 		try {
+			if (u.getId()==currentUser.getId()) return false;
 			usersDao.deleteEntity(u.getId());
 			return true;
 		} catch(Exception e) {
@@ -156,42 +171,4 @@ public class UsersBean implements Serializable {
 			return false;
 		}
 	}
-	
-	public boolean saveOrUpdate() {
-		if (currentUser!=null && saveOrUpdate(currentUser)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public boolean remove() {
-		if (currentUser!=null && remove(currentUser)) {
-			signOut();
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	/*
-	 * public void actionEdit() { FacesContext fc =
-	 * FacesContext.getCurrentInstance(); Map<String, String> params =
-	 * fc.getExternalContext().getRequestParameterMap(); String id =
-	 * params.get("editUserId"); try { //
-	 * this.setEditUser(usersDao.getEntityById(Integer.parseInt(id))); } catch
-	 * (NumberFormatException e) { e.printStackTrace(); } catch (Exception e) {
-	 * e.printStackTrace(); } }
-	 * 
-	 * public void saveEditUser() throws Exception { //
-	 * usersDao.updateEntity(editUser); // refreshUsersList(); }
-	 * 
-	 * public void actionDelete() { FacesContext fc =
-	 * FacesContext.getCurrentInstance(); Map<String, String> params =
-	 * fc.getExternalContext().getRequestParameterMap(); String id =
-	 * params.get("deleteUserId"); try {
-	 * usersDao.deleteEntity(Integer.parseInt(id)); // refreshUsersList(); }
-	 * catch (NumberFormatException e) { e.printStackTrace(); } catch (Exception
-	 * e) { e.printStackTrace(); } }
-	 */
 }

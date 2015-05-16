@@ -1,4 +1,4 @@
-package org.corporateforce.server.config;
+package org.corporateforce.server.helper;
 
 import java.util.HashMap;
 import java.util.List;
