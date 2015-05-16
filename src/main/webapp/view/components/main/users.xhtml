@@ -5,16 +5,19 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:b="http://bootsfaces.net/ui">
-	<h:panelGrid columns="2" styleClass="main-header">
+
+	<h:panelGrid columns="3" styleClass="main-header">
 		<b:iconAwesome name="users" size="3x"/>
 		<h:outputLabel value="Пользователи" styleClass="main-header-text" />
+		<button class="btn btn-default"
+				data-target="#userEditDialog" data-toggle="modal"
+				onclick="return false;">Добавить</button>
 	</h:panelGrid>
 	<hr/>
 
 	<b:panel styleClass="panel-inline-table">
 		<h:dataTable id="usersTable" styleClass="table main-datatable"
-						value="#{usersController.usersList}" var="user"
-						rows="15" >
+						value="#{usersController.usersList}" var="user" >
 			<h:column>
 				<h:selectBooleanCheckbox />
 			</h:column>

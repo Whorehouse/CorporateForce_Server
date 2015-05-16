@@ -11,6 +11,9 @@
 	<ui:define name="body">
 		<h:inputHidden value="#{mainController.initController()}"/>
 
+		<!-- Dialogs -->
+		<ui:include src="/view/components/main/userEditDialog.xhtml" />
+
 		<!-- Content -->
 		<ui:include src="/view/components/main/sidebar.xhtml" />
 		<h:panelGroup class="main-content" id="mainContent">
