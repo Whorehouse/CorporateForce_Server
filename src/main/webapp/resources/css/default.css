@@ -190,7 +190,7 @@ body {
 	top: 0px;
 	left: 0px;
 	width: 100%;
-	height: inherit;
+	height: 90%;
 	position: absolute;
 	z-index: 99999;
 	display: none;
@@ -277,13 +277,28 @@ body {
 }
 
 .main-sidebar a:HOVER {
-	background-color: #428bca;
-	color: #fff;
+	background-color: #DDDDDD;
+	color: #235698;
 }
 
 .main-sidebar a:FOCUS {
 	background-color: #a0a0a0;
 	color: #fff;
+}
+
+.main-sidebar .main-sidebar-selected {
+	background-color: #428bca;
+	color: #fff !important;
+}
+
+.main-sidebar .main-sidebar-selected:FOCUS {
+	background-color: #428bca;
+	color: #fff !important;
+}
+
+.main-sidebar .main-sidebar-selected:HOVER {
+	background-color: #659FD0;
+	color: #fff !important;
 }
 
 .main-sidebar-section {

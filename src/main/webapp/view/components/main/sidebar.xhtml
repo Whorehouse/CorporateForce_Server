@@ -5,17 +5,31 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:b="http://bootsfaces.net/ui">
-	<h:form styleClass="main-sidebar">
+	<h:form styleClass="main-sidebar" id="sidebarForm">
 		<h:panelGrid columns="1">
-			<div class="main-sidebar-section">
-				<h:commandLink value="Пользователи" />
-				<h:commandLink value="Профили" />
-				<h:commandLink value="Роли" />
-				<h:commandLink value="Офисы" />
+			<div class="main-sidebar-section" id="sidebarPanel">
+				<h:commandLink id="sidebarLinkUsers"
+					value="Пользователи" styleClass="#{mainController.sidebarLinkUsers() ? 'main-sidebar-selected' : '' }"
+					action="#{mainController.sidebarSelectLinkUsers()}" >
+					<f:ajax render="sidebarForm mainContent" onevent="waitStatus" execute="sidebarForm"/>
+				</h:commandLink>
+				<h:commandLink value="Профили" >
+					<f:ajax render="mainContent" onevent="waitStatus" execute="sidebarForm"/>
+				</h:commandLink>
+				<h:commandLink value="Роли">
+					<f:ajax render="mainContent" onevent="waitStatus" execute="sidebarForm"/>
+				</h:commandLink>
+				<h:commandLink value="Офисы" >
+					<f:ajax render="mainContent" onevent="waitStatus" execute="sidebarForm"/>
+				</h:commandLink>
 			</div>
 			<div class="main-sidebar-section">
-				<h:commandLink value="Настройки" />
-				<h:commandLink value="Справка и поддержка" />
+				<h:commandLink value="Настройки" >
+					<f:ajax render="mainContent" onevent="waitStatus" execute="sidebarForm"/>
+				</h:commandLink>
+				<h:commandLink value="Справка и поддержка" >
+					<f:ajax render="mainContent" onevent="waitStatus" execute="sidebarForm"/>
+				</h:commandLink>
 			</div>
 		</h:panelGrid>
 	</h:form>

@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.context.FacesContext;
+
 import org.corporateforce.server.dao.UsersDao;
 import org.corporateforce.server.helper.Constants;
 import org.corporateforce.server.model.Users;
@@ -66,7 +68,7 @@ public class UsersBean implements Serializable {
 	}
 
 	public void signOut() {
-		this.currentUser = null;
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 	}
 
 	public String getUserPictureURL() {

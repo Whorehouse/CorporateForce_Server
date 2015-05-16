@@ -9,13 +9,16 @@
 	xmlns:b="http://bootsfaces.net/ui"
 	template="/view/templates/default.xhtml">
 	<ui:define name="body">
-		<h:inputHidden value="#{loginController.initController()}"/>
+		<h:inputHidden value="#{mainController.initController()}"/>
 
 		<!-- Content -->
 		<ui:include src="/view/components/main/sidebar.xhtml" />
-		<div class="main-content">
-			<ui:include src="/view/components/main/start.xhtml" />
-		</div>
+		<h:panelGroup class="main-content" id="mainContent">
+			<ui:include src="/view/components/wait.xhtml" />
+			<h:panelGroup rendered="#{mainController.sidebarLinkNotSelected()}">
+				<ui:include src="/view/components/main/start.xhtml"/>
+			</h:panelGroup>
+		</h:panelGroup>
 
 	</ui:define>
 </ui:composition>
