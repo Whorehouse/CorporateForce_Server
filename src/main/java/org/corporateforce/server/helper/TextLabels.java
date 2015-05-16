@@ -27,6 +27,7 @@ public class TextLabels {
 		// text areas
 		labelsTemp.put("textarea_login_help", "Введите имя пользователя и пароль.");
 		labelsTemp.put("textarea_login_password_restore", "Для восстановления пароля обратитесь к администратору.");
+		labelsTemp.put("textarea_main_start_message", "Вы находитесь в режиме администрирования системы");
 		// errors
 		labelsTemp.put("error_empty_fields", "Не все поля заполнены");
 		labelsTemp.put("error_username_or_password", "Неверное имя пользователя или пароль");

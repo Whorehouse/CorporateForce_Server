@@ -289,3 +289,35 @@ body {
 .main-sidebar-section {
 	padding-top: 20px;
 }
+
+.main-content {
+	bottom: 0px;
+	overflow-x: auto;
+	overflow-y: auto;
+	position: fixed;
+	top: 50px;
+	left: 200px;
+	display: block;
+	margin: 0px;
+	padding: 10px;
+	right: 0px;
+}
+
+.main-start-content {
+	width: 100%;
+	height: 90%;
+	display: table;
+}
+
+.main-start-content span {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.main-start-content label {
+	display: block;
+	padding: 5px;
+	padding-top: 15px;
+	color: #444444;
+}

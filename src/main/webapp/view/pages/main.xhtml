@@ -11,56 +11,11 @@
 	<ui:define name="body">
 		<h:inputHidden value="#{loginController.initController()}"/>
 
-	<style type="text/css">
-
-		.main {
-			padding: 20px;
-		}
-		
-		@media ( min-width : 768px) {
-			.main {
-				padding-left: 40px;
-				padding-right: 40px;
-			}
-		}
-		
-		.main .page-header {
-			margin-top: 0;
-		}
-		
-		.placeholders {
-			margin-bottom: 30px;
-			text-align: center;
-		}
-		
-		.placeholders h4 {
-			margin-bottom: 0;
-		}
-		
-		.placeholder {
-			margin-bottom: 20px;
-		}
-		
-		.placeholder img {
-			border-radius: 50%;
-			display: inline-block;
-		}
-		
-
-
-	</style>
-
 		<!-- Content -->
-		<b:container fluid="true">
-			<b:row>
-				<ui:include src="/view/components/main/sidebar.xhtml" />
-				<b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
-					<b:row styleClass="placeholders">
-
-					</b:row>
-				</b:column>
-			</b:row>
-		</b:container>
+		<ui:include src="/view/components/main/sidebar.xhtml" />
+		<div class="main-content">
+			<ui:include src="/view/components/main/start.xhtml" />
+		</div>
 
 	</ui:define>
 </ui:composition>
