@@ -215,6 +215,39 @@ public class UsersDao extends AbstractDao<Users> {
 		}
 	}
 	
+	public void changeUsernameUsers(Integer id, String username) throws Exception {
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		try {			
+			session.createSQLQuery("CALL `userChangeUsername`(:id, :username)")
+					.setLong("id", id).setString("username", username).executeUpdate();
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+		} finally {
+			session.close();
+		}
+	}
+	
+	public void updateUsers(Integer id, Integer profile,
+			Integer  office, Integer role, Integer manager, String username) throws Exception {
+		if (profile!=null) {
+			changeProfileUsers(id, profile);
+		}
+		if (office!=null) {
+			changeOfficeUsers(id, office);
+		}
+		if (role!=null) {
+			changeRoleUsers(id, role);
+		}
+		if (manager!=null) {
+			changeManagerUsers(id, manager);
+		}
+		if (username!=null) {
+			changeUsernameUsers(id, username);
+		}
+	}
+	
 	//---------------Custom
 	
 	public boolean isManager(Integer id) throws Exception {

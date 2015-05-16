@@ -135,6 +135,44 @@ public class UsersBean implements Serializable {
 	public boolean isExistUserPicture(Users u) {
 		return (isExistContact(u) && u.getContacts().getAvatars() != null) ? true : false;
 	}
+	
+	public boolean saveOrUpdate(Users u) {
+		try {
+			usersDao.updateUsers(u.getId(), u.getProfiles().getId(), u.getOffices().getId(), 
+					u.getRoles().getId(), u.getUsers().getId(), u.getUsername());
+			return true;
+		} catch(Exception e) {
+			System.out.println("DEBUG: UsersBean error: " + e.getMessage());
+			return false;
+		}
+	}
+	
+	public boolean remove(Users u) {
+		try {
+			usersDao.deleteEntity(u.getId());
+			return true;
+		} catch(Exception e) {
+			System.out.println("DEBUG: UsersBean error: " + e.getMessage());
+			return false;
+		}
+	}
+	
+	public boolean saveOrUpdate() {
+		if (currentUser!=null && saveOrUpdate(currentUser)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean remove() {
+		if (currentUser!=null && remove(currentUser)) {
+			signOut();
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	/*
 	 * public void actionEdit() { FacesContext fc =
