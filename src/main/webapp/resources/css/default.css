@@ -6,6 +6,15 @@
 
 	.container>.navbar-header, .container-fluid>.navbar-header,
 	.container>.navbar-collapse, .container-fluid>.navbar-collapse {
+
+	}
+
+}
+
+@media (min-width: 900px) {
+
+	.container>.navbar-header, .container-fluid>.navbar-header,
+	.container>.navbar-collapse, .container-fluid>.navbar-collapse {
 		margin-left: 200px;
 	}
 
@@ -57,6 +66,11 @@ body {
 
 .message-error {
 	color: #D9534F;
+}
+
+.panel-inline-table {
+	display: inline-table;
+	width: 100%;
 }
 
 /* login page styles */
@@ -212,12 +226,33 @@ body {
 /* header styles */
 
 .header-block-logo {
-	display: table;
-	height: 50px;
-	left: 15px;
-	top: 0px;
-	position: fixed;
-	z-index: 999999;
+	display: none;
+}
+
+@media (min-width: 900px) {
+	
+	.header-block-logo {
+		display: table;
+		height: 50px;
+		left: 15px;
+		top: 0px;
+		position: fixed;
+		z-index: 999999;
+	}
+
+}
+
+@media (max-width: 768px) {
+	
+	.header-block-logo {
+		display: table;
+		height: 50px;
+		left: 15px;
+		top: 0px;
+		position: fixed;
+		z-index: 999999;
+	}
+
 }
 
 .header-block-logo span {
@@ -314,7 +349,7 @@ body {
 	left: 200px;
 	display: block;
 	margin: 0px;
-	padding: 10px;
+	padding: 20px;
 	right: 0px;
 }
 
@@ -336,3 +371,22 @@ body {
 	padding-top: 15px;
 	color: #444444;
 }
+
+.main-header tr {
+	vertical-align: bottom;
+}
+
+.main-header-text {
+	font-size: 1.5em;
+	font-weight: normal;
+	padding-left: 10px;
+}
+
+.main-datatable {
+	font-size: small;
+}
+
+.main-datatable tbody>tr:HOVER {
+	background-color: #D6ECF7;
+}
+

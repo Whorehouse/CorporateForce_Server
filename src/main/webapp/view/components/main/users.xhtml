@@ -5,5 +5,55 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:b="http://bootsfaces.net/ui">
-	Пользователи
+	<h:panelGrid columns="2" styleClass="main-header">
+		<b:iconAwesome name="users" size="3x"/>
+		<h:outputLabel value="Пользователи" styleClass="main-header-text" />
+	</h:panelGrid>
+	<hr/>
+
+	<b:panel styleClass="panel-inline-table">
+		<h:dataTable id="usersTable" styleClass="table main-datatable"
+						value="#{usersController.usersList}" var="user"
+						rows="15" >
+			<h:column>
+				<h:selectBooleanCheckbox />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Имя" />
+				</f:facet>
+				<h:outputText value="#{user.username}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Профиль" />
+				</f:facet>
+				<h:outputText value="#{user.profiles.name}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Роль" />
+				</f:facet>
+				<h:outputText value="#{user.roles.name}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Офис" />
+				</f:facet>
+				<h:outputText value="#{user.offices.name}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Дата создания" />
+				</f:facet>
+				<h:outputText value="#{user.created}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Дата обновления" />
+				</f:facet>
+				<h:outputText value="#{user.updated}" />
+			</h:column>
+		</h:dataTable>
+	</b:panel>
 </ui:composition>

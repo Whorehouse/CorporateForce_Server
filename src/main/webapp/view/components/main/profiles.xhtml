@@ -5,5 +5,13 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:b="http://bootsfaces.net/ui">
-	Профили
+	<h:panelGrid columns="2" styleClass="main-header">
+		<b:iconAwesome name="circle-o" size="3x"/>
+		<h:outputLabel value="Профили" styleClass="main-header-text" />
+	</h:panelGrid>
+	<hr/>
+
+	<h:dataTable id="profilesTable" rows="15">
+
+	</h:dataTable>
 </ui:composition>
