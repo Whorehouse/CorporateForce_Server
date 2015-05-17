@@ -24,6 +24,10 @@
 	box-shadow: 0 0 5px;
 }
 
+.label {
+	font-weight: normal;
+}
+
 /* common styles */
 
 html, body {
@@ -71,6 +75,81 @@ body {
 .panel-inline-table {
 	display: inline-table;
 	width: 100%;
+}
+
+.panel-head-buttons .panel-heading {
+	padding: 6px;
+	text-align: center;
+}
+
+.panel-head-buttons input {
+	margin: 0px 2px;
+	padding: 5px 10px;
+	font-size: small;
+}
+
+.modal-dialog-container {
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 999;
+	display: none;
+}
+
+.modal-dialog-overlay {
+	display: table;
+	text-align:center;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(250, 250, 250, 0.5);
+}
+
+.modal-dialog-overlay span {
+	display: table-cell;
+	vertical-align:middle;
+}
+
+.modal-dialog-panel {
+	display: inline-block;
+	margin-bottom: 10%;
+	box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.modal-dialog-panel>.panel-body {
+	padding: 10px 50px;
+	text-align: center;
+}
+
+.modal-dialog-panel>.panel-body span {
+	display: block;
+}
+
+.modal-dialog-panel label {
+	float: right;
+	margin: 0px;
+	font-weight: normal;
+}
+
+.modal-dialog-panel td {
+	padding: 5px;
+}
+
+.modal-dialog-panel .form-group {
+	margin: 0px;
+}
+
+.modal-dialog-panel>.panel-footer {
+	text-align: right;
+}
+
+.modal-dialog-panel>.panel-footer input {
+	margin-left: 6px;
 }
 
 /* login page styles */
@@ -393,5 +472,14 @@ body {
 
 .main-datatable tbody>tr:HOVER {
 	background-color: #D6ECF7;
+	vertical-align: middle;
+}
+
+.main-datatable td {
+	vertical-align: middle !important;
+}
+
+.main-datatable .btn {
+	padding: 1px 4px;
 }
 

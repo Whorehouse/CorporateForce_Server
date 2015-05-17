@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+
+	<div id="usersEditDialog" class="modal-dialog-container">
+		<div class="modal-dialog-overlay">
+			<span>
+				<h:form id="usersEditDialogForm">
+					<h:inputHidden id="usersEditDialogFormError" value="#{usersController.errorMessage}" />
+					<b:panel id="usersEditDialogPanel" title="#{usersController.editUser.id == null ? 'Создание пользователя' : 'Редактирование пользователя' }" styleClass="modal-dialog-panel" rendered="#{usersController.editUser != null}">
+						<h:panelGrid columns="2">
+							<h:outputLabel value="Имя пользователя"/>
+							<b:inputText value="#{usersController.editUser.username}"/>
+							<h:outputLabel value="Пароль"/>
+							<b:inputText value="#{usersController.editUser.password}" type="password"/>
+							<h:outputLabel value="Профиль"/>
+							<b:selectOneMenu
+								value="#{usersController.editUser.profiles.id}"
+								style="width:100%" filter="true" filterMatchMode="startsWith">
+									<f:selectItems value="#{usersController.profilesMap}" />
+							</b:selectOneMenu>
+							<h:outputLabel value="Роль"/>
+							<b:selectOneMenu
+								value="#{usersController.editUser.roles.id}"
+								style="width:100%" filter="true" filterMatchMode="startsWith">
+									<f:selectItems value="#{usersController.rolesMap}" />
+							</b:selectOneMenu>
+							<h:outputLabel value="Офис"/>
+							<b:selectOneMenu
+								value="#{usersController.editUser.offices.id}"
+								style="width:100%" filter="true" filterMatchMode="startsWith">
+									<f:selectItems value="#{usersController.officesMap}" />
+							</b:selectOneMenu>
+						</h:panelGrid>
+						<h:outputText value="#{usersController.getTextLabel(usersController.errorMessage)}" styleClass="message-error"
+											rendered="#{usersController.errorMessage != null}"/>
+						<f:facet name="footer">
+							<h:commandButton value="Сохранить" styleClass="btn btn-primary" type="button"
+								action="#{usersController.saveEditUser()}">
+								<f:ajax render="usersEditDialogForm usersForm" onevent="waitEditUserSaveStatus" execute="usersEditDialogForm"/>
+							</h:commandButton>
+							<h:commandButton value="Закрыть" styleClass="btn btn-default" type="button"
+								action="#{usersController.resetController()}">
+								<f:ajax render="usersForm" onevent="hideEditDialog()" />
+							</h:commandButton>
+						</f:facet>
+					</b:panel>
+				</h:form>
+			</span>
+		</div>
+	</div>
+
+	<script>
+		function showEditDialog() {
+			$("#usersEditDialog").show();
+		}
+
+		function hideEditDialog() {
+			$("#usersEditDialog").hide();
+		}
+
+		function waitEditUserSaveStatus(data) {
+			var status = data.status;
+			switch (status) {
+			case "begin": // Before the ajax request is sent.
+				showWaitStatus();
+				break;
+
+			case "complete": // After the ajax response is arrived.
+				hideWaitStatus();
+				break;
+
+			case "success": // After update of HTML DOM based on ajax response..
+				if ($("#usersEditDialog").is(":visible")) {
+					if (document.getElementById("usersEditDialogForm:usersEditDialogFormError").value == "") hideEditDialog();
+				}
+				break;
+			}
+		}
+
+		function waitEditUserStatus(data) {
+			var status = data.status;
+			switch (status) {
+			case "begin": // Before the ajax request is sent.
+				showWaitStatus();
+				break;
+
+			case "complete": // After the ajax response is arrived.
+				hideWaitStatus();
+				if (!$("#usersEditDialog").is(":visible")) showEditDialog();
+				break;
+
+			case "success": // After update of HTML DOM based on ajax response..
+				break;
+			}
+		}
+	</script>	
+</ui:composition>

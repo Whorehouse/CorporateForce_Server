@@ -40,4 +40,12 @@ public abstract class AbstractController {
 			System.out.println("DEBUG: UsersBean error: " + e.getMessage());
 		}
 	}
+
+	public Boolean isSystemControlRights() {
+		return this.usersBean.isSystemControlAccess();
+	}
+
+	public Boolean isUsersManageRights() {
+		return this.usersBean.isManageUsersAccess();
+	}
 }

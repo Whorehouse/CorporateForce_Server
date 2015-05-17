@@ -145,7 +145,17 @@ public class UsersBean implements Serializable {
 	public boolean isExistUserPicture(Users u) {
 		return (isExistContact(u) && u.getContacts().getAvatars() != null) ? true : false;
 	}
-	
+
+	public boolean create(Users u) {
+		try {
+			Users result = usersDao.createSimpleUsers(u.getProfiles().getId(), u.getOffices().getId(), u.getRoles().getId(), u.getUsers().getId(), u.getUsername(), u.getPassword());
+			return result != null;
+		} catch(Exception e) {
+			System.out.println("DEBUG: UsersBean error: " + e.getMessage());
+			return false;
+		}
+	}
+
 	public boolean update(Users u) {
 		try {
 			usersDao.updateUsers(u.getId(), u.getProfiles().getId(), u.getOffices().getId(), 

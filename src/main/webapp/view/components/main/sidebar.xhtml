@@ -10,7 +10,7 @@
 			<div class="main-sidebar-section" id="sidebarPanel">
 				<h:commandLink value="Пользователи" styleClass="#{mainController.sidebarLinkUsers() ? 'main-sidebar-selected' : '' }"
 					action="#{mainController.sidebarSelectLinkUsers()}" >
-					<f:ajax render="sidebarForm mainContent" onevent="waitStatus" execute="sidebarForm"/>
+					<f:ajax render="sidebarForm mainContent usersForm" onevent="waitStatus" execute="sidebarForm"/>
 				</h:commandLink>
 				<h:commandLink value="Профили" styleClass="#{mainController.sidebarLinkProfiles() ? 'main-sidebar-selected' : '' }"
 					action="#{mainController.sidebarSelectLinkProfiles()}">
