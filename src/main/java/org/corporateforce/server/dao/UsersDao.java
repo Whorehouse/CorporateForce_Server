@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.corporateforce.server.model.Users;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
@@ -40,6 +41,7 @@ public class UsersDao extends AbstractDao<Users> {
 			tx.commit();
 			System.out.println("--> Close session");
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			tx.rollback();
 		} finally {
 			session.close();
@@ -59,15 +61,23 @@ public class UsersDao extends AbstractDao<Users> {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		try {
-			id = (Integer) session
+			String paramHQL = profile==null ? "NULL, " : ":profile, ";
+			paramHQL += office==null ? "NULL, " : ":office, ";
+			paramHQL += role==null ? "NULL, " : ":role, ";
+			paramHQL += manager==null ? "NULL, " : ":manager, ";
+			Query query = session
 				.createSQLQuery(
-						"SELECT `userCreate`(:profile, :office, :role, :manager, :username, :password)")
-				.setLong("profile", profile).setLong("office", office)
-				.setLong("role", role).setLong("manager", manager)
-				.setString("username", username)
-				.setString("password", password).uniqueResult();
+						"SELECT `userCreate`("+paramHQL+":username, :password)");
+			if (profile!=null) query.setLong("profile", profile);
+			if (office!=null) query.setLong("office", office);
+			if (role!=null) query.setLong("role", role);
+			if (manager!=null) query.setLong("manager", manager);
+			query.setString("username", username);
+			query.setString("password", password);
+			id = (Integer) query.uniqueResult();
 			tx.commit();
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			tx.rollback();
 		} finally {
 			session.close();
@@ -98,6 +108,7 @@ public class UsersDao extends AbstractDao<Users> {
 				.setDate("date", date).uniqueResult();
 			tx.commit();
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			tx.rollback();
 		} finally {
 			session.close();
@@ -118,6 +129,7 @@ public class UsersDao extends AbstractDao<Users> {
 					.executeUpdate();
 			tx.commit();
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			tx.rollback();
 		} finally {
 			session.close();
@@ -135,6 +147,7 @@ public class UsersDao extends AbstractDao<Users> {
 					.setString("newpassword", newpassword).executeUpdate();
 			tx.commit();
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			tx.rollback();
 		} finally {
 			session.close();
@@ -150,6 +163,7 @@ public class UsersDao extends AbstractDao<Users> {
 			res = session.createCriteria(Users.class).addOrder(Order.asc("username")).list();
 			tx.commit();
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			tx.rollback();
 		} finally {
 			session.close();
@@ -161,10 +175,14 @@ public class UsersDao extends AbstractDao<Users> {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		try {			
-			session.createSQLQuery("CALL `userChangeManager`(:id, :manager)")
-					.setLong("id", id).setLong("manager", manager).executeUpdate();
+			String paramHQL = manager==null ? "NULL" : ":manager";
+			Query query = session.createSQLQuery("CALL `userChangeManager`(:id, "+paramHQL+")");
+			query.setLong("id", id);
+			if (manager!=null) query.setLong("manager", manager);
+			query.executeUpdate();
 			tx.commit();
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			tx.rollback();
 		} finally {
 			session.close();
@@ -174,11 +192,15 @@ public class UsersDao extends AbstractDao<Users> {
 	public void changeOfficeUsers(Integer id, Integer office) throws Exception {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		try {			
-			session.createSQLQuery("CALL `userChangeOffice`(:id, :office)")
-					.setLong("id", id).setLong("office", office).executeUpdate();
+		try {
+			String paramHQL = office==null ? "NULL" : ":office";
+			Query query = session.createSQLQuery("CALL `userChangeOffice`(:id, "+paramHQL+")");
+			query.setLong("id", id);
+			if (office!=null) query.setLong("office", office);
+			query.executeUpdate();
 			tx.commit();
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			tx.rollback();
 		} finally {
 			session.close();
@@ -190,10 +212,14 @@ public class UsersDao extends AbstractDao<Users> {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		try {			
-			session.createSQLQuery("CALL `userChangeProfile`(:id, :profile)")
-					.setLong("id", id).setLong("profile", profile).executeUpdate();
+			String paramHQL = profile==null ? "NULL" : ":profile";
+			Query query = session.createSQLQuery("CALL `userChangeProfile`(:id, "+paramHQL+")");
+			query.setLong("id", id);
+			if (profile!=null) query.setLong("profile", profile);
+			query.executeUpdate();
 			tx.commit();
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			tx.rollback();
 		} finally {
 			session.close();
@@ -205,10 +231,14 @@ public class UsersDao extends AbstractDao<Users> {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		try {			
-			session.createSQLQuery("CALL `userChangeRole`(:id, :role)")
-					.setLong("id", id).setLong("role", role).executeUpdate();
+			String paramHQL = role==null ? "NULL" : ":role";
+			Query query = session.createSQLQuery("CALL `userChangeRole`(:id, "+paramHQL+")");
+			query.setLong("id", id);
+			if (role!=null) query.setLong("role", role);
+			query.executeUpdate();
 			tx.commit();
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			tx.rollback();
 		} finally {
 			session.close();
@@ -223,29 +253,20 @@ public class UsersDao extends AbstractDao<Users> {
 					.setLong("id", id).setString("username", username).executeUpdate();
 			tx.commit();
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			tx.rollback();
 		} finally {
 			session.close();
 		}
 	}
 	
-	public void updateUsers(Integer id, Integer profile,
-			Integer  office, Integer role, Integer manager, String username) throws Exception {
-		if (profile!=null) {
-			changeProfileUsers(id, profile);
-		}
-		if (office!=null) {
-			changeOfficeUsers(id, office);
-		}
-		if (role!=null) {
-			changeRoleUsers(id, role);
-		}
-		if (manager!=null) {
-			changeManagerUsers(id, manager);
-		}
-		if (username!=null) {
-			changeUsernameUsers(id, username);
-		}
+	public void updateUsers(Integer id, String username, Integer profile,
+			Integer  office, Integer role, Integer manager) throws Exception {
+		changeUsernameUsers(id, username);
+		changeProfileUsers(id, profile);
+		changeOfficeUsers(id, office);
+		changeRoleUsers(id, role);
+		changeManagerUsers(id, manager);
 	}
 	
 	//---------------Custom
@@ -304,5 +325,9 @@ public class UsersDao extends AbstractDao<Users> {
 			session.close();
 		}
 		return res;
+	}
+	
+	public List<Users> getEntityList() throws Exception {
+		return getEntityListOrderBy("username");
 	}
 }

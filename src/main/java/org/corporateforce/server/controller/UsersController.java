@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.corporateforce.server.dao.UsersDao;
 import org.corporateforce.server.model.Offices;
 import org.corporateforce.server.model.Profiles;
 import org.corporateforce.server.model.Roles;
@@ -33,6 +34,9 @@ public class UsersController extends PaginationController implements Serializabl
 	@Autowired
 	private OfficesBean officesBean;
 	
+	@Autowired
+	private UsersDao usersDao;
+	
 	// constants
 
 	private final String USERS_ERROR_USERNAME_EXISTS = "error_username_exists";
@@ -58,6 +62,11 @@ public class UsersController extends PaginationController implements Serializabl
 
 	public void setEditUser(Users editUser) {
 		this.editUser = editUser;
+		editUser.setPassword(null);
+		if (this.editUser.getUsers()==null) this.editUser.setUsers(new Users());
+		if (this.editUser.getProfiles()==null) this.editUser.setProfiles(new Profiles());
+		if (this.editUser.getOffices()==null) this.editUser.setOffices(new Offices());
+		if (this.editUser.getRoles()==null) this.editUser.setRoles(new Roles());	
 	}
 
 	private List<UsersWrapper> usersList = null;
@@ -109,17 +118,20 @@ public class UsersController extends PaginationController implements Serializabl
 		this.refreshController();
 	}
 	
-	public void saveEditUser() {
+	public void saveEditUser() throws Exception {
 		this.errorMessage = null;
-		if ((editUser.getUsername() != null && editUser.getPassword() != null) &&
-			(!editUser.getUsername().equals("") && !editUser.getPassword().equals(""))) {
-				if ((this.editUser.getId() == null && !this.usersBean.create(this.editUser)) || (this.editUser.getId() != null && !this.usersBean.update(this.editUser))) {
-					this.errorMessage = USERS_ERROR_USERNAME_EXISTS;
-					return;
-				}
-				refreshController();
+		if (editUser.getOffices().getId()==0) editUser.getOffices().setId(null);
+		if (editUser.getRoles().getId()==0) editUser.getRoles().setId(null);
+		if (editUser.getUsers().getId()==0) editUser.getUsers().setId(null);
+		if (editUser.getUsername() != null && !editUser.getUsername().equals("")) {
+			if ((this.editUser.getId() == null && !this.usersBean.create(this.editUser)) 
+					|| (this.editUser.getId() != null && !this.usersBean.update(this.editUser))) {
+				this.errorMessage = USERS_ERROR_USERNAME_EXISTS;
 				return;
 			}
+			refreshController();
+			return;
+		}
 		this.errorMessage = USERS_ERROR_EMPTY_FIELDS;
 	}
 
@@ -144,6 +156,15 @@ public class UsersController extends PaginationController implements Serializabl
 	public Map<String, Integer> getOfficesMap() {
 		try {
 			return officesBean.getOfficesMap();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return new HashMap<String, Integer>();
+		}
+	}
+	
+	public Map<String, Integer> getUsersMap() {
+		try {
+			return editUser!=null ? usersBean.getUsersMap(editUser.getId()) : usersBean.getUsersMap(null);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return new HashMap<String, Integer>();

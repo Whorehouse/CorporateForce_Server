@@ -20,6 +20,10 @@ public class AnswersDao extends AbstractDao<Answers> {
 		super(entityClass);
 	}
 	
+	public List<Answers> getEntityList() throws Exception {
+		return getEntityListOrderBy("body");
+	}
+	
 	public List<Answers> listByQuestions(Questions q) throws Exception {
 		List<Answers> res = null;
 		Session session = sessionFactory.openSession();

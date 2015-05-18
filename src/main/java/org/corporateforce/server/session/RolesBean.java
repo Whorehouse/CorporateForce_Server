@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.faces.context.FacesContext;
 
@@ -42,7 +43,8 @@ public class RolesBean implements Serializable {
 	
 	public Map<String, Integer> getRolesMap() throws Exception {
 		List<Roles> roles = this.rolesDao.getEntityList();
-		Map<String, Integer> result = new HashMap<String, Integer>();
+		Map<String, Integer> result = new TreeMap<String, Integer>();
+		result.put("--Не выбрано--", 0);
 		for (Roles p : roles) {
 			result.put(p.getName(), p.getId());
 		}

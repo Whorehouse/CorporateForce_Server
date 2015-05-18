@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.faces.context.FacesContext;
 
@@ -93,7 +94,8 @@ public class UsersBean implements Serializable {
 	public Map<String, Integer> getUsersMap(Integer excludeId) throws Exception {
 		List<Users> users = excludeId != null ? this.usersDao.getEntityListExclude(excludeId)
 				: this.usersDao.getEntityList();
-		Map<String, Integer> result = new HashMap<String, Integer>();
+		Map<String, Integer> result = new TreeMap<String, Integer>();
+		result.put("--Не выбрано--", 0);
 		for (Users u : users) {
 			result.put(u.getUsername(), u.getId());
 		}
@@ -148,6 +150,7 @@ public class UsersBean implements Serializable {
 
 	public boolean create(Users u) {
 		try {
+			if (u.getPassword()==null || u.getPassword().equals("")) return false;
 			Users result = usersDao.createSimpleUsers(u.getProfiles().getId(), u.getOffices().getId(), u.getRoles().getId(), u.getUsers().getId(), u.getUsername(), u.getPassword());
 			return result != null;
 		} catch(Exception e) {
@@ -158,8 +161,12 @@ public class UsersBean implements Serializable {
 
 	public boolean update(Users u) {
 		try {
-			usersDao.updateUsers(u.getId(), u.getProfiles().getId(), u.getOffices().getId(), 
-					u.getRoles().getId(), u.getUsers().getId(), u.getUsername());
+			usersDao.updateUsers(u.getId(), u.getUsername(), u.getProfiles().getId(), u.getOffices().getId(), 
+					u.getRoles().getId(), u.getUsers().getId());
+			if (u.getPassword()!=null && !u.getPassword().equals("")) {
+				usersDao.changePasswordUsers(u.getId(), u.getPassword());
+				u.setPassword(null);
+			}
 			return true;
 		} catch(Exception e) {
 			System.out.println("DEBUG: UsersBean error: " + e.getMessage());

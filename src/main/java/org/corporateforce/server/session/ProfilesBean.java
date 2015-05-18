@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.faces.context.FacesContext;
 
@@ -61,7 +62,7 @@ public class ProfilesBean implements Serializable {
 	
 	public Map<String, Integer> getProfilesMap() throws Exception {
 		List<Profiles> profiels = this.profilesDao.getEntityList();
-		Map<String, Integer> result = new HashMap<String, Integer>();
+		Map<String, Integer> result = new TreeMap<String, Integer>();
 		for (Profiles p : profiels) {
 			result.put(p.getName(), p.getId());
 		}

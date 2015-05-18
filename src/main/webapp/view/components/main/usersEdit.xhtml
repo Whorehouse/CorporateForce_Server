@@ -35,6 +35,12 @@
 								style="width:100%" filter="true" filterMatchMode="startsWith">
 									<f:selectItems value="#{usersController.officesMap}" />
 							</b:selectOneMenu>
+							<h:outputLabel value="Менеджер"/>
+							<b:selectOneMenu
+								value="#{usersController.editUser.users.id}"
+								style="width:100%" filter="true" filterMatchMode="startsWith">
+									<f:selectItems value="#{usersController.usersMap}" />
+							</b:selectOneMenu>
 						</h:panelGrid>
 						<h:outputText value="#{usersController.getTextLabel(usersController.errorMessage)}" styleClass="message-error"
 											rendered="#{usersController.errorMessage != null}"/>

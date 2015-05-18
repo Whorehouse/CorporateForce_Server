@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.faces.context.FacesContext;
 
@@ -42,7 +43,8 @@ public class OfficesBean implements Serializable {
 	
 	public Map<String, Integer> getOfficesMap() throws Exception {
 		List<Offices> offices = this.officesDao.getEntityList();
-		Map<String, Integer> result = new HashMap<String, Integer>();
+		Map<String, Integer> result = new TreeMap<String, Integer>();
+		result.put("--Не выбрано--", 0);
 		for (Offices p : offices) {
 			result.put(p.getName(), p.getId());
 		}

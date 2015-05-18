@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,13 +68,19 @@ public abstract class AbstractDao<T> {
 
 	@SuppressWarnings("unchecked")
 	public List<T> getEntityList() throws Exception {
+		return getEntityListOrderBy("id");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<T> getEntityListOrderBy(String field) throws Exception {
 		List<T> entityList = null;
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		try { 
-			entityList = session.createCriteria(entityClass).list();
+			entityList = session.createCriteria(entityClass).addOrder(Order.asc(field)).list();
 			tx.commit();			
 		} catch (Exception e) {
+			e.printStackTrace(System.out);
 			tx.rollback();
 		} finally {
 			session.close();
