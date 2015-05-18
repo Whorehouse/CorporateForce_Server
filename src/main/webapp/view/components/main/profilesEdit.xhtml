@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+
+	<div id="profilesEditDialog" class="modal-dialog-container">
+		<div class="modal-dialog-overlay">
+			<span>
+				<h:form id="profilesEditDialogForm">
+					<h:inputHidden id="profilesEditDialogFormError" value="#{profilesController.errorMessage}" />
+					<b:panel id="profilesEditDialogPanel" title="#{profilesController.editProfile.id == null ? 'Создание профиля' : 'Редактирование профиля' }" styleClass="modal-dialog-panel" rendered="#{profilesController.editProfile != null}">
+						<h:panelGrid columns="2">
+							<h:outputLabel value="Имя профиля"/>
+							<b:inputText value="#{profilesController.editProfile.name}"/>
+							<h:outputLabel value="Разрешение авторизации"/>
+							<h:selectBooleanCheckbox value="#{profilesController.editProfile.loginEnabled}"/>
+							<h:outputLabel value="Разрешение системных действий"/>
+							<h:selectBooleanCheckbox value="#{profilesController.editProfile.systemControl}"/>
+							<h:outputLabel value="Разрешение действий с пользователями"/>
+							<h:selectBooleanCheckbox value="#{profilesController.editProfile.manageUsers}"/>
+						</h:panelGrid>
+						<h:outputText value="#{profilesController.getTextLabel(profilesController.errorMessage)}" styleClass="message-error"
+											rendered="#{profilesController.errorMessage != null}"/>
+						<f:facet name="footer">
+							<h:commandButton value="Сохранить" styleClass="btn btn-primary" type="button"
+								action="#{profilesController.saveEditProfile()}">
+								<f:ajax render="profilesEditDialogForm profilesForm" onevent="waitEditProfileSaveStatus" execute="profilesEditDialogForm"/>
+							</h:commandButton>
+							<h:commandButton value="Закрыть" styleClass="btn btn-default" type="button"
+								action="#{profilesController.resetController()}">
+								<f:ajax render="profilesForm" onevent="hideEditDialog()" />
+							</h:commandButton>
+						</f:facet>
+					</b:panel>
+				</h:form>
+			</span>
+		</div>
+	</div>
+
+	<script>
+		function showEditDialog() {
+			$("#profilesEditDialog").show();
+		}
+
+		function hideEditDialog() {
+			$("#profilesEditDialog").hide();
+		}
+
+		function waitEditProfileSaveStatus(data) {
+			var status = data.status;
+			switch (status) {
+			case "begin": // Before the ajax request is sent.
+				showWaitStatus();
+				break;
+
+			case "complete": // After the ajax response is arrived.
+				hideWaitStatus();
+				break;
+
+			case "success": // After update of HTML DOM based on ajax response..
+				if ($("#profilesEditDialog").is(":visible")) {
+					if (document.getElementById("profilesEditDialogForm:profilesEditDialogFormError").value == "") hideEditDialog();
+				}
+				break;
+			}
+		}
+
+		function waitEditProfileStatus(data) {
+			var status = data.status;
+			switch (status) {
+			case "begin": // Before the ajax request is sent.
+				showWaitStatus();
+				break;
+
+			case "complete": // After the ajax response is arrived.
+				hideWaitStatus();
+				if (!$("#profilesEditDialog").is(":visible")) showEditDialog();
+				break;
+
+			case "success": // After update of HTML DOM based on ajax response..
+				break;
+			}
+		}
+	</script>	
+</ui:composition>

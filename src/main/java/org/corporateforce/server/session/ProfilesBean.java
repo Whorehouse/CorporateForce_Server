@@ -5,19 +5,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.faces.context.FacesContext;
-
 import org.corporateforce.server.dao.ProfilesDao;
 import org.corporateforce.server.model.Profiles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-@SuppressWarnings("serial")
 @Component
 @Scope("session")
 public class ProfilesBean implements Serializable {
-	
+
+	private static final long serialVersionUID = 1L;
+
 	@Autowired
 	private ProfilesDao profilesDao;
 
@@ -55,8 +54,9 @@ public class ProfilesBean implements Serializable {
 		return profilesList;
 	}
 
-	public void refreshProfilesList() throws Exception {
+	public boolean refreshProfilesList() throws Exception {
 		profilesList = profilesDao.getEntityList();
+		return true;
 	}
 	
 	public Map<String, Integer> getProfilesMap() throws Exception {
@@ -68,36 +68,39 @@ public class ProfilesBean implements Serializable {
 		return result;
 	}
 	
-	public void actionEdit() {
-		FacesContext fc = FacesContext.getCurrentInstance();
-		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-		String id = params.get("editProfileId");
+	public boolean create(Profiles p) {
 		try {
-			this.setEditProfile(profilesDao.getEntityById(Integer.parseInt(id)));
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
+			if (p.getName()==null || p.getName().equals("")) return false;
+			Profiles result = profilesDao.addEntity(p);
+			return (result != null && result.getId()!=null && refreshProfilesList());
+		} catch(Exception e) {
+			System.out.println("DEBUG: ProfilesBean error: " + e.getMessage());
+			return false;
+		}
+	}
+
+	public boolean update(Profiles p) {
+		try {
+			return (profilesDao.updateEntity(p)!=null && refreshProfilesList());
+		} catch(Exception e) {
+			System.out.println("DEBUG: ProfilesBean error: " + e.getMessage());
+			return false;
 		}
 	}
 	
-	public void saveEditProfile() throws Exception {
-		profilesDao.updateEntity(editProfile);
-		refreshProfilesList();
+	public Boolean update() {
+		return (editProfile!=null && update(editProfile));
 	}
 	
-	public Boolean actionDelete() {
-		FacesContext fc = FacesContext.getCurrentInstance();
-		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+	public Boolean remove(Profiles p) {
 		try {
-			Integer id = Integer.parseInt(params.get("deleteProfileId"));
-			if (id==usersBean.getCurrentUser().getProfiles().getId()) return false;
-			profilesDao.deleteEntity(id);
+			if (p.getId()==usersBean.getCurrentUser().getProfiles().getId()) return false;
+			profilesDao.deleteEntity(p.getId());
 			refreshProfilesList();
 			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch(Exception e) {
+			System.out.println("DEBUG: ProfilesBean error: " + e.getMessage());
 			return false;
-		}		
+		}
 	}
 }

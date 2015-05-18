@@ -35,6 +35,7 @@ public class TextLabels {
 		labelsTemp.put("settings_resourcesPath", "Путь к загружаемым ресурсам");
 		// errors
 		labelsTemp.put("error_empty_fields", "Не все поля заполнены");
+		labelsTemp.put("error_upsert", "При внесении изменений произошла ошибка");
 		labelsTemp.put("error_username_or_password", "Неверное имя пользователя или пароль");
 		labelsTemp.put("error_username_exists", "Пользователь с таким именем уже существует");
 		labelsTemp.put("error_passwords_dont_match", "Пароли не совпадают");
