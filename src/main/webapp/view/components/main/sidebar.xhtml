@@ -28,7 +28,7 @@
 			<div class="main-sidebar-section">
 				<h:commandLink value="Настройки" styleClass="#{mainController.sidebarLinkSettings() ? 'main-sidebar-selected' : '' }"
 					action="#{mainController.sidebarSelectLinkSettings()}" >
-					<f:ajax render="sidebarForm mainContent" onevent="waitStatus" execute="sidebarForm"/>
+					<f:ajax render="sidebarForm mainContent settingsForm" onevent="waitStatus" execute="sidebarForm"/>
 				</h:commandLink>
 				<h:commandLink value="Справка и поддержка" styleClass="#{mainController.sidebarLinkSupport() ? 'main-sidebar-selected' : '' }"
 					action="#{mainController.sidebarSelectLinkSupport()}" >
