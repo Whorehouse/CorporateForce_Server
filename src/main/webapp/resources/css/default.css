@@ -483,3 +483,31 @@ body {
 	padding: 1px 4px;
 }
 
+.main-table-settings {
+	margin-bottom: 10px;
+}
+
+.main-table-settings td {
+	padding: 5px;
+}
+
+.main-table-settings label {
+	font-weight: normal;
+	text-align: right;
+	display:block;
+}
+
+.main-table-settings .form-group {
+	padding: 0px;
+	margin: 0px;
+}
+
+@media (min-width: 800px) {
+	.main-table-settings input {
+		width: 350px;
+	}
+}
+
+.main-settings-message {
+	margin-left: 10px;
+}

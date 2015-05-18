@@ -14,66 +14,25 @@
 			<h:outputLabel value="Настройки" styleClass="main-header-text" />
 		</h:panelGrid>
 		<hr/>
-		<h4>
-			<b:label text="Всего: #{settingsController.recordCount}" severity="primary" />
-		</h4>
-		<h:inputHidden id="settingsFormError" value="#{settingsController.errorMessage}" />
 		<b:panel styleClass="panel-inline-table panel-head-buttons">
-			<f:facet name="heading">
-				<h:form id="settingsPanelFormHead" prependId="false">
-					<h:commandButton type="button" value="Обновить"
-						action="#{settingsController.refreshController()}"
-						styleClass="btn btn-default">
-						<f:ajax render="settingsForm" onevent="waitStatus" execute="settingsForm"/>
-					</h:commandButton>
-					<h:commandButton type="button" value="Сохранить"
-						action="#{settingsController.saveSettings()}"
-						styleClass="btn btn-default">
-						<f:ajax render="settingsForm" onevent="waitEditSettingsSaveStatus" execute="settingsForm"/>
-					</h:commandButton>
-				</h:form>
-			</f:facet>
-			<h:outputText value="#{settingsController.getTextLabel(settingsController.errorMessage)}" styleClass="message-error"
-											rendered="#{settingsController.errorMessage != null}"/>
-			<h:dataTable id="settingsTable" styleClass="table main-datatable"
-							value="#{settingsController.settingsList}" var="setting" >
+			<h:dataTable id="settingsTable" styleClass="main-table-settings"
+						value="#{settingsController.settingsList}" var="setting" >
 				<h:column>
-					<f:facet name="header">
-						<h:outputText value="№" />
-					</f:facet>
-					<h:outputText value="#{setting.number}" />
+					<h:outputLabel value="#{setting.name}"/>
 				</h:column>
 				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Имя" />
-					</f:facet>
-					<h:outputText value="#{setting.name}"/>
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Значение" />
-					</f:facet>
-					<h:inputText value="#{setting.instance.pvalue}" />
+					<b:inputText value="#{setting.instance.pvalue}" />
 				</h:column>
 			</h:dataTable>
+			<h:panelGrid columns="2">
+				<h:commandButton type="button" value="Сохранить"
+							action="#{settingsController.saveSettings()}"
+							styleClass="btn btn-primary">
+							<f:ajax render="settingsForm" onevent="waitStatus" execute="settingsForm"/>
+				</h:commandButton>
+				<h:outputText value="#{settingsController.getTextLabel(settingsController.errorMessage)}" styleClass="message-error main-settings-message"
+												rendered="#{settingsController.errorMessage != null}"/>
+			</h:panelGrid>
 		</b:panel>
-	</h:form>
-	
-	<script>
-		function waitEditSettingsSaveStatus(data) {
-			var status = data.status;
-			switch (status) {
-			case "begin": // Before the ajax request is sent.
-				showWaitStatus();
-				break;
-
-			case "complete": // After the ajax response is arrived.
-				hideWaitStatus();
-				break;
-
-			case "success": // After update of HTML DOM based on ajax response..
-				break;
-			}
-		}
-	</script>	
+	</h:form>	
 </ui:composition>

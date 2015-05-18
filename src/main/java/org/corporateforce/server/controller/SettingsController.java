@@ -12,12 +12,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope("session")
-public class SettingsController extends PaginationController implements Serializable {
-
-	/**
-	 * 
-	 */
+public class SettingsController extends AbstractController implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	// session beans
 
 	@Autowired
 	private SettingsBean settingsBean;
@@ -25,11 +23,13 @@ public class SettingsController extends PaginationController implements Serializ
 	public void setSettingsBean(SettingsBean settingsBean) {
 		this.settingsBean = settingsBean;
 	}
-	
+
+	// constants
+
 	private final String SETTINGS_EMPTY_FIELDS = "error_empty_fields";
-	
-	//--------------------------
-	
+
+	// page variables
+
 	private String errorMessage = null;
 
 	public String getErrorMessage() {
@@ -43,10 +43,9 @@ public class SettingsController extends PaginationController implements Serializ
 	private List<SettingsWrapper> settingsList = null;
 
 	public List<SettingsWrapper> getSettingsList() {
-		if (settingsList == null) refreshController();
+		if (errorMessage == null) refreshController();
 		return settingsList;
 	}
-
 
 	// controller methods
 
@@ -58,13 +57,11 @@ public class SettingsController extends PaginationController implements Serializ
 			loadParams.add("uriTrainings");
 			loadParams.add("resourcesPath");
 			List<Settings> result = this.settingsBean.getSettingsList(loadParams);
-			this.setRecordCount(loadParams.size());
 			settingsList = new ArrayList<SettingsWrapper>();
 			for (int i=0; i<result.size(); i++) {
-				settingsList.add(new SettingsWrapper(i, getTextLabel("settings_"+result.get(i).getPname()), result.get(i)));
+				settingsList.add(new SettingsWrapper(getTextLabel("settings_"+result.get(i).getPname()), result.get(i)));
 			}
 		} catch (Exception e) {
-			this.setRecordCount(0);
 			settingsList = null;
 			System.out.println(e.getMessage());
 		} finally {
@@ -87,15 +84,13 @@ public class SettingsController extends PaginationController implements Serializ
 		}
 	}
 	
-	//--------------------------
+	// wrapper
 	
 	public class SettingsWrapper {
-		private Integer listIndex;
 		private String name;
 		private Settings instance;
 		
-		public SettingsWrapper(Integer number, String name, Settings settings) {
-			this.listIndex = number;
+		public SettingsWrapper(String name, Settings settings) {
 			this.name = name;
 			this.instance = settings;
 		}
@@ -108,14 +103,6 @@ public class SettingsController extends PaginationController implements Serializ
 			this.instance = instance;
 		}
 
-		public Integer getListIndex() {
-			return listIndex;
-		}
-
-		public Integer getNumber() {
-			return listIndex + 1;
-		}
-
 		public String getName() {
 			return name;
 		}
@@ -123,6 +110,5 @@ public class SettingsController extends PaginationController implements Serializ
 		public void setName(String name) {
 			this.name = name;
 		}
-
 	}
 }

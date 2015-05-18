@@ -72,7 +72,6 @@ public class UsersController extends PaginationController implements Serializabl
 		return usersList;
 	}
 
-
 	// controller methods
 
 	public void refreshController() {
