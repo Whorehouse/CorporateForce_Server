@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.corporateforce.server.model.Roles;
-import org.corporateforce.server.session.OfficesBean;
-import org.corporateforce.server.session.ProfilesBean;
 import org.corporateforce.server.session.RolesBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -22,14 +20,8 @@ public class RolesController extends PaginationController implements Serializabl
 	// session beans
 
 	@Autowired
-	private ProfilesBean profilesBean;
-
-	@Autowired
 	private RolesBean rolesBean;
-	
-	@Autowired
-	private OfficesBean officesBean;
-	
+		
 	// constants
 
 	private final String ROLES_ERROR_UPSERT = "error_upsert";

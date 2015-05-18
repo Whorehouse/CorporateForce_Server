@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.faces.context.FacesContext;
 
 import org.corporateforce.server.dao.OfficesDao;
 import org.corporateforce.server.model.Offices;
@@ -65,40 +64,44 @@ public class OfficesBean implements Serializable {
 		return officesList;
 	}
 
-	public void refreshOfficesList() throws Exception {
+	public boolean refreshOfficesList() throws Exception {
 		officesList = officesDao.getEntityList();
+		return true;
 	}
 	
-	public void actionEdit() {
-		FacesContext fc = FacesContext.getCurrentInstance();
-		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-		String id = params.get("editOfficeId");
+	public boolean create(Offices p) {
 		try {
-			this.setEditOffice(officesDao.getEntityById(Integer.parseInt(id)));
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
+			if (p.getName()==null || p.getName().equals("")) return false;
+			Offices result = officesDao.addEntity(p);
+			return (result != null && result.getId()!=null && refreshOfficesList());
+		} catch(Exception e) {
+			System.out.println("DEBUG: OfficesBean error: " + e.getMessage());
+			return false;
+		}
+	}
+
+	public boolean update(Offices p) {
+		try {
+			return (officesDao.updateEntity(p)!=null && refreshOfficesList());
+		} catch(Exception e) {
+			System.out.println("DEBUG: OfficesBean error: " + e.getMessage());
+			return false;
 		}
 	}
 	
-	public void saveEditOffice() throws Exception {
-		officesDao.updateEntity(editOffice);
-		refreshOfficesList();
+	public Boolean update() {
+		return (editOffice!=null && update(editOffice));
 	}
 	
-	public Boolean actionDelete() {
-		FacesContext fc = FacesContext.getCurrentInstance();
-		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+	public Boolean remove(Offices p) {
 		try {
-			Integer id = Integer.parseInt(params.get("deleteOfficeId"));
-			if (id==usersBean.getCurrentUser().getOffices().getId()) return false;
-			officesDao.deleteEntity(id);
+			if (p.getId()==usersBean.getCurrentUser().getOffices().getId()) return false;
+			officesDao.deleteEntity(p.getId());
 			refreshOfficesList();
 			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch(Exception e) {
+			System.out.println("DEBUG: OfficesBean error: " + e.getMessage());
 			return false;
-		}		
+		}
 	}
 }

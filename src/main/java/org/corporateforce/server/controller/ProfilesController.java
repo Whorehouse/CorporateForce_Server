@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.corporateforce.server.model.Profiles;
-import org.corporateforce.server.session.OfficesBean;
 import org.corporateforce.server.session.ProfilesBean;
-import org.corporateforce.server.session.RolesBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -21,12 +19,6 @@ public class ProfilesController extends PaginationController implements Serializ
 
 	@Autowired
 	private ProfilesBean profilesBean;
-
-	@Autowired
-	private RolesBean rolesBean;
-	
-	@Autowired
-	private OfficesBean officesBean;
 	
 	// constants
 
