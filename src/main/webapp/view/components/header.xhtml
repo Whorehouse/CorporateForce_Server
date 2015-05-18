@@ -14,7 +14,7 @@
 		</div>
 		<b:navBar inverse="true" fixed="top" fluid="true">
 			<b:navbarLinks>
-				<b:navLink value="Администрирование" href="/" active="true" />
+				<b:navLink value="Администрирование" href="/" active="true" rendered="#{headerController.isSystemControlRights()}"/>
 				<b:navLink value="Люди" href="#"/>
 				<b:navLink value="Проекты" href="#"/>
 				<b:navLink value="Тренинги" href="#"/>
