@@ -21,6 +21,7 @@ public class ResultsDao extends AbstractDao<Results> {
 		super(entityClass);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Results> listByUsers(Users u) throws Exception {
 		List<Results> res = null;
 		Session session = sessionFactory.openSession();
@@ -36,6 +37,7 @@ public class ResultsDao extends AbstractDao<Results> {
 		return res;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Results> listByTrainings(Trainings t) throws Exception {
 		List<Results> res = null;
 		Session session = sessionFactory.openSession();

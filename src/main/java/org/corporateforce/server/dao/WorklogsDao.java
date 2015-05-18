@@ -21,12 +21,13 @@ public class WorklogsDao extends AbstractDao<Worklogs> {
 		super(entityClass);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Worklogs> listByTicket(Tickets t) throws Exception {
 		List<Worklogs> res = null;
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		try {			
-			res = session.createCriteria(Worklogs.class).add(Restrictions.eq("tickets",t)).list();
+			res = (List<Worklogs>) session.createCriteria(Worklogs.class).add(Restrictions.eq("tickets",t)).list();
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
@@ -36,6 +37,7 @@ public class WorklogsDao extends AbstractDao<Worklogs> {
 		return res;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Worklogs> listByTicketAndUser(Tickets t, Users u) throws Exception {
 		List<Worklogs> res = null;
 		Session session = sessionFactory.openSession();

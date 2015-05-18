@@ -28,6 +28,11 @@ public class TextLabels {
 		labelsTemp.put("textarea_login_help", "Введите имя пользователя и пароль.");
 		labelsTemp.put("textarea_login_password_restore", "Для восстановления пароля обратитесь к администратору.");
 		labelsTemp.put("textarea_main_start_message", "Вы находитесь в режиме администрирования системы");
+		// settings
+		labelsTemp.put("settings_uriFaces", "URI модуля 'Люди'");
+		labelsTemp.put("settings_uriProjects", "URI модуля 'Проекты'");
+		labelsTemp.put("settings_uriTrainings", "URI модуля 'Тренинги'");
+		labelsTemp.put("settings_resourcesPath", "Путь к загружаемым ресурсам");
 		// errors
 		labelsTemp.put("error_empty_fields", "Не все поля заполнены");
 		labelsTemp.put("error_username_or_password", "Неверное имя пользователя или пароль");

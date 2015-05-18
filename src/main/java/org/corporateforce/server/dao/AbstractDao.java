@@ -51,7 +51,8 @@ public abstract class AbstractDao<T> {
 		return entity;
 	}
 
-	public T getEntityById(Integer id) throws Exception {
+	@SuppressWarnings("unchecked")
+	public T getEntityById(Integer id) {
 		T entity = null;
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
@@ -66,7 +67,6 @@ public abstract class AbstractDao<T> {
 		return entity;
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<T> getEntityList() throws Exception {
 		return getEntityListOrderBy("id");
 	}

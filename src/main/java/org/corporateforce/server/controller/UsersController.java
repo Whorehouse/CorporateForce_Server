@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.corporateforce.server.dao.UsersDao;
 import org.corporateforce.server.model.Offices;
 import org.corporateforce.server.model.Profiles;
 import org.corporateforce.server.model.Roles;
@@ -33,9 +32,6 @@ public class UsersController extends PaginationController implements Serializabl
 	
 	@Autowired
 	private OfficesBean officesBean;
-	
-	@Autowired
-	private UsersDao usersDao;
 	
 	// constants
 

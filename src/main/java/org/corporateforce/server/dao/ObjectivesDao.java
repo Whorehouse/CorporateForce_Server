@@ -20,6 +20,7 @@ public class ObjectivesDao extends AbstractDao<Objectives> {
 		super(entityClass);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Objectives> listByProject(Projects t) throws Exception {
 		List<Objectives> res = null;
 		Session session = sessionFactory.openSession();

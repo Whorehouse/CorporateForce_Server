@@ -20,6 +20,7 @@ public class HolidaysDao extends AbstractDao<Holidays> {
 		super(entityClass);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Holidays> listByUsers(Users u) {
 		List<Holidays> res = null;
 		Session session = sessionFactory.openSession();

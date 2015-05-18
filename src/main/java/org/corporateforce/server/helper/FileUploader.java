@@ -7,11 +7,25 @@ import java.io.IOException;
 
 import org.apache.commons.io.FilenameUtils;
 import org.corporateforce.server.model.Users;
+import org.corporateforce.server.session.SettingsBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+@Component
+@Scope("session")
 public class FileUploader {
+	
+	@Autowired
+	private static SettingsBean settingsBean;
+	
+	public static void setSettingsBean(SettingsBean settingsBean) {
+		FileUploader.settingsBean = settingsBean;
+	}
+
 	public static File prepareDir(String relativePath) {
-		File dir = new File(Config.getResourcesPath()+File.separator+relativePath);
+		File dir = new File(settingsBean.getResourcesPath()+File.separator+relativePath);
 		if (!dir.exists())
 			dir.mkdirs();
 		return dir;

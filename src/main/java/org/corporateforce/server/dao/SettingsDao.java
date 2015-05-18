@@ -3,6 +3,7 @@ package org.corporateforce.server.dao;
 import org.corporateforce.server.model.Settings;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,8 +16,24 @@ public class SettingsDao extends AbstractDao<Settings> {
 	public SettingsDao(Class<Settings> entityClass) {
 		super(entityClass);
 	}
+	
+	public Settings getByPname(String pname) {
+		Settings res = null;
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		try {			
+			res = (Settings) session.createCriteria(Settings.class).add(Restrictions.eq("pname",pname)).uniqueResult();
+			tx.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			tx.rollback();
+		} finally {
+			session.close();
+		}
+		return res;
+	}
 
-	public Settings settingsCreate(String pname, String pvalue) throws Exception {
+	public Settings settingsCreate(String pname, String pvalue) {
 		Settings res = null;		
 		Integer id = 0;
 		Session session = sessionFactory.openSession();
@@ -40,8 +57,7 @@ public class SettingsDao extends AbstractDao<Settings> {
 		return res;
 	}
 	
-	public Settings settingsUpdate(String pname, String pvalue)
-			throws Exception {
+	public Settings settingsUpdate(String pname, String pvalue) {
 		Settings res = null;		
 		Integer id = 0;
 		Session session = sessionFactory.openSession();
@@ -65,8 +81,8 @@ public class SettingsDao extends AbstractDao<Settings> {
 		return res;
 	}
 	
-	public Settings settingsUpsert(String pname, String pvalue)
-			throws Exception {
+	public Settings settingsUpsert(String pname, String pvalue) {
+		if (!(pname!=null && !pname.trim().equals("") && pvalue!=null && !pvalue.trim().equals(""))) return null;
 		Settings res = null;		
 		Integer id = 0;
 		Session session = sessionFactory.openSession();

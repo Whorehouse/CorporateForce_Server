@@ -10,15 +10,29 @@ import org.apache.commons.io.IOUtils;
 import org.corporateforce.server.model.Avatars;
 import org.corporateforce.server.model.Resources;
 import org.corporateforce.server.model.Users;
+import org.corporateforce.server.session.SettingsBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 
+@Component
+@Scope("session")
 public class FileGetter {
 	
+	@Autowired
+	private static SettingsBean settingsBean;
+	
+	public static void setSettingsBean(SettingsBean settingsBean) {
+		FileGetter.settingsBean = settingsBean;
+	}
+
+
 	public static ResponseEntity<byte[]> responseFile(String relativePathDir, String filename) throws FileNotFoundException, IOException {
-		File file = new File(Config.getResourcesPath() + File.separator	+ relativePathDir + File.separator + filename);
+		File file = new File(settingsBean.getResourcesPath() + File.separator	+ relativePathDir + File.separator + filename);
 		if (!file.exists()) {
 			final HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.IMAGE_PNG);

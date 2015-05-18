@@ -24,6 +24,7 @@ public class AnswersDao extends AbstractDao<Answers> {
 		return getEntityListOrderBy("body");
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Answers> listByQuestions(Questions q) throws Exception {
 		List<Answers> res = null;
 		Session session = sessionFactory.openSession();

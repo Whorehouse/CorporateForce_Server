@@ -20,6 +20,7 @@ public class ChatterDao extends AbstractDao<Chatter> {
 		super(entityClass);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Chatter> getListForParent(Users u) {
 		List<Chatter> entityList = null;
 		Session session = sessionFactory.openSession();
@@ -37,6 +38,7 @@ public class ChatterDao extends AbstractDao<Chatter> {
 		return entityList;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Chatter> getListForCreator(Users u) {
 		List<Chatter> entityList = null;
 		Session session = sessionFactory.openSession();

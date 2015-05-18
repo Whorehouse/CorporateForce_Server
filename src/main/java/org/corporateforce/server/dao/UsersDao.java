@@ -155,6 +155,7 @@ public class UsersDao extends AbstractDao<Users> {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Users> listByUsernameUsers() throws Exception {			
 		List<Users> res = null;
 		Session session = sessionFactory.openSession();
@@ -311,6 +312,7 @@ public class UsersDao extends AbstractDao<Users> {
 		return res;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Users> listByManager(Integer id) throws Exception {
 		Users manager = getEntityById(id);
 		List<Users> res = null;

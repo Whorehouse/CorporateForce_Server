@@ -20,6 +20,7 @@ public class QuestionsDao extends AbstractDao<Questions> {
 		super(entityClass);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Questions> listByTrainings(Trainings t) throws Exception {
 		List<Questions> res = null;
 		Session session = sessionFactory.openSession();
