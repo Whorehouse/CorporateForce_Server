@@ -12,8 +12,14 @@
 		<h:outputStylesheet library="css" name="default.css" />
 		<h:outputScript library="javax.faces" name="jsf.js" target="head" />
 		<h:outputScript library="js" name="jquery.js" target="head" />
+		<h:outputScript library="js" name="login-scripts.js" target="head" />
 	</h:head>
-	<h:body>
+	<h:body>			
+		<h:panelGroup styleClass="modules">
+			<h:inputHidden value="#{settingsBean.getUriFaces()}" />
+			<h:inputHidden value="#{settingsBean.getUriProjects()}" />
+			<h:inputHidden value="#{settingsBean.getUriTrainings()}" />
+		</h:panelGroup>
 		<ui:insert name="header" />
 		<ui:insert name="body" />
 		<ui:insert name="footer" />

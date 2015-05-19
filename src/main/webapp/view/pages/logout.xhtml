@@ -8,10 +8,7 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	template="/view/templates/default.xhtml">
 	<ui:define name="body">
-		<c:forEach var="module" items="#{usersBean.outerModulesURLs()}">
-			<div title="#{module}" style="display: none;" class="moduleURL"></div>
-		</c:forEach>
 		<script>modulesLogout();</script>
-		<h:inputHidden value="#{usersBean.logout()}"></h:inputHidden>
+		<h:commandButton id="hdnSignOut" style="display: none;"	actionListener="#{headerController.signOut}" />
 	</ui:define>
 </ui:composition>

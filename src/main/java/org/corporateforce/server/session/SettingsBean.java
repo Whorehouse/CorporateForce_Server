@@ -12,15 +12,12 @@ import javax.annotation.PostConstruct;
 import org.corporateforce.server.dao.SettingsDao;
 import org.corporateforce.server.model.Settings;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
-@Scope("session")
 public class SettingsBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	
 	
 	@Autowired
 	private SettingsDao settingsDao;

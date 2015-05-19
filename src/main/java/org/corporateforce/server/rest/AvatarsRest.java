@@ -26,6 +26,24 @@ public class AvatarsRest extends AbstractRest<Avatars, AvatarsDao>  {
 	@Autowired
 	ContactsDao contactsDao;
 	
+	@Autowired
+	FileUploader fileUploader;
+	
+	public void setContactsDao(ContactsDao contactsDao) {
+		this.contactsDao = contactsDao;
+	}
+
+	public void setFileUploader(FileUploader fileUploader) {
+		this.fileUploader = fileUploader;
+	}
+
+	public void setFileGetter(FileGetter fileGetter) {
+		this.fileGetter = fileGetter;
+	}
+
+	@Autowired
+	FileGetter fileGetter;
+	
 	@RequestMapping(value = "/uploadAvatar", method = RequestMethod.POST)
 	public @ResponseBody Avatars uploadAvatar(
 			@RequestParam MultipartFile file,
@@ -33,7 +51,7 @@ public class AvatarsRest extends AbstractRest<Avatars, AvatarsDao>  {
 			throws Exception {
 		Avatars res = null;
 		Users users = jsonToModel(jsonUsers, Users.class);
-		File savedFile = FileUploader.saveAvatar(file);		
+		File savedFile = fileUploader.saveAvatar(file);		
 		Avatars avatar = new Avatars();
 		avatar.setFilename(savedFile.getName());
 		res = daoService.addEntity(avatar);
@@ -45,6 +63,6 @@ public class AvatarsRest extends AbstractRest<Avatars, AvatarsDao>  {
 
 	@RequestMapping("/showAvatar/{id}")
 	public ResponseEntity<byte[]> showAvatar(@PathVariable int id) throws Exception {
-		return FileGetter.responseFileForAvatar(daoService.getEntityById(id));
+		return fileGetter.responseFileForAvatar(daoService.getEntityById(id));
 	}
 }

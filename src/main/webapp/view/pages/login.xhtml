@@ -11,8 +11,6 @@
 	<ui:define name="body">
 		<h:inputHidden value="#{loginController.initController()}"/>
 
-		<h:outputScript library="js" name="login-scripts.js" target="head" />
-
 		<!-- Dialogs -->
 		<ui:include src="/view/components/login/help.xhtml" />
 		<ui:include src="/view/components/login/passwordRestore.xhtml" />
@@ -41,12 +39,12 @@
 						</div>
 						<h:panelGroup styleClass="login-panel-block login-panel-block-input" rendered="#{loginController.modeSignIn()}">
 							<span>
-								<b:inputText placeholder="#{loginController.getTextLabel('input_username')}" fieldSize="sm" value="#{loginController.username}">
+								<b:inputText placeholder="#{loginController.getTextLabel('input_username')}" fieldSize="sm" value="#{loginController.username}" styleClass="field-username">
 									<f:facet name="prepend">
 										<b:iconAwesome name="user" id="user"/>
 									</f:facet>
 								</b:inputText>
-								<b:inputText placeholder="#{loginController.getTextLabel('input_password')}" fieldSize="sm" type="password" value="#{loginController.password}">
+								<b:inputText placeholder="#{loginController.getTextLabel('input_password')}" fieldSize="sm" type="password" value="#{loginController.password}" styleClass="field-password">
 									<f:facet name="prepend">
 										<b:iconAwesome name="key" id="password"/>
 									</f:facet>
@@ -64,8 +62,12 @@
 							<h:commandButton id="btnSignIn"
 								value="#{loginController.modeSignIn() ? loginController.getTextLabel('button_submit_sign_in') : loginController.getTextLabel('button_submit_sign_up')}"
 								styleClass="btn #{loginController.modeSignIn() ? 'btn-success' : 'btn-primary'}"
-								action="#{loginController.acceptInputValues()}">
+								onclick="modulesLogin(this);"
+								>
 									<f:ajax render="loginPanel loginFormHead" onevent="waitStatus" execute="loginFormMain"/>
+							</h:commandButton>
+							<h:commandButton id="hdnSignIn" actionListener="#{loginController.acceptInputValues}" style="display: none;">
+								<f:ajax render="loginPanel loginFormHead" onevent="waitStatus" execute="loginFormMain"/>
 							</h:commandButton>
 							<h:outputText value="#{loginController.getTextLabel(loginController.errorMessage)}" styleClass="message-error login-message-error"
 											rendered="#{loginController.errorMessage != null}"/>
