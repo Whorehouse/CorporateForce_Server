@@ -5,6 +5,7 @@ import javax.faces.context.FacesContext;
 
 import org.corporateforce.server.helper.Constants;
 import org.corporateforce.server.helper.TextLabels;
+import org.corporateforce.server.session.SettingsBean;
 import org.corporateforce.server.session.UsersBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,9 +16,8 @@ public abstract class AbstractController {
 	@Autowired
 	protected UsersBean usersBean;
 
-	public void setUsersBean(UsersBean usersBean) {
-		this.usersBean = usersBean;
-	}
+	@Autowired
+	protected SettingsBean settingsBean;;
 
 	// controller methods
 

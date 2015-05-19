@@ -62,7 +62,8 @@ public class SettingsBean implements Serializable {
 	//-------------------------------
 
 	public String getUriModule(String module) {
-		return getParam("uri" + module);
+		String result = getParam("uri" + module);
+		return result != null ? result : "#";
 	}
 	
 	public String getUriFaces() {
@@ -97,7 +98,7 @@ public class SettingsBean implements Serializable {
 			Settings tmp = getParamInstance(pname);
 			if (tmp==null) {
 				tmp = new Settings();
-				tmp.setPname(pname);				
+				tmp.setPname(pname);
 			}
 			res.add(tmp);
 		}

@@ -17,10 +17,6 @@ public class InitController implements Serializable {
 	@Autowired
 	private UsersBean usersBean;
 
-	public void setUsersBean(UsersBean usersBean) {
-		this.usersBean = usersBean;
-	}
-
 	// controller methods
 	
 }

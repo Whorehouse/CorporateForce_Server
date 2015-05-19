@@ -16,9 +16,9 @@
 		<b:navBar inverse="true" fixed="top" fluid="true">
 			<b:navbarLinks>
 				<b:navLink value="Администрирование" href="/" active="true" rendered="#{headerController.isSystemControlRights()}"/>
-				<b:navLink value="Люди" href="#"/>
-				<b:navLink value="Проекты" href="#"/>
-				<b:navLink value="Тренинги" href="#"/>
+				<b:navLink value="Люди" href="#{headerController.urlFaces}"/>
+				<b:navLink value="Проекты" href="#{headerController.urlProjects}"/>
+				<b:navLink value="Тренинги" href="#{headerController.urlTrainings}"/>
 			</b:navbarLinks>
 
 			<div class="control-block control-right header-block-user">
