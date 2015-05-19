@@ -511,3 +511,24 @@ body {
 .main-settings-message {
 	margin-left: 10px;
 }
+
+.main-support-table {
+	width: 100%;
+}
+
+.main-support-table td:first-child {
+	text-align: right;
+}
+
+.main-support-table td {
+	vertical-align: top;
+	padding: 5px;
+}
+
+.main-support-table a {
+	display: block;
+}
+
+.main-support-table label {
+	display: block;
+}
