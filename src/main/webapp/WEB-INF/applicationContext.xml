@@ -32,6 +32,8 @@
 				<value>org.corporateforce.server.model.Chatterresourceslink</value>
 				<value>org.corporateforce.server.model.Contacts</value>
 				<value>org.corporateforce.server.model.Holidays</value>
+				<value>org.corporateforce.server.model.Holidaysorg</value>
+				<value>org.corporateforce.server.model.Notes</value>
 				<value>org.corporateforce.server.model.Objectives</value>
 				<value>org.corporateforce.server.model.Offices</value>
 				<value>org.corporateforce.server.model.Profiles</value>
@@ -47,6 +49,8 @@
 				<value>org.corporateforce.server.model.Tutorials</value>
 				<value>org.corporateforce.server.model.Users</value>
 				<value>org.corporateforce.server.model.Worklogs</value>
+				<value>org.corporateforce.server.model.Workperiod</value>
+				<value>org.corporateforce.server.model.Worktime</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
