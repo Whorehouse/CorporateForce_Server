@@ -35,7 +35,7 @@ public class WorktimeRest extends AbstractRest<Worktime, WorktimeDao>   {
 		return entities;		
 	}
 	
-	@RequestMapping(value = "/listByRangeOverlap/{uid}/{day}", method = RequestMethod.GET)
+	@RequestMapping(value = "/listByUserAndDay/{uid}/{day}", method = RequestMethod.GET)
 	public @ResponseBody List<Worktime> listByUserAndDay(
 			@PathVariable("uid") int uid, 
 			@PathVariable("day") @DateTimeFormat(iso=ISO.DATE) Date day
