@@ -8,6 +8,7 @@ import org.corporateforce.server.model.Workperiod;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class WorkperiodDao extends AbstractDao<Workperiod> {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		try {			
-			res = session.createCriteria(Workperiod.class).add(Restrictions.eq("users",u)).list();
+			res = session.createCriteria(Workperiod.class).add(Restrictions.eq("users",u)).addOrder(Order.asc("start")).list();
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
