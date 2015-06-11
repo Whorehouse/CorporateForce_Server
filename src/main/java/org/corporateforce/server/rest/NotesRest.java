@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.corporateforce.server.dao.UsersDao;
 import org.corporateforce.server.dao.NotesDao;
+import org.corporateforce.server.helper.DateHelper;
 import org.corporateforce.server.model.Users;
 import org.corporateforce.server.model.Notes;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,7 @@ public class NotesRest extends AbstractRest<Notes, NotesDao>   {
 			@PathVariable("uid") int uid, 
 			@PathVariable("day") @DateTimeFormat(iso=ISO.DATE) Date day
 	) throws Exception {
+		day = DateHelper.removeTimeZoneOffset(day);
 		Users users = usersDao.getEntityById(uid);
 		List<Notes> entities = null;
 		try {
@@ -56,6 +58,8 @@ public class NotesRest extends AbstractRest<Notes, NotesDao>   {
 			@PathVariable("startDate") @DateTimeFormat(iso=ISO.DATE) Date startDate, 
 			@PathVariable("endDate") @DateTimeFormat(iso=ISO.DATE)  Date endDate
 	) throws Exception {
+		startDate = DateHelper.removeTimeZoneOffset(startDate);
+		endDate = DateHelper.removeTimeZoneOffset(endDate);
 		Users users = usersDao.getEntityById(uid);
 		List<Notes> entities = null;
 		try {

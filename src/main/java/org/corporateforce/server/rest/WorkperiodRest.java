@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.corporateforce.server.dao.UsersDao;
 import org.corporateforce.server.dao.WorkperiodDao;
+import org.corporateforce.server.helper.DateHelper;
 import org.corporateforce.server.model.Users;
 import org.corporateforce.server.model.Workperiod;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,8 @@ public class WorkperiodRest extends AbstractRest<Workperiod, WorkperiodDao>   {
 			@PathVariable("startDate") @DateTimeFormat(iso=ISO.DATE) Date startDate, 
 			@PathVariable("endDate") @DateTimeFormat(iso=ISO.DATE)  Date endDate
 	) throws Exception {
+		startDate = DateHelper.removeTimeZoneOffset(startDate);
+		endDate = DateHelper.removeTimeZoneOffset(endDate);
 		Users users = usersDao.getEntityById(uid);
 		List<Workperiod> entities = null;
 		try {

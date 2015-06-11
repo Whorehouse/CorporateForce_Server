@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.corporateforce.server.dao.HolidaysorgDao;
+import org.corporateforce.server.helper.DateHelper;
 import org.corporateforce.server.model.Holidaysorg;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -22,6 +23,8 @@ public class HolidaysorgRest extends AbstractRest<Holidaysorg, HolidaysorgDao>  
 			@PathVariable("startDate") @DateTimeFormat(iso=ISO.DATE) Date startDate, 
 			@PathVariable("endDate") @DateTimeFormat(iso=ISO.DATE)  Date endDate
 	) throws Exception {
+		startDate = DateHelper.removeTimeZoneOffset(startDate);
+		endDate = DateHelper.removeTimeZoneOffset(endDate);
 		List<Holidaysorg> entities = null;
 		try {
 			entities = daoService.listByRangeOverlap(startDate, endDate);
