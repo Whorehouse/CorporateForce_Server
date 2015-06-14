@@ -12,31 +12,37 @@
 		<h:inputHidden value="#{mainController.initController()}"/>
 
 		<!-- Content -->
-		<ui:include src="/view/components/main/sidebar.xhtml" />
-		<h:panelGroup class="main-content" id="mainContent">
-			<ui:include src="/view/components/wait.xhtml" />
-			<h:panelGroup rendered="#{mainController.sidebarLinkNotSelected()}">
-				<ui:include src="/view/components/main/start.xhtml"/>
-			</h:panelGroup>
-			<h:panelGroup rendered="#{mainController.sidebarLinkUsers()}">
-				<ui:include src="/view/components/main/users.xhtml"/>
-			</h:panelGroup>
-			<h:panelGroup rendered="#{mainController.sidebarLinkProfiles()}">
-				<ui:include src="/view/components/main/profiles.xhtml"/>
-			</h:panelGroup>
-			<h:panelGroup rendered="#{mainController.sidebarLinkRoles()}">
-				<ui:include src="/view/components/main/roles.xhtml"/>
-			</h:panelGroup>
-			<h:panelGroup rendered="#{mainController.sidebarLinkOffices()}">
-				<ui:include src="/view/components/main/offices.xhtml"/>
-			</h:panelGroup>
-			<h:panelGroup rendered="#{mainController.sidebarLinkSettings()}">
-				<ui:include src="/view/components/main/settings.xhtml"/>
-			</h:panelGroup>
-			<h:panelGroup rendered="#{mainController.sidebarLinkSupport()}">
-				<ui:include src="/view/components/main/support.xhtml"/>
+		<h:panelGroup rendered="#{headerController.isSystemControlRights()}">
+			<ui:include src="/view/components/main/sidebar.xhtml" />
+			<h:panelGroup class="main-content" id="mainContent">
+				<ui:include src="/view/components/wait.xhtml" />
+				<h:panelGroup rendered="#{mainController.sidebarLinkNotSelected()}">
+					<ui:include src="/view/components/main/start.xhtml"/>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{mainController.sidebarLinkUsers()}">
+					<ui:include src="/view/components/main/users.xhtml"/>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{mainController.sidebarLinkProfiles()}">
+					<ui:include src="/view/components/main/profiles.xhtml"/>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{mainController.sidebarLinkRoles()}">
+					<ui:include src="/view/components/main/roles.xhtml"/>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{mainController.sidebarLinkOffices()}">
+					<ui:include src="/view/components/main/offices.xhtml"/>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{mainController.sidebarLinkSettings()}">
+					<ui:include src="/view/components/main/settings.xhtml"/>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{mainController.sidebarLinkSupport()}">
+					<ui:include src="/view/components/main/support.xhtml"/>
+				</h:panelGroup>
 			</h:panelGroup>
 		</h:panelGroup>
-
+		<h:panelGroup class="main-nocontent" rendered="#{!headerController.isSystemControlRights()}">
+			<h3>
+				<b:label text="Выберите раздел для перехода" severity="primary"/>
+			</h3>
+		</h:panelGroup>
 	</ui:define>
 </ui:composition>
